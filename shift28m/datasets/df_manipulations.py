@@ -23,7 +23,7 @@ def price_mean(x: list) -> int:
     for item in x:
         res.append(int(item[C.Keys.PRICE]))
 
-    return np.mean(res)
+    return np.mean(res) if len(res) > 0 else 0
 
 
 def price_max(x: list) -> int:
@@ -31,7 +31,7 @@ def price_max(x: list) -> int:
     for item in x:
         res.append(int(item[C.Keys.PRICE]))
 
-    return np.max(res)
+    return np.max(res) if len(res) > 0 else 0
 
 
 def price_min(x: list) -> int:
@@ -39,7 +39,7 @@ def price_min(x: list) -> int:
     for item in x:
         res.append(int(item[C.Keys.PRICE]))
 
-    return np.min(res)
+    return np.min(res) if len(res) > 0 else 0
 
 
 def categories_count_embedding_id1(x: list) -> np.ndarray:
