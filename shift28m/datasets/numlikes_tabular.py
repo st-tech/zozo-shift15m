@@ -8,7 +8,18 @@ from shift28m import msgs as M
 from shift28m.datasets import df_manipulations
 
 
-def load_numlikes_tabular(root: str = C.ROOT):
+def load_numlikes_tabular(root: str = C.ROOT) -> (np.ndarray, np.ndarray):
+    """Load number of likes regression dataset with tabular inputs.
+
+    Args:
+        root (str, optional): Root path for the dataset. Defaults to "./data".
+
+    Raises:
+        RuntimeError: If dataset files are corrupted.
+
+    Returns:
+        (x, y) (np.ndarray, np.ndarray): Input-output pair.
+    """
     # load *.jsonl files in the root directory
     jsonls: list = glob.glob(os.path.join(root, f"*.{C.JSONL}"))
     if len(jsonls) == 0:
