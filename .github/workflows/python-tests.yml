@@ -21,10 +21,10 @@ jobs:
           python -m pip install --progress-bar off --upgrade pip setuptools
           pip install --progress-bar off .
           pip install --progress-bar off flake8 black isort mypy
-      - run: flake8 . --show-source
+      # - run: flake8 . --show-source
       - run: black --check --diff .
-      - run: isort --check --diff .
-      - run: mypy .
+      # - run: isort --check --diff .
+      # - run: mypy .
   test:
     runs-on: ubuntu-latest
     strategy:
