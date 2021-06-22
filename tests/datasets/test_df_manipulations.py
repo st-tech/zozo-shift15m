@@ -29,71 +29,55 @@ class TestDFManipulations(unittest.TestCase):
         )
 
     def test_price_sum(self):
-        self.assertEqual(
-            df_manipulations.price_sum(self.price_testcase1), 6000
-        )
-        self.assertEqual(
-            df_manipulations.price_sum(self.price_testcase2), 0
-        )
-        self.assertEqual(
-            df_manipulations.price_sum(self.price_testcase3), 0
-        )
+        self.assertEqual(df_manipulations.price_sum(self.price_testcase1), 6000)
+        self.assertEqual(df_manipulations.price_sum(self.price_testcase2), 0)
+        self.assertEqual(df_manipulations.price_sum(self.price_testcase3), 0)
 
     def test_price_mean(self):
-        self.assertEqual(
-            df_manipulations.price_mean(self.price_testcase1), 3000
-        )
-        self.assertEqual(
-            df_manipulations.price_mean(self.price_testcase2), 0
-        )
-        self.assertEqual(
-            df_manipulations.price_mean(self.price_testcase3), 0
-        )
+        self.assertEqual(df_manipulations.price_mean(self.price_testcase1), 3000)
+        self.assertEqual(df_manipulations.price_mean(self.price_testcase2), 0)
+        self.assertEqual(df_manipulations.price_mean(self.price_testcase3), 0)
 
     def test_price_max(self):
-        self.assertEqual(
-            df_manipulations.price_max(self.price_testcase1), 5000
-        )
-        self.assertEqual(
-            df_manipulations.price_max(self.price_testcase2), 0
-        )
-        self.assertEqual(
-            df_manipulations.price_max(self.price_testcase3), 0
-        )
+        self.assertEqual(df_manipulations.price_max(self.price_testcase1), 5000)
+        self.assertEqual(df_manipulations.price_max(self.price_testcase2), 0)
+        self.assertEqual(df_manipulations.price_max(self.price_testcase3), 0)
 
     def test_price_min(self):
-        self.assertEqual(
-            df_manipulations.price_min(self.price_testcase1), 1000
-        )
-        self.assertEqual(
-            df_manipulations.price_min(self.price_testcase2), 0
-        )
-        self.assertEqual(
-            df_manipulations.price_min(self.price_testcase3), 0
-        )
+        self.assertEqual(df_manipulations.price_min(self.price_testcase1), 1000)
+        self.assertEqual(df_manipulations.price_min(self.price_testcase2), 0)
+        self.assertEqual(df_manipulations.price_min(self.price_testcase3), 0)
 
     def test_categories_count_embedding_id1(self):
         self.assertTrue(
             np.array_equal(
-                df_manipulations.categories_count_embedding_id1(self.category_testcase1),
-                [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                df_manipulations.categories_count_embedding_id1(
+                    self.category_testcase1
+                ),
+                [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             )
         )
         self.assertTrue(
             np.array_equal(
-                df_manipulations.categories_count_embedding_id1(self.category_testcase2),
-                [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                df_manipulations.categories_count_embedding_id1(
+                    self.category_testcase2
+                ),
+                [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             )
         )
         self.assertTrue(
             np.array_equal(
-                df_manipulations.categories_count_embedding_id1(self.category_testcase3),
-                [0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                df_manipulations.categories_count_embedding_id1(
+                    self.category_testcase3
+                ),
+                [0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             )
         )
         self.assertTrue(
             np.array_equal(
-                df_manipulations.categories_count_embedding_id1(self.category_testcase4),
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                df_manipulations.categories_count_embedding_id1(
+                    self.category_testcase4
+                ),
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             )
         )
