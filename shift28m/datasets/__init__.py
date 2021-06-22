@@ -1,3 +1,3 @@
-from shift28m.datasets.numlikes_tabular import load_numlikes_tabular
+from shift28m.datasets.numlikes_tabular import NumLikesRegression
 
-assert load_numlikes_tabular is not None
+assert NumLikesRegression is not None
