@@ -5,7 +5,8 @@ description = "Large-scale multiobective dataset with dataset shift."
 authors = ["Masanari Kimura"]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = ">=3.7.1,<4.0"
+pandas = "^1.2.4"
 
 [tool.poetry.dev-dependencies]
 
