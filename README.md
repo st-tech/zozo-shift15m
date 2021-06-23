@@ -1,5 +1,8 @@
 # Shift28M
 
+We provide the [Datasheet for SHIFT28M](./DATASHEET.md).
+This datasheet is based on the [Datasheets for Datasets](https://arxiv.org/abs/1803.09010) template.
+
 ## Benchmarks
 
 As templates for numerical experiments on the SHIFT28M dataset, we have published [experimental results for each task with several models](./benchmarks).
@@ -39,3 +42,6 @@ To learn more about making a contribution to Shift28M, please see the following 
   year = {2021},
 }
 ```
+
+## References
+- Gebru, Timnit, et al. "Datasheets for datasets." arXiv preprint arXiv:1803.09010 (2018).
