@@ -1,4 +1,4 @@
-# Shift28M
+# SHIFT28M
 
 We provide the [Datasheet for SHIFT28M](./DATASHEET.md).
 This datasheet is based on the [Datasheets for Datasets](https://arxiv.org/abs/1803.09010) template.
@@ -27,7 +27,7 @@ The original dataset is maintained in jsonl format, and a row consists of the fo
 
 
 ## Contributing
-To learn more about making a contribution to Shift28M, please see the following materials:
+To learn more about making a contribution to SHIFT28M, please see the following materials:
 - [Developers Guide](./DEVELOPMENT.md)
 - [Task Proposal Guide](./TASK_PROPOSAL.md)
 - [Benchmark Proposal Guide](./BENCHMARK.md)
