@@ -1,4 +1,5 @@
 JSONL = "jsonl"
+PICKLE = "pickle"
 ROOT = "data"
 RECORDS = "records"
 CATEGORY_ID_MAX = 20
