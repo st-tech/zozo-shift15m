@@ -3,6 +3,20 @@
 We provide the [Datasheet for SHIFT28M](./DATASHEET.md).
 This datasheet is based on the [Datasheets for Datasets](https://arxiv.org/abs/1803.09010) template.
 
+## Download SHIFT28M
+
+### (WIP) Use Dataset class
+
+You can download SHIFT28M dataset as follows:
+
+```python
+dataset = NumLikesRegression(root="./data", download=True)
+```
+
+### Download Directly from the Sharable URL
+
+Please access [here](https://drive.google.com/drive/folders/1BExsZkhE5N6Oj_OyFrs2O52WUc0SkZOr?usp=sharing) and download all files.
+
 ## Benchmarks
 
 As templates for numerical experiments on the SHIFT28M dataset, we have published [experimental results for each task with several models](./benchmarks).
