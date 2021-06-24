@@ -10,8 +10,10 @@ from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import RANSACRegressor
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.linear_model import HuberRegressor
+from sklearn.linear_model import TheilSenRegressor
 from sklearn.metrics import mean_absolute_error as mae
 from scipy.stats import wasserstein_distance
+import tqdm
 from shift28m.datasets import NumLikesRegression
 
 
@@ -41,6 +43,7 @@ shifts = [
 ]
 
 models = [
+    TheilSenRegressor,
     HuberRegressor,
     RANSACRegressor,
     LinearRegression,
@@ -63,7 +66,7 @@ for model in models:
         wd = wasserstein_distance(rv_train, rv_test)
         model_dists.append(wd)
 
-        for i in range(n_trials):
+        for i in tqdm.tqdm(range(n_trials)):
             (x_train, y_train), (x_test, y_test) = dataset.load_dataset(
                 target_shift=True,
                 train_size=train_sample_size,
@@ -90,7 +93,7 @@ for model in models:
 models_errors_mean = np.array(models_errors_mean)
 models_errors_std = np.array(models_errors_std)
 
-colors = ["purple", "green", "blue", "red"]
+colors = ["purple", "green", "blue", "darkcyan", "red"]
 
 print(dists)
 print(models_errors_mean)
