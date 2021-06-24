@@ -3,13 +3,28 @@
 We provide the [Datasheet for SHIFT28M](./DATASHEET.md).
 This datasheet is based on the [Datasheets for Datasets](https://arxiv.org/abs/1803.09010) template.
 
-## Download SHIFT28M
+## Installation
+
+### (WIP) From PyPi
+
+### From Source
+
+```bash
+$ git clone https://github.com/st-tech/zr-shift28m.git
+$ cd zr-shift28m
+$ poetry build
+$ pip install dist/shift28m-xxxx-py3-none-any.whl
+```
+
+## Download SHIFT28M dataset
 
 ### (WIP) Use Dataset class
 
 You can download SHIFT28M dataset as follows:
 
 ```python
+from shift28.datasets import NumLikesRegression
+
 dataset = NumLikesRegression(root="./data", download=True)
 ```
 
