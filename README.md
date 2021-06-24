@@ -17,6 +17,14 @@ dataset = NumLikesRegression(root="./data", download=True)
 
 Please access [here](https://drive.google.com/drive/folders/1BExsZkhE5N6Oj_OyFrs2O52WUc0SkZOr?usp=sharing) and download all files.
 
+## Tasks
+
+The following tasks are now available:
+
+| Tasks              | Task type      | Shift type   | # of input dim | # of output dim |
+|--------------------|----------------|--------------|----------------|-----------------|
+| [NumLikesRegression](https://github.com/st-tech/zr-shift28m/tree/main/benchmarks#regression-for-the-number-of-likes) | regression     | target shift |     (N,25)     | (N,1)           |
+
 ## Benchmarks
 
 As templates for numerical experiments on the SHIFT28M dataset, we have published [experimental results for each task with several models](./benchmarks).
