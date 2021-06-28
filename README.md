@@ -3,6 +3,13 @@
 We provide the [Datasheet for SHIFT28M](./DATASHEET.md).
 This datasheet is based on the [Datasheets for Datasets](https://arxiv.org/abs/1803.09010) template.
 
+| System      | Python 3.6 | Python 3.7 | Python 3.8 |
+| :---:              | :---:             | :---:            | :--:              |
+| Linux CPU    |  <img src="https://img.shields.io/badge/build-success-brightgreen" /> | <img src="https://img.shields.io/badge/build-success-brightgreen" /> | <img src="https://img.shields.io/badge/build-success-brightgreen" /> |
+| Linux GPU    |   <img src="https://img.shields.io/badge/build-success-brightgreen" />  | <img src="https://img.shields.io/badge/build-success-brightgreen" /> | <img src="https://img.shields.io/badge/build-success-brightgreen" /> |
+| Windows CPU / GPU | <center>Status Currently Unavailable</center> | <center>Status Currently Unavailable</center> |  <center>Status Currently Unavailable</center> |
+| Mac OS CPU|   <img src="https://img.shields.io/badge/build-success-brightgreen" /> |  <img src="https://img.shields.io/badge/build-success-brightgreen" />   |  <img src="https://img.shields.io/badge/build-success-brightgreen" /> |
+
 ## Installation
 
 ### (WIP) From PyPi
