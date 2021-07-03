@@ -46,6 +46,7 @@ The following tasks are now available:
 | Tasks              | Task type      | Shift type   | # of input dim | # of output dim |
 |--------------------|----------------|--------------|----------------|-----------------|
 | [NumLikesRegression](https://github.com/st-tech/zr-shift28m/tree/main/benchmarks#regression-for-the-number-of-likes) | regression     | target shift |     (N,25)     | (N,1)           |
+| SumPricesRegression | regression    | covariate shift, target shift | (N, 1) | (N, 1) |
 
 ## Benchmarks
 
