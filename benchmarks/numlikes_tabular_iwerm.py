@@ -1,4 +1,3 @@
-
 import os
 import sys
 
@@ -47,9 +46,21 @@ shifts = [
 models = [
     {"model": LinearRegression, "sample_weights": "ERM"},
     {"model": LinearRegression, "sample_weights": "IWERM (optimal)"},
-    {"model": LinearRegression, "sample_weights": r"RIWERM ($\alpha=0.25$)", "alpha": 0.25},
-    {"model": LinearRegression, "sample_weights": r"RIWERM ($\alpha=0.5$)", "alpha": 0.5},
-    {"model": LinearRegression, "sample_weights": r"RIWERM ($\alpha=0.75$)", "alpha": 0.75},
+    {
+        "model": LinearRegression,
+        "sample_weights": r"RIWERM ($\alpha=0.25$)",
+        "alpha": 0.25,
+    },
+    {
+        "model": LinearRegression,
+        "sample_weights": r"RIWERM ($\alpha=0.5$)",
+        "alpha": 0.5,
+    },
+    {
+        "model": LinearRegression,
+        "sample_weights": r"RIWERM ($\alpha=0.75$)",
+        "alpha": 0.75,
+    },
 ]
 
 models_errors_mean = []
@@ -89,14 +100,14 @@ for k in range(len(models)):
             if weighting == "ERM":
                 reg.fit(x_train, y_train)
             elif weighting.split()[0] == "IWERM":
-                reg.fit(x_train, y_train, sample_weight=p_te/(p_tr+1e-9))
+                reg.fit(x_train, y_train, sample_weight=p_te / (p_tr + 1e-9))
             elif weighting.split()[0] == "AIWERM":
                 alpha = float(models[k]["alpha"])
-                w = (p_te/(p_tr + 1e-9))**alpha
+                w = (p_te / (p_tr + 1e-9)) ** alpha
                 reg.fit(x_train, y_train, sample_weight=w)
             elif weighting.split()[0] == "RIWERM":
                 alpha = float(models[k]["alpha"])
-                w = p_te/((1-alpha)*p_te + alpha*p_tr + 1e-9)
+                w = p_te / ((1 - alpha) * p_te + alpha * p_tr + 1e-9)
                 reg.fit(x_train, y_train, sample_weight=w)
 
             errors.append(mae(reg.predict(x_test), y_test))
