@@ -22,11 +22,11 @@ dataset = NumLikesRegression()
 #############################
 # Experimental setup
 #############################
-n_trials = 20              # number of trials.
-train_sample_size = 100000 # number of training data
+n_trials = 20  # number of trials.
+train_sample_size = 100000  # number of training data
 test_sample_size = 100000  # number of test data
-test_mu = 80               # mean of test distribution
-test_sigma = 10            # std of test distribution
+test_mu = 80  # mean of test distribution
+test_sigma = 10  # std of test distribution
 
 
 # specify the dataset shift.
