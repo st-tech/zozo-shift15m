@@ -76,6 +76,9 @@ To learn more about making a contribution to SHIFT28M, please see the following 
 - [Task Proposal Guide](./TASK_PROPOSAL.md)
 - [Benchmark Proposal Guide](./BENCHMARK.md)
 
+## LICENSE
+Please observe the {TBD} license that is listed in this repository.
+
 ## Citation
 
 ```bibtex
