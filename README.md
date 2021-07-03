@@ -1,7 +1,7 @@
 # SHIFT28M
 
 We provide the [Datasheet for SHIFT28M](./DATASHEET.md).
-This datasheet is based on the [Datasheets for Datasets](https://arxiv.org/abs/1803.09010) template.
+This datasheet is based on the [Datasheets for Datasets](https://arxiv.org/abs/1803.09010) [1] template.
 
 | System      | Python 3.6 | Python 3.7 | Python 3.8 |
 | :---:              | :---:             | :---:            | :--:              |
@@ -88,4 +88,4 @@ To learn more about making a contribution to SHIFT28M, please see the following 
 ```
 
 ## References
-- Gebru, Timnit, et al. "Datasheets for datasets." arXiv preprint arXiv:1803.09010 (2018).
+- [1] Gebru, Timnit, et al. "Datasheets for datasets." arXiv preprint arXiv:1803.09010 (2018).
