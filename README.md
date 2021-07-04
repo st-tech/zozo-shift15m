@@ -14,6 +14,10 @@ This datasheet is based on the [Datasheets for Datasets](https://arxiv.org/abs/1
 
 ### (WIP) From PyPi
 
+```bash
+$ pip install shift28m
+```
+
 ### From Source
 
 ```bash
