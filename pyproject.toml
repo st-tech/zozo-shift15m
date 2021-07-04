@@ -11,6 +11,8 @@ sklearn = "^0.0"
 matplotlib = "^3.4.2"
 seaborn = "^0.11.1"
 tqdm = "^4.61.1"
+Sphinx = "^4.0.2"
+furo = "^2021.6.24-beta.37"
 
 [tool.poetry.dev-dependencies]
 

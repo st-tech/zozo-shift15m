@@ -1,0 +1,5 @@
+## Build
+
+```bash
+$ make html
+```
