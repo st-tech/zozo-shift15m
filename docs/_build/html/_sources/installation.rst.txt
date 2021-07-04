@@ -2,6 +2,9 @@
 Installation
 ====================================
 
+.. contents::
+    :local:
+
 SHIFT28M supports Python 3.6 or newer.
 
 We recommend to install SHIFT28M via pip::
@@ -14,3 +17,4 @@ You can also install the development version of SHIFT28M from master branch of `
     $ cd zr-shift28m
     $ poetry build
     $ pip install dist/shift28m-xxxx-py3-none-any.whl
+

@@ -11,7 +11,11 @@ Welcome to SHIFT28M's documentation!
    :caption: Contents:
 
    installation
+   tasks
    datasheet
+   tutorial/index
+   reference/index
+   faq
 
 
 Indices and tables
