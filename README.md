@@ -1,5 +1,8 @@
 # SHIFT28M
 
+The main motivation of the SHIFT28M project is to provide a dataset that contains natural dataset shifts collected from a web service that was actually in operation for several years.
+In addition, the SHIFT28M dataset has several types of dataset shifts, allowing us to evaluate the robustness of the model to different types of shifts (e.g., covariate shift and target shift).
+
 We provide the [Datasheet for SHIFT28M](./DATASHEET.md).
 This datasheet is based on the [Datasheets for Datasets](https://arxiv.org/abs/1803.09010) [1] template.
 
