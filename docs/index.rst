@@ -10,6 +10,7 @@ Welcome to SHIFT28M's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   installation
    datasheet
 
 
