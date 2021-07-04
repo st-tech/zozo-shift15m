@@ -2,10 +2,12 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="#" /><link rel="search" title="Search" href="search.html" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="Welcome to SHIFT28M’s documentation!" href="index.html" />
 
-    <meta name="generator" content="sphinx-4.0.2, furo 2021.06.24.beta37"/><title>Index - SHIFT28M 0.1.0 documentation</title>
-<link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <meta name="generator" content="sphinx-4.0.2, furo 2021.06.24.beta37"/>
+        <title>Datasheet for SHIFT28M - SHIFT28M 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css" />
     
@@ -88,7 +90,7 @@
       <a href="index.html"><div class="brand">SHIFT28M 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
     </div>
@@ -107,8 +109,8 @@
   <input type="hidden" name="area" value="default">
 </form><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="datasheet.html">Datasheet for SHIFT28M</a></li>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Datasheet for SHIFT28M</a></li>
 </ul>
 
 </div>
@@ -120,13 +122,31 @@
   <main class="main">
     <div class="content">
       <article role="main">
-        <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        
-<section class="genindex-section">
-  <h1 id="index">Index</h1>
-  <div class="genindex-jumpbox"></div>
+        <section id="datasheet-for-shift28m">
+<h1>Datasheet for SHIFT28M<a class="headerlink" href="#datasheet-for-shift28m" title="Permalink to this headline">¶</a></h1>
+<section id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>For what purpose was the dataset created? Was there a specific task in mind? Was there a specific gap that needed to be filled? Please provide a description.</p>
+</div></blockquote>
+<p>Many machine learning algorithms assume that the training data and the test data are generated from the same distribution.
+In the real world, however, this assumption is most often violated.
+Many robust algorithms against such dataset shifts have been studied, but they often experiment with artificially induced dataset shifts on originally i.i.d. datasets.
+Although such experiments seem reasonable, <a class="reference external" href="https://papers.nips.cc/paper/2020/hash/d8330f857a17c53d217014ee776bfd50-Abstract.html">recent studies</a> have reported that there is no correlation between robustness to artificial dataset shifts and robustness to natural dataset shifts.
+The main motivation of the SHIFT28M project is to provide a dataset that contains natural dataset shifts collected from a web service that was actually in operation for several years.
+In addition, the SHIFT28M dataset has several types of dataset shifts, allowing us to evaluate the robustness of the model to different types of shifts (e.g., covariate shift and target shift).</p>
+<blockquote>
+<div><p>Who created this dataset (e.g., which team, research group) and on behalf of which entity (e.g., company, institution, organization)?</p>
+</div></blockquote>
+<p>TODO</p>
+<blockquote>
+<div><p>Who funded the creation of the dataset? If there is an associated grant, please provide the name of the grantor and the grant name and number.</p>
+</div></blockquote>
+<p>TODO</p>
+</section>
 </section>
 
       </article>
@@ -134,7 +154,17 @@
         
         <div class="related-pages">
           
-          
+          <a class="prev-page" href="index.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Home</div>
+                
+              </div>
+            </a>
         </div>
 
         <div class="related-information">
@@ -144,12 +174,36 @@
               and
               <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
               <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            |
+            <a class="muted-link" href="_sources/datasheet.rst.txt"
+               rel="nofollow">
+              Show Source
+            </a>
         </div>
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Datasheet for SHIFT28M</a><ul>
+<li><a class="reference internal" href="#motivation">Motivation</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
