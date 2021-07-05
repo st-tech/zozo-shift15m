@@ -13,6 +13,7 @@ In addition, the SHIFT28M dataset has several types of dataset shifts, allowing 
 The initial version of the dataset was created by Masanari Kimura, Yuki Saito, Kazuya Morishita, Ryosuke Goto, and Takuma Nakamura most of whom were researchers at the ZOZO Research.
 
 ##### ```Who funded the creation of the dataset? If there is an associated grant, please provide the name of the grantor and the grant name and number.```
+Not applicable.
 
 ## Composition
 ##### ```What do the instances that comprise the dataset represent (e.g., documents, photos, people, countries)? Are there multiple types of instances (e.g., movies, users, and ratings; people and interactions between them; nodes and edges)? Please provide a description.```
