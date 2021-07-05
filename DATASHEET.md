@@ -15,6 +15,8 @@ The initial version of the dataset was created by Masanari Kimura, Yuki Saito, K
 ##### ```Who funded the creation of the dataset? If there is an associated grant, please provide the name of the grantor and the grant name and number.```
 Not applicable.
 
+##### ```Any other comments?```
+
 ## Composition
 ##### ```What do the instances that comprise the dataset represent (e.g., documents, photos, people, countries)? Are there multiple types of instances (e.g., movies, users, and ratings; people and interactions between them; nodes and edges)? Please provide a description.```
 
