@@ -10,6 +10,7 @@ The main motivation of the SHIFT28M project is to provide a dataset that contain
 In addition, the SHIFT28M dataset has several types of dataset shifts, allowing us to evaluate the robustness of the model to different types of shifts (e.g., covariate shift and target shift).
 
 ##### ```Who created this dataset (e.g., which team, research group) and on behalf of which entity (e.g., company, institution, organization)?```
+The initial version of the dataset was created by Masanari Kimura, Yuki Saito, Kazuya Morishita, Ryosuke Goto, and Takuma Nakamura most of whom were researchers at the ZOZO Research.
 
 ##### ```Who funded the creation of the dataset? If there is an associated grant, please provide the name of the grantor and the grant name and number.```
 
