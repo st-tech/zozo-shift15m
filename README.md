@@ -172,7 +172,7 @@ The following table is necessary for this dataset to be indexed by search engine
 ```bibtex
 @software{https://github.com/st-tech/zr-shift28m,
   url = {https://github.com/st-tech/zr-shift28m},
-  author = {Masanari Kimura, Yuki Saito, Kazuya Morishita},
+  author = {Masanari Kimura, Yuki Saito, Kazuya Morishita, Takuma Nakamura, Ryosuke Goto},
   title = {SHIFT28M: Multiobjective Large-Scale Dataset with Distributional Shifts},
   year = {2021},
 }
