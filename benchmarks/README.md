@@ -16,7 +16,7 @@
 ### Ordinal Empirical Risk Minimizations
 
 * hyperparameters: All hyperparameters are default settings of the [scikit-learn](https://scikit-learn.org/stable/index.html).
-* source code is available [here](bechmarks/numlikes_tabular.py).
+* source code is available [here](numlikes_tabular.py).
 
 | Models            | W=0            | W=5            | W=10           | W=15           | W=20           | W=25           | W=30            | W=35           | W=40           | W=45           | W=50           |
 |-------------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|
@@ -36,7 +36,7 @@
   * ERM: Linear Regression
   * IWERM: [Importance Weighted ERM [1]](https://www.sciencedirect.com/science/article/pii/S0378375800001154?casa_token=FNmKLAni55IAAAAA:5mrfwarhzqhRTZ6j9Ny20vSTaSU1nnK3lVSOYlWjCJm8oZXBqKdOTYarDtQDkJlTgrqrf1bXcf2V)
   * RIWERM: [Relative Importance Weighted ERM [2]](https://ieeexplore.ieee.org/abstract/document/6797650)
-* source code is available [here](bechmarks/numlikes_tabular_iwerm.py).
+* source code is available [here](numlikes_tabular_iwerm.py).
 
 | Models            | W=0            | W=5            | W=10           | W=15           | W=20           | W=25           | W=30            | W=35           | W=40           | W=45           | W=50           |
 |-------------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|
