@@ -19,7 +19,7 @@ Not applicable.
 
 ## Composition
 ##### ```What do the instances that comprise the dataset represent (e.g., documents, photos, people, countries)? Are there multiple types of instances (e.g., movies, users, and ratings; people and interactions between them; nodes and edges)? Please provide a description.```
-The SHIFT28M dataset is a collection of outfits posted to the fasion website IQON (which is no longer probiding this service). A record represents the posted outfit, the user who posted it, and some meta-information, it has 5 fields.
+The SHIFT28M dataset is a collection of outfits posted to the fashion website IQON (which is no longer providing this service). A record represents the posted outfit, the user who posted it, and some meta-information, it has 5 fields.
 - set_id: An ID that identifies the outfit that was posted.
 - items: Provides information about the items that comprise the posted outfit and consists of 4 subfields.
   - item_id: An ID that identifies an item.
