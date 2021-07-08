@@ -10,11 +10,27 @@ The main motivation of the SHIFT28M project is to provide a dataset that contain
 In addition, the SHIFT28M dataset has several types of dataset shifts, allowing us to evaluate the robustness of the model to different types of shifts (e.g., covariate shift and target shift).
 
 ##### ```Who created this dataset (e.g., which team, research group) and on behalf of which entity (e.g., company, institution, organization)?```
+The initial version of the dataset was created by Masanari Kimura, Yuki Saito, Kazuya Morishita, Ryosuke Goto, and Takuma Nakamura most of whom were researchers at the ZOZO Research.
 
 ##### ```Who funded the creation of the dataset? If there is an associated grant, please provide the name of the grantor and the grant name and number.```
+Not applicable.
+
+##### ```Any other comments?```
 
 ## Composition
 ##### ```What do the instances that comprise the dataset represent (e.g., documents, photos, people, countries)? Are there multiple types of instances (e.g., movies, users, and ratings; people and interactions between them; nodes and edges)? Please provide a description.```
+The SHIFT28M dataset is a collection of outfits posted to the fashion website IQON (which is no longer providing this service). A record represents the posted outfit, the user who posted it, and some meta-information, it has 5 fields.
+- set_id: An ID that identifies the outfit that was posted.
+- items: Provides information about the items that comprise the posted outfit and consists of 4 subfields.
+  - item_id: An ID that identifies an item.
+  - category_id1: An ID indicating the item category (e.g., outerwear, tops, ...).
+  - category_id2: An ID indicating the item subcategory (e.g., T-shirts, blouses, ...).
+  - price: Price of the item (Japanese yen).
+- user: Provides information about the user who posted the outfit and consists of 2 subfields.
+  - An ID that identifies the user who posted the outfit.
+  - A list of brands that users have voted for as their favorites. The number is an ID that identifies the brand.
+- like_num: the number of times this outfit has been favorited by other users.
+- publish_date: The date the outfit was posted.
 
 ##### ```How many instances are there in total (of each type, if appropriate)?```
 
@@ -33,6 +49,8 @@ In addition, the SHIFT28M dataset has several types of dataset shifts, allowing 
 ##### ```Are there any errors, sources of noise, or redundancies in the dataset? If so, please provide a description.```
 
 ##### ```Is the dataset self-contained, or does it link to or otherwise rely on external resources (e.g., websites, tweets, other datasets)? If it links to or relies on external resources, a) are there guarantees that they will exist, and remain constant, over time; b) are there official archival versions of the complete dataset (i.e., including the external resources as they existed at the time the dataset was created); c) are there any restrictions (e.g., licenses, fees) associated with any of the external resources that might apply to a future user? Please provide descriptions of all external resources and any restrictions associated with them, as well as links or other access points, as appropriate.```
+
+The dataset is self-contained.
 
 ##### ```Does the dataset contain data that might be considered confidential (e.g., data that is protected by legal privilege or by doctorpatient confidentiality, data that includes the content of individuals non-public communications)? If so, please provide a description.```
 
