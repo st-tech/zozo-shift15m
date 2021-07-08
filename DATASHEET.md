@@ -19,6 +19,18 @@ Not applicable.
 
 ## Composition
 ##### ```What do the instances that comprise the dataset represent (e.g., documents, photos, people, countries)? Are there multiple types of instances (e.g., movies, users, and ratings; people and interactions between them; nodes and edges)? Please provide a description.```
+The SHIFT28M dataset is a collection of outfits posted to the fashion website IQON (which is no longer providing this service). A record represents the posted outfit, the user who posted it, and some meta-information, it has 5 fields.
+- set_id: An ID that identifies the outfit that was posted.
+- items: Provides information about the items that comprise the posted outfit and consists of 4 subfields.
+  - item_id: An ID that identifies an item.
+  - category_id1: An ID indicating the item category (e.g., outerwear, tops, ...).
+  - category_id2: An ID indicating the item subcategory (e.g., T-shirts, blouses, ...).
+  - price: Price of the item (Japanese yen).
+- user: Provides information about the user who posted the outfit and consists of 2 subfields.
+  - An ID that identifies the user who posted the outfit.
+  - A list of brands that users have voted for as their favorites. The number is an ID that identifies the brand.
+- like_num: the number of times this outfit has been favorited by other users.
+- publish_date: The date the outfit was posted.
 
 ##### ```How many instances are there in total (of each type, if appropriate)?```
 
