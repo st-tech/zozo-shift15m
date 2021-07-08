@@ -150,9 +150,13 @@ In addition, the SHIFT28M dataset has several types of dataset shifts, allowing 
 <blockquote>
 <div><p>Who created this dataset (e.g., which team, research group) and on behalf of which entity (e.g., company, institution, organization)?</p>
 </div></blockquote>
-<p>TODO</p>
+<p>The initial version of the dataset was created by Masanari Kimura, Yuki Saito, Kazuya Morishita, Ryosuke Goto, and Takuma Nakamura most of whom were researchers at the ZOZO Research.</p>
 <blockquote>
 <div><p>Who funded the creation of the dataset? If there is an associated grant, please provide the name of the grantor and the grant name and number.</p>
+</div></blockquote>
+<p>Not applicable.</p>
+<blockquote>
+<div><p>Any other comments?</p>
 </div></blockquote>
 <p>TODO</p>
 </section>
@@ -161,10 +165,30 @@ In addition, the SHIFT28M dataset has several types of dataset shifts, allowing 
 <blockquote>
 <div><p>What do the instances that comprise the dataset represent (e.g., documents, photos, people, countries)? Are there multiple types of instances (e.g., movies, users, and ratings; people and interactions between them; nodes and edges)? Please provide a description.</p>
 </div></blockquote>
-<p>TODO</p>
+<p>The SHIFT28M dataset is a collection of outfits posted to the fashion website IQON (which is no longer providing this service). A record represents the posted outfit, the user who posted it, and some meta-information, it has 5 fields.</p>
+<ul>
+<li><p>set_id: An ID that identifies the outfit that was posted.</p></li>
+<li><p>items: Provides information about the items that comprise the posted outfit and consists of 4 subfields.</p>
+<ul class="simple">
+<li><p>item_id: An ID that identifies an item.</p></li>
+<li><p>category_id1: An ID indicating the item category (e.g., outerwear, tops, …).</p></li>
+<li><p>category_id2: An ID indicating the item subcategory (e.g., T-shirts, blouses, …).</p></li>
+<li><p>price: Price of the item (Japanese yen).</p></li>
+</ul>
+</li>
+<li><p>user: Provides information about the user who posted the outfit and consists of 2 subfields.</p>
+<ul class="simple">
+<li><p>An ID that identifies the user who posted the outfit.</p></li>
+<li><p>A list of brands that users have voted for as their favorites. The number is an ID that identifies the brand.</p></li>
+</ul>
+</li>
+<li><p>like_num: the number of times this outfit has been favorited by other users.</p></li>
+<li><p>publish_date: The date the outfit was posted.</p>
 <blockquote>
 <div><p>How many instances are there in total (of each type, if appropriate)?</p>
 </div></blockquote>
+</li>
+</ul>
 <p>TODO</p>
 <blockquote>
 <div><p>Does the dataset contain all possible instances or is it a sample (not necessarily random) of instances from a larger set? If the dataset is a sample, then what is the larger set? Is the sample representative of the larger set (e.g., geographic coverage)? If so, please describe how this representativeness was validated/verified. If it is not representative of the larger set, please describe why not (e.g., to cover a more diverse range of instances, because instances were withheld or unavailable).</p>
