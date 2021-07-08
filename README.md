@@ -120,7 +120,7 @@ The following table is necessary for this dataset to be indexed by search engine
   </tr>
   <tr>
     <td>description</td>
-    <td><code itemprop="description">SHIFT28M is a multi-objective, multi-domain dataset that encompasses multiple dataset shifts.</code></td>
+    <td><code itemprop="description">SHIFT28M is a multi-objective, multi-domain dataset which includes multiple dataset shifts.</code></td>
   </tr>
   <tr>
     <td>provider</td>
