@@ -35,6 +35,8 @@ The SHIFT28M dataset is a collection of outfits posted to the fashion website IQ
 ##### ```How many instances are there in total (of each type, if appropriate)?```
 
 ##### ```Does the dataset contain all possible instances or is it a sample (not necessarily random) of instances from a larger set? If the dataset is a sample, then what is the larger set? Is the sample representative of the larger set (e.g., geographic coverage)? If so, please describe how this representativeness was validated/verified. If it is not representative of the larger set, please describe why not (e.g., to cover a more diverse range of instances, because instances were withheld or unavailable).```
+We collected outfits posted on a Japanese fasion website "IQON". This website has about 2M users, almost all are Japanese women. Most of them are in their 20s and 30s. The collection period was from 01/01/2000 to 04/06/2020.
+An outfit is a set of multiple items, and each item has a corresponding category. In SHIFT28M, outfits that contain 4 or more items belonging to the main categories (outerwear, tops, bottoms, shoes,bags, hats, and accessories) were collected.
 
 ##### ```What data does each instance consist of? “Raw” data (e.g., unprocessed text or images)or features? In either case, please provide a description.```
 
