@@ -41,6 +41,7 @@ The SHIFT28M dataset is a collection of outfits posted to the fashion website IQ
 ##### ```Is there a label or target associated with each instance? If so, please provide a description.```
 
 ##### ```Is any information missing from individual instances? If so, please provide a description, explaining why this information is missing (e.g., because it was unavailable). This does not include intentionally removed information, but might include, e.g., redacted text.```
+Items that do not belong to the main categories, such that underwear and background images for collage, are missing. The items field consists only of items that belong to the main categories, but the original outfit may contain items other than these.
 
 ##### ```Are relationships between individual instances made explicit (e.g., users’ movie ratings, social network links)? If so, please describe how these relationships are made explicit.```
 
