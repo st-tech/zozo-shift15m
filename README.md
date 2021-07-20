@@ -56,6 +56,7 @@ The following tasks are now available:
 |--------------------|----------------|--------------|----------------|-----------------|
 | [NumLikesRegression](https://github.com/st-tech/zr-shift28m/tree/main/benchmarks#regression-for-the-number-of-likes) | regression     | target shift |     (N,25)     | (N,1)           |
 | [SumPricesRegression](https://github.com/st-tech/zr-shift28m/tree/main/benchmarks#regression-for-the-sum-of-prices) | regression    | covariate shift, target shift | (N, 1) | (N, 1) |
+| ItemPriceRegression| regression     | target shift | (N, H, W)      | (N, 1)          |
 
 ## Benchmarks
 
