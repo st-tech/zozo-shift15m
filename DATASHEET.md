@@ -153,6 +153,9 @@ This will be posted on the dataset webpage.
 All questions and comments can be sent to GitHub Issues on [SHIFT28M repository](https://github.com/st-tech/zr-shift28m).
 
 ##### ```Is there an erratum? If so, please provide a link or other access point.```
+All changes to the dataset will be announced through the GitHub Releases.
+Errata are listed under the “Errata” section of [SHIFT28M repository](https://github.com/st-tech/zr-shift28m).
+
 
 ##### ```If the dataset relates to people, are there applicable limits on the retention of the data associated with the instances (e.g., were individuals in question told that their data would be retained for a fixed period of time and then deleted)? If so, please describe these limits and explain how they will be enforced.```
 No.
