@@ -139,6 +139,7 @@ The dataset is self-contained.
 ## Maintenance
 
 ##### ```Who will be supporting/hosting/maintaining the dataset?```
+ZOZO Research is supporting/maintaining the dataset.
 
 ##### ```How can the owner/curator/manager of the dataset be contacted (e.g., email address)?```
 
