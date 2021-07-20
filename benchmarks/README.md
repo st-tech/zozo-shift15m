@@ -48,6 +48,31 @@
 
 ![](../assets/benchmarks/numlikes_regression_iwerm.png)
 
+## Regression for the number of likes
+
+* task type: regression
+* shift type: covariate shift, target shift
+* shift metric: wasserstein distance
+* train/test sample size
+  * train sample size: 100000
+  * test sample size: 100000
+* input/output dimension
+  * input dimension: 1
+  * output dimension: 1
+* number of trials: 20
+
+### Covariate shift
+
+#### Ordinal Empirical Risk Minimizations
+
+#### Importance Weighted Empirical Risk Minimizations
+
+### Target shift
+
+#### Ordinal Empirical Risk Minimizations
+
+#### Importance Weighted Empirical Risk Minimizations
+
 ## References
 - [1] Shimodaira, Hidetoshi. "Improving predictive inference under covariate shift by weighting the log-likelihood function." Journal of statistical planning and inference 90.2 (2000): 227-244.
 - [2] Yamada, Makoto, et al. "Relative density-ratio estimation for robust distribution comparison." Neural computation 25.5 (2013): 1324-1370.
