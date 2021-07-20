@@ -155,6 +155,7 @@ This will be posted on the dataset webpage.
 ##### ```Will older versions of the dataset continue to be supported/hosted/maintained? If so, please describe how. If not, please describe how its obsolescence will be communicated to users.```
 
 ##### ```If others want to extend/augment/build on/contribute to the dataset, is there a mechanism for them to do so? If so, please provide a description. Will these contributions be validated/verified? If so, please describe how. If not, why not? Is there a process for communicating/distributing these contributions to other users? If so, please provide a description.```
+Others may do so and should contact the original authors about incorporating fixes/extensions.
 
 ##### ```Any other comments?```
 
