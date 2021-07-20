@@ -149,6 +149,7 @@ ZOZO Research is supporting/maintaining the dataset.
 This will be posted on the dataset webpage.
 
 ##### ```How can the owner/curator/manager of the dataset be contacted (e.g., email address)?```
+All questions and comments can be sent to GitHub Issues on [SHIFT28M repository](https://github.com/st-tech/zr-shift28m).
 
 ##### ```Is there an erratum? If so, please provide a link or other access point.```
 
