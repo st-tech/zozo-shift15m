@@ -127,6 +127,7 @@ The dataset is self-contained.
 ##### ```How will the dataset will be distributed (e.g., tarball on website, API, GitHub)? Does the dataset have a digital object identifier (DOI)?```
 
 ##### ```When will the dataset be distributed?```
+The dataset will be first released in August 2021.
 
 ##### ```Will the dataset be distributed under a copyright or other intellectual property (IP) license, and/or under applicable terms of use (ToU)? If so, please describe this license and/or ToU, and provide a link or other access point to, or otherwise reproduce, any relevant licensing terms or ToU, as well as any fees associated with these restrictions.```
 
