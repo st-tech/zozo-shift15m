@@ -144,6 +144,7 @@ There are no fees or restrictions.
 ZOZO Research is supporting/maintaining the dataset.
 
 ##### ```Will the dataset be updated (e.g., to correct labeling errors, add new instances, delete instances)? If so, please describe how often, by whom, and how updates will be communicated to users (e.g., mailing list, GitHub)?```
+All changes to the dataset will be announced through the GitHub Releases.
 
 ##### ```If the dataset becomes obsolete how will this be communicated?```
 This will be posted on the dataset webpage.
