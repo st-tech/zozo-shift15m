@@ -141,11 +141,14 @@ The dataset is self-contained.
 ##### ```Who will be supporting/hosting/maintaining the dataset?```
 ZOZO Research is supporting/maintaining the dataset.
 
+##### ```Will the dataset be updated (e.g., to correct labeling errors, add new instances, delete instances)? If so, please describe how often, by whom, and how updates will be communicated to users (e.g., mailing list, GitHub)?```
+
+##### ```If the dataset becomes obsolete how will this be communicated?```
+This will be posted on the dataset webpage.
+
 ##### ```How can the owner/curator/manager of the dataset be contacted (e.g., email address)?```
 
 ##### ```Is there an erratum? If so, please provide a link or other access point.```
-
-##### ```Will the dataset be updated (e.g., to correct labeling errors, add new instances, delete instances)? If so, please describe how often, by whom, and how updates will be communicated to users (e.g., mailing list, GitHub)?```
 
 ##### ```If the dataset relates to people, are there applicable limits on the retention of the data associated with the instances (e.g., were individuals in question told that their data would be retained for a fixed period of time and then deleted)? If so, please describe these limits and explain how they will be enforced.```
 
