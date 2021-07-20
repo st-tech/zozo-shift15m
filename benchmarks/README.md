@@ -48,7 +48,7 @@
 
 ![](../assets/benchmarks/numlikes_regression_iwerm.png)
 
-## Regression for the number of likes
+## Regression for the sum of prices
 
 * task type: regression
 * shift type: covariate shift, target shift
