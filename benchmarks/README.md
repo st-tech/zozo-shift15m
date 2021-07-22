@@ -63,7 +63,8 @@
 
 ### Covariate shift
 
-#### Ordinal Empirical Risk Minimizations
+* hyperparameters: All hyperparameters are default settings of the [scikit-learn](https://scikit-learn.org/stable/index.html).
+* source code is available [here](sumprices_tabular_covariate_shift.py).
 
 | Models            | W=0            | W=5            | W=10           | W=15           | W=20           | W=25           | W=30            | W=35           | W=40           | W=45           | W=50           |
 |-------------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|
@@ -75,20 +76,18 @@
 
 ![](../assets/benchmarks/sumprices_regression_covariate_shift.png)
 
-#### Importance Weighted Empirical Risk Minimizations
-
-| Models            | W=0            | W=5            | W=10           | W=15           | W=20           | W=25           | W=30            | W=35           | W=40           | W=45           | W=50           |
-|-------------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|
-| Linear Regression | (±)  | (±)  | (±) | (±) | (±) | (±) | (±)| (±) | (±) | (±) | (±) |
-| IWERM (optimal) | (±)  | (±)  | (±) | (±) | (±) | (±) | (±)| (±)| (±)| (±) | (±) |
-| RIWERM (alpha=0.25) |(±) | (±) | (±)| (±) | (±) | (±) | (±) |(±) | (±) | (±) | (±)|
-| RIWERM (alpha=0.5) | (±) | (±) | (±)| (±) | (±) | (±) | (±) |(±)| (±) | (±)| (±)|
-| RIWERM (alpha=0.75) | (±) | (±) | (±)| (±) | (±) | (±)| (±) |(±)| (±)| (±) | (±) |
-
 ### Target shift
 
 #### Ordinal Empirical Risk Minimizations
 
+| Models            | W=0            | W=5            | W=10           | W=15           | W=20           | W=25           | W=30            | W=35           | W=40           | W=45           | W=50           |
+|-------------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|
+| Linear Regression | (±)  | (±)  | (±) | (±) | (±) | (±) | (±)| (±) | (±) | (±) | (±) |
+| RANSAC Regression | (±)  | (±)  | (±) | (±) | (±) | (±) | (±)| (±)| (±)| (±) | (±) |
+| Huber Regression  |(±) | (±) | (±)| (±) | (±) | (±) | (±) |(±) | (±) | (±) | (±)|
+| TheilSen Regressor | (±) | (±) | (±)| (±) | (±) | (±) | (±) |(±)| (±) | (±)| (±)|
+| Decision Tree | (±) | (±) | (±)| (±) | (±) | (±)| (±) |(±)| (±)| (±) | (±) |
+
 #### Importance Weighted Empirical Risk Minimizations
 
 | Models            | W=0            | W=5            | W=10           | W=15           | W=20           | W=25           | W=30            | W=35           | W=40           | W=45           | W=50           |
@@ -98,6 +97,28 @@
 | RIWERM (alpha=0.25) |(±) | (±) | (±)| (±) | (±) | (±) | (±) |(±) | (±) | (±) | (±)|
 | RIWERM (alpha=0.5) | (±) | (±) | (±)| (±) | (±) | (±) | (±) |(±)| (±) | (±)| (±)|
 | RIWERM (alpha=0.75) | (±) | (±) | (±)| (±) | (±) | (±)| (±) |(±)| (±)| (±) | (±) |
+
+## Template
+
+* task type:
+* shift type:
+* shift metric:
+* train/test sample size
+  * train sample size:
+  * test sample size:
+* input/output dimension
+  * input dimension:
+  * output dimension:
+* number of trials:
+
+* hyperparameters:
+* source code is
+
+
+| Models  | W=0  | W=5  | W=10| W=15| W=20| W=25| W=30| W=35| W=40| W=45| W=50|
+|---------|------|------|-----|-----|-----|-----|-----|-----|-----|-----|-----|
+| Model 1 | (±)  | (±)  | (±) | (±) | (±) | (±) | (±) | (±) | (±) | (±) | (±) |
+| Model 2 | (±)  | (±)  | (±) | (±) | (±) | (±) | (±) | (±) | (±) | (±) | (±) |
 
 ## References
 - [1] Shimodaira, Hidetoshi. "Improving predictive inference under covariate shift by weighting the log-likelihood function." Journal of statistical planning and inference 90.2 (2000): 227-244.
