@@ -51,6 +51,8 @@ Items that do not belong to the main categories, such that underwear and backgro
 
 ##### ```Are there any errors, sources of noise, or redundancies in the dataset? If so, please provide a description.```
 
+No.
+
 ##### ```Is the dataset self-contained, or does it link to or otherwise rely on external resources (e.g., websites, tweets, other datasets)? If it links to or relies on external resources, a) are there guarantees that they will exist, and remain constant, over time; b) are there official archival versions of the complete dataset (i.e., including the external resources as they existed at the time the dataset was created); c) are there any restrictions (e.g., licenses, fees) associated with any of the external resources that might apply to a future user? Please provide descriptions of all external resources and any restrictions associated with them, as well as links or other access points, as appropriate.```
 
 The dataset is self-contained.
