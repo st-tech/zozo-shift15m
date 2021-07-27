@@ -75,6 +75,19 @@ No.
 
 ##### ```Any other comments?```
 
+Table 1 summarizes some dataset statistics and Figure 1 shows examples of items.
+All images in the dataset are color.
+
+
+| Property            | Value      |
+|---------------------|------------|
+| Number of Instances | 2,555,314  |
+| Number of Items     | 28,487,984 |
+
+> Table 1. A summary of dataset statistics.
+
+> Figure 1. TODO
+
 ## Collection Process
 ##### ```How was the data associated with each instance acquired? Was the data directly observable (e.g., raw text, movie ratings), reported by subjects (e.g., survey responses), or indirectly inferred/derived from other data (e.g., part-of-speech tags, model-based guesses for age or language)? If data was reported by subjects or indirectly inferred/derived from other data, was the data validated/verified? If so, please describe how.```
 
