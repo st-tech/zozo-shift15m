@@ -71,6 +71,8 @@ It is impossible to identify individuals from the dataset.
 
 ##### ```Does the dataset contain data that might be considered sensitive in any way (e.g., data that reveals racial or ethnic origins, sexual orientations, religious beliefs, political opinions or union memberships, or locations; financial or health data; biometric or genetic data; forms of government identification, such as social security numbers; criminal history)? If so, please provide a description.```
 
+No.
+
 ##### ```Any other comments?```
 
 ## Collection Process
