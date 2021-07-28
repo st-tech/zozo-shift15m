@@ -8,9 +8,10 @@ from sklearn.model_selection import train_test_split
 from shift28m import constants as C
 from shift28m import msgs as M
 from shift28m.datasets import df_manipulations
+from shift28m.datasets.base_dataset import BaseDataset
 
 
-class SumPricesRegression(object):
+class SumPricesRegression(BaseDataset):
     def __init__(self, root: str = C.ROOT, load_jsonl: bool = False):
         if load_jsonl:
             # load *.jsonl files in the root directory
