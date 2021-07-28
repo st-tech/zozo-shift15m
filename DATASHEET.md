@@ -130,6 +130,8 @@ All software are provided on the [SHIFT28M repository](https://github.com/st-tec
 
 ##### ```Has the dataset been used for any tasks already? If so, please provide a description.```
 
+Benchmarks using this dataset and the specified evaluation protocol are listed in https://github.com/st-tech/zr-shift28m/tree/main/benchmarks.
+
 ##### ```Is there a repository that links to any or all papers or systems that use the dataset? If so, please provide a link or other access point.```
 
 ##### ```What (other) tasks could the dataset be used for?```
