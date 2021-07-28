@@ -7,10 +7,11 @@ from sklearn.model_selection import train_test_split
 
 from shift28m import constants as C
 from shift28m import msgs as M
+from shift28m.datasets.base_dataset import BaseDataset
 from shift28m.datasets import df_manipulations
 
 
-class NumLikesRegression(object):
+class NumLikesRegression(BaseDataset):
     def __init__(self, root: str = C.ROOT, load_jsonl: bool = False):
         if load_jsonl:
             # load *.jsonl files in the root directory
@@ -85,6 +86,7 @@ class NumLikesRegression(object):
         self,
         train_size: int = 10000,
         test_size: int = 10000,
+        covariate_shift: bool = False,
         target_shift: bool = False,
         train_mu: float = 50,
         train_sigma: float = 10,
@@ -95,6 +97,8 @@ class NumLikesRegression(object):
     ):
 
         N = len(self.x)
+        if covariate_shift:
+            raise RuntimeError(M.UNSUPPORTED_SHIFT_TYPE)
         if not target_shift:
             x_train, x_pool, y_train, y_pool = train_test_split(
                 self.x, self.y, train_size=train_size, random_state=random_seed
