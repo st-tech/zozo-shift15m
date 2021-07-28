@@ -21,7 +21,7 @@ authors:
   - family-names: Goto
     given-names: Ryosuke
     orcid: https://orcid.org/0000-0000-0000-0000
-title: SHIFT28M: Multiobjective Large-Scale Dataset with Distributional Shifts
+title: "SHIFT28M: Multiobjective Large-Scale Dataset with Distributional Shifts"
 version: 1.0.0
 date-released: 2021-08-20
-license: "Apache-2.0"
+license: Apache-2.0
