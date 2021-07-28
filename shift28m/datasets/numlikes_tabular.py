@@ -15,49 +15,55 @@ class NumLikesRegression(BaseDataset):
     def __init__(self, root: str = C.ROOT, load_jsonl: bool = False):
         if load_jsonl:
             # load *.jsonl files in the root directory
-            self.jsonls: list = sorted(glob.glob(os.path.join(root, f"*.{C.JSONL}")))
-            if len(self.jsonls) == 0:
-                raise RuntimeError(M.DATASET_NOT_FOUND)
-
-            self.df: pd.DataFrame = pd.read_json(
-                self.jsonls[0], orient=C.RECORDS, lines=True
-            )
-            for jsonl in self.jsonls[1:]:
-                df_: pd.DataFrame = pd.read_json(jsonl, orient=C.RECORDS, lines=True)
-                self.df = pd.concat([self.df, df_])
-
-            self.df: pd.DataFrame = self.df.sort_values(C.Keys.PUBLISH_DATE)
-
-            self.__prepare_features()
-
-            self.y: np.ndarray = np.array(self.df.like_num)
-            self.x: np.ndarray = np.array(
-                (
-                    self.user_ids,
-                    self.price_sum,
-                    self.price_mean,
-                    self.price_max,
-                    self.price_min,
-                )
-            )
-
-            self.x: np.ndarray = self.x.T
-            self.x: np.ndarray = np.hstack([self.x, np.stack(self.category_ids_1)])
+            self.__load_jsonl(root=root)
         else:
             root = os.path.join(root, C.Tasks.NUM_LIKES_REGRESSION)
             # load *.pickle files in the root directory
-            self.pickles: list = sorted(glob.glob(os.path.join(root, f"*.{C.PICKLE}")))
-            if len(self.pickles) == 0:
-                raise RuntimeError(M.DATASET_NOT_FOUND)
+            self.__load_pickle(root=root)
 
-            with open(self.pickles[0], "rb") as f:
-                (self.x, self.y) = pickle.load(f)
+    def __load_jsonl(self, root: str):
+        self.jsonls: list = sorted(glob.glob(os.path.join(root, f"*.{C.JSONL}")))
+        if len(self.jsonls) == 0:
+            raise RuntimeError(M.DATASET_NOT_FOUND)
 
-            for p in self.pickles[1:]:
-                with open(p, "rb") as f:
-                    (x_, y_) = pickle.load(f)
-                    self.x = np.vstack([self.x, x_])
-                    self.y = np.hstack([self.y, y_])
+        self.df: pd.DataFrame = pd.read_json(
+            self.jsonls[0], orient=C.RECORDS, lines=True
+        )
+        for jsonl in self.jsonls[1:]:
+            df_: pd.DataFrame = pd.read_json(jsonl, orient=C.RECORDS, lines=True)
+            self.df = pd.concat([self.df, df_])
+
+        self.df: pd.DataFrame = self.df.sort_values(C.Keys.PUBLISH_DATE)
+
+        self.__prepare_features()
+
+        self.y: np.ndarray = np.array(self.df.like_num)
+        self.x: np.ndarray = np.array(
+            (
+                self.user_ids,
+                self.price_sum,
+                self.price_mean,
+                self.price_max,
+                self.price_min,
+            )
+        )
+
+        self.x: np.ndarray = self.x.T
+        self.x: np.ndarray = np.hstack([self.x, np.stack(self.category_ids_1)])
+
+    def __load_pickle(self, root: str):
+        self.pickles: list = sorted(glob.glob(os.path.join(root, f"*.{C.PICKLE}")))
+        if len(self.pickles) == 0:
+            raise RuntimeError(M.DATASET_NOT_FOUND)
+
+        with open(self.pickles[0], "rb") as f:
+            (self.x, self.y) = pickle.load(f)
+
+        for p in self.pickles[1:]:
+            with open(p, "rb") as f:
+                (x_, y_) = pickle.load(f)
+                self.x = np.vstack([self.x, x_])
+                self.y = np.hstack([self.y, y_])
 
     def __prepare_features(self):
         # generate input features
