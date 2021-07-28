@@ -1,0 +1,34 @@
+cff-version: 1.0.0
+message: "If you use SHIFT28M in your research, please cite it using these metadata."
+abstract: The main motivation of the SHIFT28M project is to provide a dataset that contains natural dataset shifts collected from a web service that was actually in operation for several years. In addition, the SHIFT28M dataset has several types of dataset shifts, allowing us to evaluate the robustness of the model to different types of shifts (e.g., covariate shift and target shift).
+authors:
+  - family-names: Kimura
+    given-names: Masanari
+    orcid: https://orcid.org/0000-0002-9953-3469
+    email: masanari.kimura@zozo.com
+  - family-names: Saito
+    given-names: Yuki
+    orcid: https://orcid.org/0000-0000-0000-0000
+  - family-names: Morishita
+    given-names: Kazuya
+    orcid: https://orcid.org/0000-0000-0000-0000
+  - family-names: Haines
+    given-names: Robert
+    orcid: https://orcid.org/0000-0002-9538-7919
+  - family-names: Nakamura
+    given-names: Takuma
+    orcid: https://orcid.org/0000-0000-0000-0000
+  - family-names: Goto
+    given-names: Ryosuke
+    orcid: https://orcid.org/0000-0000-0000-0000
+title: SHIFT28M: Multiobjective Large-Scale Dataset with Distributional Shifts
+version: 1.0.0
+date-released: 2021-08-20
+keywords:
+  - machine learning
+  - dataset
+  - dataset shift
+  - covariate shift
+  - target shift
+  - domain adaptation
+license: "Apache-2.0 License"
