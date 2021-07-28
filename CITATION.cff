@@ -24,11 +24,4 @@ authors:
 title: SHIFT28M: Multiobjective Large-Scale Dataset with Distributional Shifts
 version: 1.0.0
 date-released: 2021-08-20
-keywords:
-  - machine learning
-  - dataset
-  - dataset shift
-  - covariate shift
-  - target shift
-  - domain adaptation
 license: "Apache-2.0 License"
