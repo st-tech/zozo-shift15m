@@ -17,6 +17,8 @@ This datasheet is based on the [Datasheets for Datasets](https://arxiv.org/abs/1
 | Windows CPU / GPU | <center>Status Currently Unavailable</center> | <center>Status Currently Unavailable</center> |  <center>Status Currently Unavailable</center> |
 | Mac OS CPU|   <img src="https://img.shields.io/badge/build-success-brightgreen" /> |  <img src="https://img.shields.io/badge/build-success-brightgreen" />   |  <img src="https://img.shields.io/badge/build-success-brightgreen" /> |
 
+![](./assets/iqon.png)
+
 ## Installation
 
 ### (WIP) From PyPi
