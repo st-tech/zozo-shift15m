@@ -1,5 +1,0 @@
-## Build
-
-```bash
-$ make html
-```
