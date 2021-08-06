@@ -11,12 +11,12 @@ from sklearn.metrics import mean_absolute_error as mae
 from scipy.stats import norm
 from scipy.stats import wasserstein_distance
 import tqdm
-from shift28m.datasets import NumLikesRegression
+from shift15m.datasets import NumLikesRegression
 
 # set the plot style.
 sns.set_style("whitegrid")
 
-# load dataset from SHIFT28M
+# load dataset from SHIFT15M
 dataset = NumLikesRegression()
 
 #############################

@@ -1,6 +1,6 @@
 cff-version: 1.0.0
-message: "If you use SHIFT28M in your research, please cite it using these metadata."
-abstract: The main motivation of the SHIFT28M project is to provide a dataset that contains natural dataset shifts collected from a web service that was actually in operation for several years. In addition, the SHIFT28M dataset has several types of dataset shifts, allowing us to evaluate the robustness of the model to different types of shifts (e.g., covariate shift and target shift).
+message: "If you use SHIFT15M in your research, please cite it using these metadata."
+abstract: The main motivation of the SHIFT15M project is to provide a dataset that contains natural dataset shifts collected from a web service that was actually in operation for several years. In addition, the SHIFT15M dataset has several types of dataset shifts, allowing us to evaluate the robustness of the model to different types of shifts (e.g., covariate shift and target shift).
 authors:
   - family-names: Kimura
     given-names: Masanari
@@ -18,7 +18,7 @@ authors:
   - family-names: Goto
     given-names: Ryosuke
     orcid: https://orcid.org/0000-0000-0000-0000
-title: "SHIFT28M: Multiobjective Large-Scale Dataset with Distributional Shifts"
+title: "SHIFT15M: Multiobjective Large-Scale Dataset with Distributional Shifts"
 version: 1.0.0
 date-released: 2021-08-20
 license: Apache-2.0

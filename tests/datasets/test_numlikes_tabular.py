@@ -1,6 +1,6 @@
 import unittest
-import shift28m.msgs as M
-from shift28m.datasets import NumLikesRegression
+import shift15m.msgs as M
+from shift15m.datasets import NumLikesRegression
 
 
 class TestNumlikesTabular(unittest.TestCase):

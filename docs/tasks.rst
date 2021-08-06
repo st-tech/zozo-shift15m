@@ -1,5 +1,0 @@
-Tasks
-=============
-
-.. contents::
-    :local:

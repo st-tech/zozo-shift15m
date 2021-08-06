@@ -1,5 +1,5 @@
 import numpy as np
-from shift28m import constants as C
+from shift15m import constants as C
 
 
 def extract_user_id(x: dict) -> int:

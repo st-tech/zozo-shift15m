@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from shift28m.datasets import df_manipulations
+from shift15m.datasets import df_manipulations
 
 
 class TestDFManipulations(unittest.TestCase):

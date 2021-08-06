@@ -5,10 +5,10 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 
-from shift28m import constants as C
-from shift28m import msgs as M
-from shift28m.datasets import df_manipulations
-from shift28m.datasets.base_dataset import BaseDataset
+from shift15m import constants as C
+from shift15m import msgs as M
+from shift15m.datasets import df_manipulations
+from shift15m.datasets.base_dataset import BaseDataset
 
 
 class SumPricesRegression(BaseDataset):

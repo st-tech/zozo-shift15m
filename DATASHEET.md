@@ -1,4 +1,4 @@
-# Datasheet for SHIFT28M
+# Datasheet for SHIFT15M
 
 ## Motivation
 ##### ```For what purpose was the dataset created? Was there a specific task in mind? Was there a specific gap that needed to be filled? Please provide a description.```
@@ -6,8 +6,8 @@ Many machine learning algorithms assume that the training data and the test data
 In the real world, however, this assumption is most often violated.
 Many robust algorithms against such dataset shifts have been studied, but they often experiment with artificially induced dataset shifts on originally i.i.d. datasets.
 Although such experiments seem reasonable, [recent studies](https://papers.nips.cc/paper/2020/hash/d8330f857a17c53d217014ee776bfd50-Abstract.html) have reported that there is no correlation between robustness to artificial dataset shifts and robustness to natural dataset shifts.
-The main motivation of the SHIFT28M project is to provide a dataset that contains natural dataset shifts collected from a web service that was actually in operation for several years.
-In addition, the SHIFT28M dataset has several types of dataset shifts, allowing us to evaluate the robustness of the model to different types of shifts (e.g., covariate shift and target shift).
+The main motivation of the SHIFT15M project is to provide a dataset that contains natural dataset shifts collected from a web service that was actually in operation for several years.
+In addition, the SHIFT15M dataset has several types of dataset shifts, allowing us to evaluate the robustness of the model to different types of shifts (e.g., covariate shift and target shift).
 
 ##### ```Who created this dataset (e.g., which team, research group) and on behalf of which entity (e.g., company, institution, organization)?```
 The initial version of the dataset was created by Masanari Kimura, Yuki Saito, Kazuya Morishita, Ryosuke Goto, and Takuma Nakamura most of whom were researchers at the ZOZO Research.
@@ -19,7 +19,7 @@ Not applicable.
 
 ## Composition
 ##### ```What do the instances that comprise the dataset represent (e.g., documents, photos, people, countries)? Are there multiple types of instances (e.g., movies, users, and ratings; people and interactions between them; nodes and edges)? Please provide a description.```
-The SHIFT28M dataset is a collection of outfits posted to the fashion website IQON (which is no longer providing this service). A record represents the posted outfit, the user who posted it, and some meta-information, it has 5 fields.
+The SHIFT15M dataset is a collection of outfits posted to the fashion website IQON (which is no longer providing this service). A record represents the posted outfit, the user who posted it, and some meta-information, it has 5 fields.
 - set_id: An ID that identifies the outfit that was posted.
 - items: Provides information about the items that comprise the posted outfit and consists of 4 subfields.
   - item_id: An ID that identifies an item.
@@ -36,7 +36,7 @@ The SHIFT28M dataset is a collection of outfits posted to the fashion website IQ
 
 ##### ```Does the dataset contain all possible instances or is it a sample (not necessarily random) of instances from a larger set? If the dataset is a sample, then what is the larger set? Is the sample representative of the larger set (e.g., geographic coverage)? If so, please describe how this representativeness was validated/verified. If it is not representative of the larger set, please describe why not (e.g., to cover a more diverse range of instances, because instances were withheld or unavailable).```
 We collected outfits posted on a Japanese fasion website "IQON". This website has about 2M users, almost all are Japanese women. Most of them are in their 20s and 30s. The collection period was from 01/01/2000 to 04/06/2020.
-An outfit is a set of multiple items, and each item has a corresponding category. In SHIFT28M, outfits that contain 4 or more items belonging to the main categories (outerwear, tops, bottoms, shoes,bags, hats, and accessories) were collected.
+An outfit is a set of multiple items, and each item has a corresponding category. In SHIFT15M, outfits that contain 4 or more items belonging to the main categories (outerwear, tops, bottoms, shoes,bags, hats, and accessories) were collected.
 
 ##### ```What data does each instance consist of? “Raw” data (e.g., unprocessed text or images)or features? In either case, please provide a description.```
 
@@ -81,8 +81,8 @@ All images in the dataset are color.
 
 | Property            | Value      |
 |---------------------|------------|
-| Number of Instances | 2,555,314  |
-| Number of Items     | 28,487,984 |
+| Number of Instances | 2,555,147  |
+| Number of Items     | 15,218,721 |
 
 > Table 1. A summary of dataset statistics.
 
@@ -122,7 +122,7 @@ All images in the dataset are color.
 ##### ```Was the “raw” data saved in addition to the preprocessed/cleaned/labeled data (e.g., to support unanticipated future uses)? If so, please provide a link or other access point to the “raw” data.```
 
 ##### ```Is the software used to preprocess/clean/label the instances available? If so, please provide a link or other access point.```
-All software are provided on the [SHIFT28M repository](https://github.com/st-tech/zr-shift28m).
+All software are provided on the [SHIFT15M repository](https://github.com/st-tech/zozo-shift15m).
 
 ##### ```Any other comments?```
 
@@ -130,7 +130,7 @@ All software are provided on the [SHIFT28M repository](https://github.com/st-tec
 
 ##### ```Has the dataset been used for any tasks already? If so, please provide a description.```
 
-Benchmarks using this dataset and the specified evaluation protocol are listed in https://github.com/st-tech/zr-shift28m/tree/main/benchmarks.
+Benchmarks using this dataset and the specified evaluation protocol are listed in https://github.com/st-tech/zozo-shift15m/tree/main/benchmarks.
 
 ##### ```Is there a repository that links to any or all papers or systems that use the dataset? If so, please provide a link or other access point.```
 
@@ -172,18 +172,18 @@ All changes to the dataset will be announced through the GitHub Releases.
 This will be posted on the dataset webpage.
 
 ##### ```How can the owner/curator/manager of the dataset be contacted (e.g., email address)?```
-All questions and comments can be sent to GitHub Issues on [SHIFT28M repository](https://github.com/st-tech/zr-shift28m).
+All questions and comments can be sent to GitHub Issues on [SHIFT15M repository](https://github.com/st-tech/zozo-shift15m).
 
 ##### ```Is there an erratum? If so, please provide a link or other access point.```
 All changes to the dataset will be announced through the GitHub Releases.
-Errata are listed under the “Errata” section of [SHIFT28M repository](https://github.com/st-tech/zr-shift28m).
+Errata are listed under the “Errata” section of [SHIFT15M repository](https://github.com/st-tech/zozo-shift15m).
 
 
 ##### ```If the dataset relates to people, are there applicable limits on the retention of the data associated with the instances (e.g., were individuals in question told that their data would be retained for a fixed period of time and then deleted)? If so, please describe these limits and explain how they will be enforced.```
 No.
 
 ##### ```Will older versions of the dataset continue to be supported/hosted/maintained? If so, please describe how. If not, please describe how its obsolescence will be communicated to users.```
-They will continue to be supported with all information on [SHIFT28M repository](https://github.com/st-tech/zr-shift28m).
+They will continue to be supported with all information on [SHIFT15M repository](https://github.com/st-tech/zozo-shift15m).
 We also provide the contribution guides for software that supports the dataset.
 
 ##### ```If others want to extend/augment/build on/contribute to the dataset, is there a mechanism for them to do so? If so, please provide a description. Will these contributions be validated/verified? If so, please describe how. If not, why not? Is there a process for communicating/distributing these contributions to other users? If so, please provide a description.```
