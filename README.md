@@ -1,13 +1,13 @@
-# SHIFT28M
+# SHIFT15M
 
 [![Python](https://img.shields.io/badge/python-3.6%20%7C%203.7%20%7C%203.8%20%7C%203.9-blue)](https://www.python.org)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/st-tech/zr-shift28m)
-![GitHub last commit](https://img.shields.io/github/last-commit/st-tech/zr-shift28m)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/st-tech/zr-shift15m)
+![GitHub last commit](https://img.shields.io/github/last-commit/st-tech/zr-shift15m)
 
-The main motivation of the SHIFT28M project is to provide a dataset that contains natural dataset shifts collected from a web service that was actually in operation for several years.
-In addition, the SHIFT28M dataset has several types of dataset shifts, allowing us to evaluate the robustness of the model to different types of shifts (e.g., covariate shift and target shift).
+The main motivation of the SHIFT15M project is to provide a dataset that contains natural dataset shifts collected from a web service that was actually in operation for several years.
+In addition, the SHIFT15M dataset has several types of dataset shifts, allowing us to evaluate the robustness of the model to different types of shifts (e.g., covariate shift and target shift).
 
-We provide the [Datasheet for SHIFT28M](./DATASHEET.md).
+We provide the [Datasheet for SHIFT15M](./DATASHEET.md).
 This datasheet is based on the [Datasheets for Datasets](https://arxiv.org/abs/1803.09010) [1] template.
 
 | System      | Python 3.6 | Python 3.7 | Python 3.8 |
@@ -17,7 +17,7 @@ This datasheet is based on the [Datasheets for Datasets](https://arxiv.org/abs/1
 | Windows CPU / GPU | <center>Status Currently Unavailable</center> | <center>Status Currently Unavailable</center> |  <center>Status Currently Unavailable</center> |
 | Mac OS CPU|   <img src="https://img.shields.io/badge/build-success-brightgreen" /> |  <img src="https://img.shields.io/badge/build-success-brightgreen" />   |  <img src="https://img.shields.io/badge/build-success-brightgreen" /> |
 
-SHIFT28M is a large-scale dataset based on approximately 28 million items accumulated by the fashion search service IQON.
+SHIFT15M is a large-scale dataset based on approximately 15 million items accumulated by the fashion search service IQON.
 
 ![](./assets/iqon.png)
 
@@ -26,26 +26,26 @@ SHIFT28M is a large-scale dataset based on approximately 28 million items accumu
 ### (WIP) From PyPi
 
 ```bash
-$ pip install shift28m
+$ pip install shift15m
 ```
 
 ### From Source
 
 ```bash
-$ git clone https://github.com/st-tech/zr-shift28m.git
-$ cd zr-shift28m
+$ git clone https://github.com/st-tech/zr-shift15m.git
+$ cd zr-shift15m
 $ poetry build
-$ pip install dist/shift28m-xxxx-py3-none-any.whl
+$ pip install dist/shift15m-xxxx-py3-none-any.whl
 ```
 
-## Download SHIFT28M dataset
+## Download SHIFT15M dataset
 
 ### (WIP) Use Dataset class
 
-You can download SHIFT28M dataset as follows:
+You can download SHIFT15M dataset as follows:
 
 ```python
-from shift28.datasets import NumLikesRegression
+from shift15.datasets import NumLikesRegression
 
 dataset = NumLikesRegression(root="./data", download=True)
 ```
@@ -60,13 +60,13 @@ The following tasks are now available:
 
 | Tasks              | Task type      | Shift type   | # of input dim | # of output dim |
 |--------------------|----------------|--------------|----------------|-----------------|
-| [NumLikesRegression](https://github.com/st-tech/zr-shift28m/tree/main/benchmarks#regression-for-the-number-of-likes) | regression     | target shift |     (N,25)     | (N,1)           |
-| [SumPricesRegression](https://github.com/st-tech/zr-shift28m/tree/main/benchmarks#regression-for-the-sum-of-prices) | regression    | covariate shift, target shift | (N, 1) | (N, 1) |
+| [NumLikesRegression](https://github.com/st-tech/zr-shift15m/tree/main/benchmarks#regression-for-the-number-of-likes) | regression     | target shift |     (N,25)     | (N,1)           |
+| [SumPricesRegression](https://github.com/st-tech/zr-shift15m/tree/main/benchmarks#regression-for-the-sum-of-prices) | regression    | covariate shift, target shift | (N, 1) | (N, 1) |
 | ItemPriceRegression| regression     | target shift | (N, H, W)      | (N, 1)          |
 
 ## Benchmarks
 
-As templates for numerical experiments on the SHIFT28M dataset, we have published [experimental results for each task with several models](./benchmarks).
+As templates for numerical experiments on the SHIFT15M dataset, we have published [experimental results for each task with several models](./benchmarks).
 
 ## Original Dataset Structure
 
@@ -88,7 +88,7 @@ The original dataset is maintained in jsonl format, and a row consists of the fo
 
 
 ## Contributing
-To learn more about making a contribution to SHIFT28M, please see the following materials:
+To learn more about making a contribution to SHIFT15M, please see the following materials:
 - [Developers Guide](./DEVELOPMENT.md)
 - [Task Proposal Guide](./TASK_PROPOSAL.md)
 - [Benchmark Proposal Guide](./BENCHMARK.md)
@@ -107,27 +107,27 @@ The following table is necessary for this dataset to be indexed by search engine
   </tr>
   <tr>
     <td>name</td>
-    <td><code itemprop="name">SHIFT28M Dataset</code></td>
+    <td><code itemprop="name">SHIFT15M Dataset</code></td>
   </tr>
   <tr>
     <td>alternateName</td>
-    <td><code itemprop="alternateName">SHIFT28M</code></td>
+    <td><code itemprop="alternateName">SHIFT15M</code></td>
   </tr>
   <tr>
     <td>alternateName</td>
-    <td><code itemprop="alternateName">shift28m-dataset</code></td>
+    <td><code itemprop="alternateName">shift15m-dataset</code></td>
   </tr>
   <tr>
     <td>url</td>
-    <td><code itemprop="url">https://github.com/st-tech/zr-shift28m</code></td>
+    <td><code itemprop="url">https://github.com/st-tech/zr-shift15m</code></td>
   </tr>
   <tr>
     <td>sameAs</td>
-    <td><code itemprop="sameAs">https://github.com/st-tech/zr-shift28m</code></td>
+    <td><code itemprop="sameAs">https://github.com/st-tech/zr-shift15m</code></td>
   </tr>
   <tr>
     <td>description</td>
-    <td><code itemprop="description">SHIFT28M is a multi-objective, multi-domain dataset which includes multiple dataset shifts.</code></td>
+    <td><code itemprop="description">SHIFT15M is a multi-objective, multi-domain dataset which includes multiple dataset shifts.</code></td>
   </tr>
   <tr>
     <td>provider</td>
@@ -177,10 +177,10 @@ The following table is necessary for this dataset to be indexed by search engine
 ## Citation
 
 ```bibtex
-@misc{Kimura_SHIFT28M_Multiobjective_LargeScale_2021,
+@misc{Kimura_SHIFT15M_Multiobjective_LargeScale_2021,
 author = {Kimura, Masanari and Saito, Yuki and Morishita, Kazuya and Nakamura, Takuma and Goto, Ryosuke},
 month = {8},
-title = {SHIFT28M: Multiobjective Large-Scale Dataset with Distributional Shifts},
+title = {SHIFT15M: Multiobjective Large-Scale Dataset with Distributional Shifts},
 year = {2021}
 }
 ```
