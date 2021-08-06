@@ -14,7 +14,7 @@ from sklearn.linear_model import TheilSenRegressor
 from sklearn.metrics import mean_absolute_error as mae
 from scipy.stats import wasserstein_distance
 import tqdm
-from shift28m.datasets import NumLikesRegression
+from shift15m.datasets import NumLikesRegression
 
 
 sns.set_style("whitegrid")
