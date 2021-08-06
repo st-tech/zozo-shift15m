@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "shift28m"
+name = "shift15m"
 version = "0.1.0"
 description = "Large-scale multiobective dataset with dataset shift."
 authors = ["Masanari Kimura"]
