@@ -11,6 +11,9 @@ class Keys:
     ITEMS = "items"
     PRICE = "price"
     PUBLISH_DATE = "publish_date"
+    ITEM_ID = "item_id"
+    CATEGORY_ID = "category_id1"
+    SUBCATEGORY_ID = "category_id2"
 
 
 class Tasks:
