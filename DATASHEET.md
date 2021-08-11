@@ -61,6 +61,8 @@ The dataset is self-contained.
 
 ##### ```Does the dataset contain data that, if viewed directly, might be offensive, insulting, threatening, or might otherwise cause anxiety? If so, please describe why.```
 
+No.
+
 ##### ```Does the dataset relate to people? If not, you may skip the remaining questions in this section.```
 
 ##### ```Does the dataset identify any subpopulations (e.g., by age, gender)? If so, please describe how these subpopulations are identified and provide a description of their respective distributions within the dataset.```
