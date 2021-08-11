@@ -146,6 +146,8 @@ Benchmarks using this dataset and the specified evaluation protocol are listed i
 
 ##### ```Will the dataset be distributed to third parties outside of the entity (e.g., company, institution, organization) on behalf of which the dataset was created? If so, please provide a description.```
 
+Yes. The dataset will be distributed to third parties based on the licence.
+
 ##### ```How will the dataset will be distributed (e.g., tarball on website, API, GitHub)? Does the dataset have a digital object identifier (DOI)?```
 
 ##### ```When will the dataset be distributed?```
