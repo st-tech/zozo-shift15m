@@ -59,11 +59,17 @@ The dataset is self-contained.
 
 ##### ```Does the dataset contain data that might be considered confidential (e.g., data that is protected by legal privilege or by doctorpatient confidentiality, data that includes the content of individuals non-public communications)? If so, please provide a description.```
 
+No.
+
 ##### ```Does the dataset contain data that, if viewed directly, might be offensive, insulting, threatening, or might otherwise cause anxiety? If so, please describe why.```
 
 No.
 
 ##### ```Does the dataset relate to people? If not, you may skip the remaining questions in this section.```
+
+Yes.
+Each instance is a combination of outfits created by an individual and preferred by that individual.
+
 
 ##### ```Does the dataset identify any subpopulations (e.g., by age, gender)? If so, please describe how these subpopulations are identified and provide a description of their respective distributions within the dataset.```
 
@@ -109,6 +115,9 @@ Each outfit includes a timestamp that describes when the outfit created.
 ##### ```Were any ethical review processes conducted (e.g., by an institutional review board)? If so, please provide a description of these review processes, including the outcomes, as well as a link or other access point to any supporting documentation.```
 
 ##### ```Does the dataset relate to people? If not, you may skip the remaining questions in this section.```
+
+Yes.
+Each instance is a combination of outfits created by an individual and preferred by that individual.
 
 ##### ```Did you collect the data from the individuals in question directly, or obtain it via third parties or other sources (e.g., websites)?```
 
