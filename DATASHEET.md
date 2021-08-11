@@ -65,6 +65,8 @@ The dataset is self-contained.
 
 ##### ```Does the dataset identify any subpopulations (e.g., by age, gender)? If so, please describe how these subpopulations are identified and provide a description of their respective distributions within the dataset.```
 
+No.
+
 ##### ```Is it possible to identify individuals (i.e., one or more natural persons), either directly or indirectly (i.e., in combination with other data) from the dataset? If so, please describe how.```
 
 It is impossible to identify individuals from the dataset.
