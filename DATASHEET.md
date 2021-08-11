@@ -99,6 +99,9 @@ All images in the dataset are color.
 
 ##### ```Over what timeframe was the data collected? Does this timeframe match the creation timeframe of the data associated with the instances (e.g., recent crawl of old news articles)? If not, please describe the timeframe in which the data associated with the instances was created.```
 
+The dataset was collected in the period of 2013~2017.
+Each outfit includes a timestamp that describes when the outfit created.
+
 ##### ```Were any ethical review processes conducted (e.g., by an institutional review board)? If so, please provide a description of these review processes, including the outcomes, as well as a link or other access point to any supporting documentation.```
 
 ##### ```Does the dataset relate to people? If not, you may skip the remaining questions in this section.```
