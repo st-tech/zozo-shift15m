@@ -44,13 +44,19 @@ def main(args):
     torch.manual_seed(args.seed)
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
-    train_loader = get_loader(args.inp_train, args.data_dir, args.target, args.batch_size, is_train=True)
-    test_loader = get_loader(args.inp_test, args.data_dir, args.target, args.batch_size, is_train=False)
+    train_loader = get_loader(
+        args.inp_train, args.data_dir, args.target, args.batch_size, is_train=True
+    )
+    test_loader = get_loader(
+        args.inp_test, args.data_dir, args.target, args.batch_size, is_train=False
+    )
 
     model = Net(n_outputs=train_loader.dataset.category_size).to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
 
-    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=1, gamma=args.gamma)
+    scheduler = torch.optim.lr_scheduler.StepLR(
+        optimizer, step_size=1, gamma=args.gamma
+    )
     for epoch in range(args.epochs):
         train(train_loader, model, optimizer, device, epoch)
         test(test_loader, model, device)
@@ -99,7 +105,9 @@ if __name__ == "__main__":
         default=0.7,
         help="Learning rate step gamma (default: 0.7)",
     )
-    parser.add_argument("--seed", type=int, default=1, metavar="S", help="random seed (default: 1)")
+    parser.add_argument(
+        "--seed", type=int, default=1, metavar="S", help="random seed (default: 1)"
+    )
     parser.add_argument(
         "--save-model",
         action="store_true",
