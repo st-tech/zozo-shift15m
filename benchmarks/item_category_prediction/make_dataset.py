@@ -1,7 +1,9 @@
-import pathlib
 import json
-from shift15m.constants import Keys as K
+import pathlib
+
 from sklearn.model_selection import train_test_split
+
+from shift15m.constants import Keys as K
 
 
 def main(args):
@@ -26,7 +28,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     parser.add_argument("input", type=str, help="path to the input file")
-    parser.add_argument("--test_size", type=float, default=0.2, help="Ratio of test dataset")
-    parser.add_argument("--output_dir", type=str, default=".", help="Path to the output directory")
+    parser.add_argument(
+        "--test_size", type=float, default=0.2, help="Ratio of test dataset"
+    )
+    parser.add_argument(
+        "--output_dir", type=str, default=".", help="Path to the output directory"
+    )
     args = parser.parse_args()
     main(args)

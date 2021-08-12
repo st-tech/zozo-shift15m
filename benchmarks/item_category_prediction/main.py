@@ -1,8 +1,8 @@
 import torch
 import torch.nn.functional as F
+from dataset import get_loader
+from model import Net
 from tqdm import tqdm
-
-from .model import Net
 
 
 def train(loader, model, optimizer, device, epoch):
@@ -44,7 +44,10 @@ def main(args):
     torch.manual_seed(args.seed)
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
-    model = Net().to(device)
+    train_loader = get_loader(args.inp_train, args.data_dir, args.target, args.batch_size, is_train=True)
+    test_loader = get_loader(args.inp_test, args.data_dir, args.target, args.batch_size, is_train=False)
+
+    model = Net(n_outputs=train_loader.dataset.category_size).to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
 
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=1, gamma=args.gamma)
@@ -62,19 +65,47 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
 
+    parser.add_argument("inp_train", type=str, help="path to the input file for train")
+    parser.add_argument("inp_test", type=str, help="path to the input file for test")
+    parser.add_argument("data_dir", type=str, help="path to the feature directory")
     parser.add_argument(
-        "--batch-size", type=int, default=64, metavar="N", help="input batch size for training (default: 64)"
+        "--target",
+        type=str,
+        choices=["category", "subcategory"],
+        default="category",
+        help="target label (categoy / subcategory)",
     )
     parser.add_argument(
-        "--test-batch-size", type=int, default=1000, metavar="N", help="input batch size for testing (default: 1000)"
+        "--batch_size",
+        type=int,
+        default=128,
+        help="input batch size for training (default: 128)",
     )
-    parser.add_argument("--epochs", type=int, default=14, metavar="N", help="number of epochs to train (default: 14)")
-    parser.add_argument("--lr", type=float, default=1.0, metavar="LR", help="learning rate (default: 1.0)")
     parser.add_argument(
-        "--gamma", type=float, default=0.7, metavar="M", help="Learning rate step gamma (default: 0.7)"
+        "--epochs",
+        type=int,
+        default=10,
+        help="number of epochs to train (default: 10)",
+    )
+    parser.add_argument(
+        "--lr",
+        type=float,
+        default=0.1,
+        help="learning rate (default: 0.1)",
+    )
+    parser.add_argument(
+        "--gamma",
+        type=float,
+        default=0.7,
+        help="Learning rate step gamma (default: 0.7)",
     )
     parser.add_argument("--seed", type=int, default=1, metavar="S", help="random seed (default: 1)")
-    parser.add_argument("--save-model", action="store_true", default=False, help="For Saving the current Model")
+    parser.add_argument(
+        "--save-model",
+        action="store_true",
+        default=False,
+        help="For Saving the current Model",
+    )
 
     args = parser.parse_args()
     main(args)
