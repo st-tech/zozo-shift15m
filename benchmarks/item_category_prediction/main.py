@@ -50,17 +50,14 @@ def main(args):
     test_loader = get_loader(
         args.inp_test, args.data_dir, args.target, args.batch_size, is_train=False
     )
+    assert train_loader.dataset.category_size == test_loader.dataset.category_size
 
     model = Net(n_outputs=train_loader.dataset.category_size).to(device)
-    optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
+    optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=0.0004)
 
-    scheduler = torch.optim.lr_scheduler.StepLR(
-        optimizer, step_size=1, gamma=args.gamma
-    )
     for epoch in range(args.epochs):
         train(train_loader, model, optimizer, device, epoch)
         test(test_loader, model, device)
-        scheduler.step()
 
     if args.save_model:
         torch.save(model.state_dict(), "model.pt")
@@ -96,18 +93,10 @@ if __name__ == "__main__":
     parser.add_argument(
         "--lr",
         type=float,
-        default=0.1,
-        help="learning rate (default: 0.1)",
+        default=0.05,
+        help="learning rate (default: 0.05)",
     )
-    parser.add_argument(
-        "--gamma",
-        type=float,
-        default=0.7,
-        help="Learning rate step gamma (default: 0.7)",
-    )
-    parser.add_argument(
-        "--seed", type=int, default=1, metavar="S", help="random seed (default: 1)"
-    )
+    parser.add_argument("--seed", type=int, default=1, help="random seed (default: 1)")
     parser.add_argument(
         "--save-model",
         action="store_true",
