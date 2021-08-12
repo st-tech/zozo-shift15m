@@ -47,6 +47,7 @@ An outfit is a set of multiple items, and each item has a corresponding category
 Items that do not belong to the main categories, such that underwear and background images for collage, are missing. The items field consists only of items that belong to the main categories, but the original outfit may contain items other than these.
 
 ##### ```Are relationships between individual instances made explicit (e.g., users’ movie ratings, social network links)? If so, please describe how these relationships are made explicit.```
+Each instance is assigned the ID of the user who submitted the outfit.
 
 ##### ```Are there recommended data splits (e.g., training, development/validation, testing)? If so, please provide a description of these splits, explaining the rationale behind them.```
 
