@@ -33,6 +33,7 @@ The SHIFT15M dataset is a collection of outfits posted to the fashion website IQ
 - publish_date: The date the outfit was posted.
 
 ##### ```How many instances are there in total (of each type, if appropriate)?```
+The dataset consists of 15,218,721 item images and 2,555,147 outfits which created by users of IQON.
 
 ##### ```Does the dataset contain all possible instances or is it a sample (not necessarily random) of instances from a larger set? If the dataset is a sample, then what is the larger set? Is the sample representative of the larger set (e.g., geographic coverage)? If so, please describe how this representativeness was validated/verified. If it is not representative of the larger set, please describe why not (e.g., to cover a more diverse range of instances, because instances were withheld or unavailable).```
 We collected outfits posted on a Japanese fasion website "IQON". This website has about 2M users, almost all are Japanese women. Most of them are in their 20s and 30s. The collection period was from 01/01/2000 to 04/06/2020.
