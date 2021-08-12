@@ -43,6 +43,13 @@ class ImageFeatureDataset(torch.utils.data.Dataset):
     def category_size(self):
         return len(self.labels)
 
+    @property
+    def category_count(self):
+        count = [0] * self.category_size
+        for _, label in self.items:
+            count[self.labels[label]] += 1
+        return count
+
     def __len__(self):
         return len(self.items)
 

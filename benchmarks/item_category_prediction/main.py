@@ -5,7 +5,7 @@ from model import Net
 from tqdm import tqdm
 
 
-def train(loader, model, optimizer, device, epoch):
+def train(loader, model, optimizer, device, epoch, weight=None):
     model.train()
     with tqdm(loader) as pbar:
         for x, label in pbar:
@@ -14,8 +14,9 @@ def train(loader, model, optimizer, device, epoch):
             x, label = x.to(device), label.to(device)
             optimizer.zero_grad()
             y = model(x)
-            loss = F.nll_loss(y, label)
+            loss = F.nll_loss(y, label, weight=weight)
             loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 1)
             optimizer.step()
 
             pbar.set_postfix({"loss": loss.item()})
@@ -51,12 +52,19 @@ def main(args):
         args.inp_test, args.data_dir, args.target, args.batch_size, is_train=False
     )
     assert train_loader.dataset.category_size == test_loader.dataset.category_size
+    count = train_loader.dataset.category_count
+    print(
+        f"category size: {train_loader.dataset.category_size}, category count: {count}"
+    )
+
+    count = torch.tensor(count, dtype=torch.float32, device=device)
+    weight = count.max() / count
 
     model = Net(n_outputs=train_loader.dataset.category_size).to(device)
-    optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=0.0004)
+    optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=0.00004)
 
     for epoch in range(args.epochs):
-        train(train_loader, model, optimizer, device, epoch)
+        train(train_loader, model, optimizer, device, epoch, weight=weight)
         test(test_loader, model, device)
 
     if args.save_model:
