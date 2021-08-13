@@ -51,6 +51,10 @@ Each instance is assigned the ID of the user who submitted the outfit.
 
 ##### ```Are there recommended data splits (e.g., training, development/validation, testing)? If so, please provide a description of these splits, explaining the rationale behind them.```
 
+SHIFT15M is a dataset with multiple dataset shifts observed in the real world.
+We provide software that makes it easy to experiment with different types and sizes of shifts.
+SHIFT15M was collected between 2013~2017, and our software allows automatic train/val/test splitting by specifying the shift type and magnitude.
+
 ##### ```Are there any errors, sources of noise, or redundancies in the dataset? If so, please provide a description.```
 
 No.
