@@ -1,5 +1,4 @@
 import torch
-import torch.nn.functional as F
 from dataset import get_loader
 from model import Net
 from tqdm import tqdm
@@ -7,6 +6,7 @@ from tqdm import tqdm
 
 def train(loader, model, optimizer, device, epoch, weight=None):
     model.train()
+    loss_fn = torch.nn.CrossEntropyLoss(weight=weight)
     with tqdm(loader) as pbar:
         for x, label in pbar:
             pbar.set_description(f"[Epoch {epoch + 1}]")
@@ -14,9 +14,9 @@ def train(loader, model, optimizer, device, epoch, weight=None):
             x, label = x.to(device), label.to(device)
             optimizer.zero_grad()
             y = model(x)
-            loss = F.nll_loss(y, label, weight=weight)
+            loss = loss_fn(y, label)
             loss.backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), 1)
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 5)
             optimizer.step()
 
             pbar.set_postfix({"loss": loss.item()})
@@ -24,13 +24,14 @@ def train(loader, model, optimizer, device, epoch, weight=None):
 
 def test(loader, model, device):
     model.eval()
+    loss_fn = torch.nn.CrossEntropyLoss()
     loss = 0
     correct = 0
     with torch.no_grad():
         for x, label in loader:
             x, label = x.to(device), label.to(device)
             y = model(x)
-            loss += F.nll_loss(y, label, reduction="sum").item()
+            loss += loss_fn(y, label).sum().item()
             pred = y.argmax(dim=1, keepdim=True)
             correct += pred.eq(label.view_as(pred)).sum().item()
 
@@ -62,10 +63,12 @@ def main(args):
 
     model = Net(n_outputs=train_loader.dataset.category_size).to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=0.00004)
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=1, gamma=0.5)
 
     for epoch in range(args.epochs):
         train(train_loader, model, optimizer, device, epoch, weight=weight)
         test(test_loader, model, device)
+        scheduler.step()
 
     if args.save_model:
         torch.save(model.state_dict(), "model.pt")

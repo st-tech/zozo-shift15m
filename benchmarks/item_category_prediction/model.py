@@ -1,5 +1,4 @@
 import torch.nn as nn
-import torch.nn.functional as F
 
 
 class Net(nn.Module):
@@ -8,9 +7,10 @@ class Net(nn.Module):
         self.mlp = nn.Sequential(
             nn.Linear(4096, 512),
             nn.ReLU(),
+            nn.Dropout(0.2),
             nn.Linear(512, n_outputs),
         )
 
     def forward(self, x):
-        y = F.log_softmax(self.mlp(x), dim=1)
+        y = self.mlp(x)
         return y
