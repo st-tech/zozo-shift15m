@@ -43,6 +43,9 @@ An outfit is a set of multiple items, and each item has a corresponding category
 
 ##### ```Is there a label or target associated with each instance? If so, please provide a description.```
 
+Yes. Each instance has several numerical values (category ID, number of likes).
+We can switch between several tasks by choosing one of these as the target variable.
+
 ##### ```Is any information missing from individual instances? If so, please provide a description, explaining why this information is missing (e.g., because it was unavailable). This does not include intentionally removed information, but might include, e.g., redacted text.```
 Items that do not belong to the main categories, such that underwear and background images for collage, are missing. The items field consists only of items that belong to the main categories, but the original outfit may contain items other than these.
 
