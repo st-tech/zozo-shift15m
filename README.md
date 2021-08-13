@@ -58,11 +58,13 @@ Please access [here](https://drive.google.com/drive/folders/1BExsZkhE5N6Oj_OyFrs
 
 The following tasks are now available:
 
-| Tasks              | Task type      | Shift type   | # of input dim | # of output dim |
-|--------------------|----------------|--------------|----------------|-----------------|
-| [NumLikesRegression](https://github.com/st-tech/zozo-shift15m/tree/main/benchmarks#regression-for-the-number-of-likes) | regression     | target shift |     (N,25)     | (N,1)           |
-| [SumPricesRegression](https://github.com/st-tech/zozo-shift15m/tree/main/benchmarks#regression-for-the-sum-of-prices) | regression    | covariate shift, target shift | (N, 1) | (N, 1) |
-| ItemPriceRegression| regression     | target shift | (N, H, W)      | (N, 1)          |
+| Tasks                      | Task type           | Shift type   | # of input dim | # of output dim |
+|----------------------------|---------------------|--------------|----------------|-----------------|
+| [NumLikesRegression](https://github.com/st-tech/zozo-shift15m/tree/main/benchmarks#regression-for-the-number-of-likes) | regression     | target shift |     (N,25)                       | (N,1)               |
+| [SumPricesRegression](https://github.com/st-tech/zozo-shift15m/tree/main/benchmarks#regression-for-the-sum-of-prices) | regression    | covariate shift, target shift | (N, 1) | (N, 1)|
+| ItemPriceRegression        | regression          | target shift | (N, H, W)      | (N, 1)          |
+| ItemCategoryClassification | classification      |              | (N, H, W)      | (N, 7)          |
+| Set2SetMatching            | set-to-set matching |              | (N,H,W)x(N,H,W)| (N, 1)          |
 
 ## Benchmarks
 
