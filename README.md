@@ -180,7 +180,7 @@ The following table is necessary for this dataset to be indexed by search engine
 
 ```bibtex
 @misc{Kimura_SHIFT15M_Multiobjective_LargeScale_2021,
-author = {Kimura, Masanari and Saito, Yuki and Morishita, Kazuya and Nakamura, Takuma and Goto, Ryosuke},
+author = {Kimura, Masanari and Nakamura, Takuma and Saito, Yuki},
 month = {8},
 title = {SHIFT15M: Multiobjective Large-Scale Dataset with Distributional Shifts},
 year = {2021}
