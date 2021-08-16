@@ -1,10 +1,40 @@
-import torch
-from dataset import get_loader
-from model import Net
+try:
+    import torch
+    import torch.nn as nn
+except ModuleNotFoundError as e:
+    msg = (
+        "This benchmark requires PyTorch.\n"
+        "Please install extra pachages as follows:\n"
+        "  poetry install -E pytorch"
+    )
+    raise ModuleNotFoundError(msg) from e
+import pathlib
+from typing import Any
+
 from tqdm import tqdm
 
+import shift15m.constants as C
+from shift15m.datasets import get_imagefeature_dataloader
+from shift15m.datasets.helper import make_item_catalog
 
-def train(loader, model, optimizer, device, epoch, weight=None):
+
+def get_model(n_outputs: int):
+    return nn.Sequential(
+        nn.Linear(4096, 512),
+        nn.ReLU(),
+        nn.Dropout(0.2),
+        nn.Linear(512, n_outputs),
+    )
+
+
+def train(
+    loader: torch.utils.data.DataLoader,
+    model: nn.Module,
+    optimizer: torch.optim.Optimizer,
+    device: str,
+    epoch: int,
+    weight: torch.Tensor = None,
+):
     model.train()
     loss_fn = torch.nn.CrossEntropyLoss(weight=weight)
     with tqdm(loader) as pbar:
@@ -22,7 +52,7 @@ def train(loader, model, optimizer, device, epoch, weight=None):
             pbar.set_postfix({"loss": loss.item()})
 
 
-def test(loader, model, device):
+def test(loader: torch.utils.data.DataLoader, model: nn.Module, device: str):
     model.eval()
     loss_fn = torch.nn.CrossEntropyLoss()
     loss = 0
@@ -42,15 +72,28 @@ def test(loader, model, device):
     )
 
 
-def main(args):
+def main(args: Any):
     torch.manual_seed(args.seed)
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
-    train_loader = get_loader(
-        args.inp_train, args.data_dir, args.target, args.batch_size, is_train=True
+    if args.make_dataset:
+        inp = next(
+            pathlib.Path(C.ROOT).glob("*.json")
+        )  # Assume that the source json file is located in `C.ROOT`
+        make_item_catalog(inp)
+        inp_train, inp_test = (
+            pathlib.Path(C.ROOT) / "train.txt",
+            pathlib.Path(C.ROOT) / "test.txt",
+        )
+    else:
+        assert args.inp_train is not None and args.inp_test is not None
+        inp_train, inp_test = args.inp_train, args.inp_test
+
+    train_loader = get_imagefeature_dataloader(
+        inp_train, args.data_dir, args.target, args.batch_size, is_train=True
     )
-    test_loader = get_loader(
-        args.inp_test, args.data_dir, args.target, args.batch_size, is_train=False
+    test_loader = get_imagefeature_dataloader(
+        inp_test, args.data_dir, args.target, args.batch_size, is_train=False
     )
     assert train_loader.dataset.category_size == test_loader.dataset.category_size
     count = train_loader.dataset.category_count
@@ -61,7 +104,7 @@ def main(args):
     count = torch.tensor(count, dtype=torch.float32, device=device)
     weight = count.max() / count
 
-    model = Net(n_outputs=train_loader.dataset.category_size).to(device)
+    model = get_model(n_outputs=train_loader.dataset.category_size).to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=0.00004)
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=1, gamma=0.5)
 
@@ -79,9 +122,23 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("inp_train", type=str, help="path to the input file for train")
-    parser.add_argument("inp_test", type=str, help="path to the input file for test")
-    parser.add_argument("data_dir", type=str, help="path to the feature directory")
+    parser.add_argument(
+        "--make_dataset",
+        action="store_true",
+        help="it true, make train and test catalogs.",
+    )
+    parser.add_argument(
+        "--inp_train", type=str, default=None, help="path to the input file for train"
+    )
+    parser.add_argument(
+        "--inp_test", type=str, default=None, help="path to the input file for test"
+    )
+    parser.add_argument(
+        "--data_dir",
+        type=str,
+        default=C.FEATURE_ROOT,
+        help="path to the feature directory",
+    )
     parser.add_argument(
         "--target",
         type=str,

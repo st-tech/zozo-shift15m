@@ -1,6 +1,7 @@
 JSONL = "jsonl"
 PICKLE = "pickle"
 ROOT = "data"
+FEATURE_ROOT = "data/features"
 RECORDS = "records"
 CATEGORY_ID_MAX = 20
 
