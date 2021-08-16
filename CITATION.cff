@@ -6,17 +6,11 @@ authors:
     given-names: Masanari
     orcid: https://orcid.org/0000-0002-9953-3469
     email: masanari.kimura@zozo.com
-  - family-names: Saito
-    given-names: Yuki
-    orcid: https://orcid.org/0000-0000-0000-0000
-  - family-names: Morishita
-    given-names: Kazuya
-    orcid: https://orcid.org/0000-0000-0000-0000
   - family-names: Nakamura
     given-names: Takuma
     orcid: https://orcid.org/0000-0000-0000-0000
-  - family-names: Goto
-    given-names: Ryosuke
+  - family-names: Saito
+    given-names: Yuki
     orcid: https://orcid.org/0000-0000-0000-0000
 title: "SHIFT15M: Multiobjective Large-Scale Dataset with Distributional Shifts"
 version: 1.0.0
