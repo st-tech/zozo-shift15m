@@ -112,6 +112,8 @@ All images in the dataset are color.
 
 ##### ```What mechanisms or procedures were used to collect the data (e.g., hardware apparatus or sensor, manual human curation, software program, software API)? How were these mechanisms or procedures validated?```
 
+Users were able to create and publish their outfits using an editor provided by the website. The items selected in the editor are registered as an outfit, and this function was tested based on general software development procedures.
+
 ##### ```If the dataset is a sample from a larger set, what was the sampling strategy (e.g., deterministic, probabilistic with specific sampling probabilities)?```
 
 ##### ```Who was involved in the data collection process (e.g., students, crowdworkers, contractors) and how were they compensated (e.g., how much were crowdworkers paid)?```
