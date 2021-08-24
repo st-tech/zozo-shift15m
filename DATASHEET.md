@@ -149,6 +149,11 @@ Collected directly through the website.
 ## Preprocessing/cleaning/labeling
 
 ##### ```Was any preprocessing/cleaning/labeling of the data done (e.g., discretization or bucketing, tokenization, part-of-speech tagging, SIFT feature extraction, removal of instances, processing of missing values)? If so, please provide a description. If not, you may skip the remainder of the questions in this section.```
+We extracted the CNN features from images and treated them as input data in our image-based tasks. As a result, our dataset contains the features but does not include raw photos, making them anonymized.
+The CNN we used is an official pre-trained VGG16, and we adopted the outputs of the 'fc6' layer before applying ReLU as the feature.
+We used the Chainer implementation for extracting CNN features. For more information on the Chainer implementation, please refer to the reference page:
+https://docs.chainer.org/en/v7.8.0/reference/generated/chainer.links.VGG16Layers.html
+We exclude the outfits that contain less than four items. Other than that, we did not remove any instances in creating our dataset. However, we excluded some data in each independent task. In detail, please refer to each task description.
 
 ##### ```Was the “raw” data saved in addition to the preprocessed/cleaned/labeled data (e.g., to support unanticipated future uses)? If so, please provide a link or other access point to the “raw” data.```
 
