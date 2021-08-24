@@ -56,7 +56,7 @@ Each instance is assigned the ID of the user who submitted the outfit.
 
 SHIFT15M is a dataset with multiple dataset shifts observed in the real world.
 We provide software that makes it easy to experiment with different types and sizes of shifts.
-SHIFT15M was collected between 2013~2017, and our software allows automatic train/val/test splitting by specifying the shift type and magnitude.
+SHIFT15M was collected between 2010~2020, and our software allows automatic train/val/test splitting by specifying the shift type and magnitude.
 
 ##### ```Are there any errors, sources of noise, or redundancies in the dataset? If so, please provide a description.```
 
@@ -122,7 +122,7 @@ Users were able to create and publish their outfits using an editor provided by 
 
 ##### ```Over what timeframe was the data collected? Does this timeframe match the creation timeframe of the data associated with the instances (e.g., recent crawl of old news articles)? If not, please describe the timeframe in which the data associated with the instances was created.```
 
-The dataset was collected in the period of 2013~2017.
+The dataset was collected in the period of 2010~2020.
 Each outfit includes a timestamp that describes when the outfit created.
 
 ##### ```Were any ethical review processes conducted (e.g., by an institutional review board)? If so, please provide a description of these review processes, including the outcomes, as well as a link or other access point to any supporting documentation.```
