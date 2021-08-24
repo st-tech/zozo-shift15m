@@ -138,9 +138,13 @@ Each instance is a combination of outfits created by an individual and preferred
 
 Notified in the Terms of Service.
 
+![](./assets/iqon_terms_of_service/license.png)
+
 ##### ```Did the individuals in question consent to the collection and use of their data? If so, please describe (or show with screenshots or other information) how consent was requested and provided, and provide a link or other access point to, or otherwise reproduce, the exact language to which the individuals consented.```
 
 The use of the service was deemed as consent.
+
+![](./assets/iqon_terms_of_service/introduction.png)
 
 ##### ```If consent was obtained, were the consenting individuals provided with a mechanism to revoke their consent in the future or for certain uses? If so, please provide a description, as well as a link or other access point to the mechanism (if appropriate).```
 
