@@ -126,6 +126,7 @@ The dataset was collected in the period of 2013~2017.
 Each outfit includes a timestamp that describes when the outfit created.
 
 ##### ```Were any ethical review processes conducted (e.g., by an institutional review board)? If so, please provide a description of these review processes, including the outcomes, as well as a link or other access point to any supporting documentation.```
+No.
 
 ##### ```Does the dataset relate to people? If not, you may skip the remaining questions in this section.```
 
