@@ -134,6 +134,8 @@ Each instance is a combination of outfits created by an individual and preferred
 
 ##### ```Did you collect the data from the individuals in question directly, or obtain it via third parties or other sources (e.g., websites)?```
 
+Collected directly through the website.
+
 ##### ```Were the individuals in question notified about the data collection? If so, please describe (or show with screenshots or other information) how notice was provided, and provide a link or other access point to, or otherwise reproduce, the exact language of the notification itself.```
 
 ##### ```Did the individuals in question consent to the collection and use of their data? If so, please describe (or show with screenshots or other information) how consent was requested and provided, and provide a link or other access point to, or otherwise reproduce, the exact language to which the individuals consented.```
