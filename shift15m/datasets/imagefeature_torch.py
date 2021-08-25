@@ -6,29 +6,23 @@ import random
 from typing import Any, List, Tuple
 
 import numpy as np
+import shift15m.constants as C
 import torch
+from sklearn.model_selection import train_test_split
 
 label_id = {"category": 1, "subcategory": 2}
+label_name = {"category": C.CATEGORIES, "subcategory": C.SUB_CATEGORIES}
 
 
 def get_loader(
-    itemcatalog_path: str,
-    data_dir: str,
-    year: str,
+    items: List[Tuple[str, str]],
     target: str,
+    data_dir: str,
     batch_size: int,
-    dataset_size: int = -1,
     is_train: bool = True,
     num_workers: int = None,
 ) -> torch.utils.data.DataLoader:
-    items = [s.split(" ") for s in open(itemcatalog_path).read().strip().split("\n")]
-    items = [(item[0], item[label_id[target]]) for item in items if item[3] == year]
-    if len(items) == 0:
-        raise ValueError(f"No items with year {year}.")
-    if dataset_size > 0 and dataset_size < len(items):
-        items = random.sample(items, dataset_size)
-
-    dataset = ImageFeatureDataset(items, pathlib.Path(data_dir))
+    dataset = ImageFeatureDataset(items, pathlib.Path(data_dir), target)
     loader = torch.utils.data.DataLoader(
         dataset,
         shuffle=is_train,
@@ -41,14 +35,12 @@ def get_loader(
 
 
 class ImageFeatureDataset(torch.utils.data.Dataset):
-    def __init__(self, items: List, root: pathlib.Path):
+    def __init__(self, items: List, root: pathlib.Path, target: str):
         self.items = []
-        self.labels = {}
+        self.labels = {name: i for i, name in enumerate(label_name[target])}
         for item, label in items:
             if (root / f"{item}.json.gz").exists():
                 self.items.append((item, label))
-                if label not in self.labels:
-                    self.labels[label] = len(self.labels)
         self.root = root
 
     @property
@@ -73,3 +65,50 @@ class ImageFeatureDataset(torch.utils.data.Dataset):
         feature = np.array(feature, dtype=np.float32)
         label = self.labels[label]
         return feature, label
+
+
+class ItemCatalog:
+    def __init__(self, catalog_path: str) -> None:
+        self.items = [
+            s.split(" ") for s in open(catalog_path).read().strip().split("\n")
+        ]
+
+    def _validate(self, items: List[Tuple], year: str):
+        if len(items) == 0:
+            raise ValueError(f"No items with year {year}.")
+
+    def get_train_valid_test_items(
+        self,
+        target: str,
+        train_valid_year: str,
+        test_year: str,
+        train_size: int,
+        valid_size: int,
+        test_size: int,
+    ) -> Any:
+        train_valid = [
+            (item[0], item[label_id[target]])
+            for item in self.items
+            if item[3] == train_valid_year
+        ]
+        self._validate(train_valid, train_valid_year)
+        test = [
+            (item[0], item[label_id[target]])
+            for item in self.items
+            if item[3] == test_year
+        ]
+        self._validate(test, test_year)
+
+        # split train valid
+        train_valid_size = train_size + valid_size
+        if train_valid_size > len(train_valid):
+            train_size = int(train_size / train_valid_size)
+            valid_size = int(valid_size / train_valid_size)
+
+        train, valid = train_test_split(
+            train_valid, train_size=train_size, test_size=test_size
+        )
+
+        test = random.sample(test, min(test_size, len(test)))
+
+        return train, valid, test
