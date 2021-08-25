@@ -100,15 +100,29 @@ class ItemCatalog:
         self._validate(test, test_year)
 
         # split train valid
-        train_valid_size = train_size + valid_size
-        if train_valid_size > len(train_valid):
-            train_size = int(train_size / train_valid_size)
-            valid_size = int(valid_size / train_valid_size)
+        if train_valid_year == test_year:
+            train_valid_test_size = train_size + valid_size + test_size
+            if train_valid_test_size > len(train_valid):
+                train_size = int(train_size / train_valid_test_size)
+                valid_size = int(valid_size / train_valid_test_size)
+                test_size = int(test_size / train_valid_test_size)
 
-        train, valid = train_test_split(
-            train_valid, train_size=train_size, test_size=test_size
-        )
+            train, valid_test = train_test_split(
+                train_valid, train_size=train_size, test_size=valid_size + test_size
+            )
+            valid, test = train_test_split(
+                valid_test, train_size=valid_size, test_size=test_size
+            )
 
-        test = random.sample(test, min(test_size, len(test)))
+        else:
+            train_valid_size = train_size + valid_size
+            if train_valid_size > len(train_valid):
+                train_size = int(train_size / train_valid_size)
+                valid_size = int(valid_size / train_valid_size)
+
+            train, valid = train_test_split(
+                train_valid, train_size=train_size, test_size=valid_size
+            )
+            test = random.sample(test, min(test_size, len(test)))
 
         return train, valid, test
