@@ -54,7 +54,7 @@ dataset = NumLikesRegression(root="./data", download=True)
 
 ### Download Directly from the Sharable URL
 
-Please access [here](https://drive.google.com/drive/folders/1BExsZkhE5N6Oj_OyFrs2O52WUc0SkZOr?usp=sharing) and download all files.
+Please access [here](s3://zr-web-static-prd/data_release/shift15m/) and download all files.
 
 ## Tasks
 
