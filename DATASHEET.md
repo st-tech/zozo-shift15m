@@ -120,6 +120,7 @@ Users were able to create and publish their outfits using an editor provided by 
 We collected a complete dataset without sampling to create our dataset, except for data deleted by the user.
 
 ##### ```Who was involved in the data collection process (e.g., students, crowdworkers, contractors) and how were they compensated (e.g., how much were crowdworkers paid)?```
+The employees in ZOZO Technologies, Inc. or VASILY, inc. (merged into ZOZO Technologies, Inc.) were involved in collecting data.
 
 ##### ```Over what timeframe was the data collected? Does this timeframe match the creation timeframe of the data associated with the instances (e.g., recent crawl of old news articles)? If not, please describe the timeframe in which the data associated with the instances was created.```
 
