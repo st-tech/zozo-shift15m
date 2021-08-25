@@ -2,6 +2,7 @@ import gzip
 import json
 import os
 import pathlib
+import random
 from typing import Any, List, Tuple
 
 import numpy as np
@@ -11,18 +12,23 @@ label_id = {"category": 1, "subcategory": 2}
 
 
 def get_loader(
-    itemlist_path: str,
+    itemcatalog_path: str,
     data_dir: str,
+    year: str,
     target: str,
     batch_size: int,
+    dataset_size: int = -1,
     is_train: bool = True,
     num_workers: int = None,
 ) -> torch.utils.data.DataLoader:
-    items = [s.split(" ") for s in open(itemlist_path).read().strip().split("\n")]
-    items = [(item[0], item[label_id[target]]) for item in items]
-    root = pathlib.Path(data_dir)
+    items = [s.split(" ") for s in open(itemcatalog_path).read().strip().split("\n")]
+    items = [(item[0], item[label_id[target]]) for item in items if item[3] == year]
+    if len(items) == 0:
+        raise ValueError(f"No items with year {year}.")
+    if dataset_size > 0 and dataset_size < len(items):
+        items = random.sample(items, dataset_size)
 
-    dataset = ImageFeatureDataset(items, root)
+    dataset = ImageFeatureDataset(items, pathlib.Path(data_dir))
     loader = torch.utils.data.DataLoader(
         dataset,
         shuffle=is_train,
