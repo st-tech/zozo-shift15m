@@ -9,17 +9,20 @@ except ModuleNotFoundError as e:
     )
     raise ModuleNotFoundError(msg) from e
 import itertools
+import json
 import pathlib
 import random
-from typing import Any, Dict, List, Tuple
+import sys
+from typing import Any, Tuple
 
-import matplotlib.pyplot as plt
-import numpy as np
 import shift15m.constants as C
 from shift15m.datasets import get_imagefeature_dataloader
 from shift15m.datasets.helper import make_item_catalog
 from shift15m.datasets.imagefeature_torch import ItemCatalog
 from tqdm import tqdm
+
+sys.path.append(pathlib.Path(__file__).parent)
+from figure import plot_score_matrix
 
 
 def load_item_catalog(args: Any) -> ItemCatalog:
@@ -38,40 +41,6 @@ def get_model(n_outputs: int) -> nn.Module:
         nn.ReLU(),
         nn.Dropout(0.2),
         nn.Linear(512, n_outputs),
-    )
-
-
-def _plot_matrix(results: List[Dict]):
-    cm = np.zeros((len(C.YEAES), len(C.YEAES)))
-    years_rev = {y: i for i, y in enumerate(C.YEAES)}
-    for res in results:
-        i, j = years_rev[res["train_year"]], years_rev[res["test_year"]]
-        cm[i, j] = res["test_acc"]
-
-    plt.imshow(cm, interpolation="nearest", cmap=plt.cm.Blues)
-    plt.colorbar()
-    tick_marks = np.arange(len(C.YEAES))
-    plt.xticks(tick_marks, C.YEAES, rotation=45)
-    plt.yticks(tick_marks, C.YEAES)
-
-    thresh = cm.max() / 1.3
-    for res in results:
-        i, j = years_rev[res["train_year"]], years_rev[res["test_year"]]
-        plt.text(
-            i,
-            j,
-            f"{res['train_acc']:.1f}/\n{res['test_acc']:.1f}",
-            horizontalalignment="center",
-            verticalalignment="center",
-            color="white" if cm[i, j] > thresh else "gray",
-            size=8,
-        )
-
-    plt.ylabel("test year")
-    plt.xlabel("train year")
-    plt.tight_layout()
-    plt.savefig(
-        "classification_acc_by_year.png", orientation="portrait", pad_inches=0.1
     )
 
 
@@ -154,9 +123,9 @@ def run(
     return test(valid_loader, model, device), test(test_loader, model, device)
 
 
-def main(args: Any):
-    random.seed(args.seed)
-    torch.manual_seed(args.seed)
+def main(args: Any, seed: int, path: pathlib.Path):
+    random.seed(seed)
+    torch.manual_seed(seed)
 
     item_catalog = load_item_catalog(args)
 
@@ -208,7 +177,18 @@ def main(args: Any):
             }
         )
 
-    _plot_matrix(results)
+        save_dir = path / f"inputs/trainval_{train_val_year}_test_{test_year}"
+        save_dir.mkdir(parents=True, exist_ok=True)
+        with open(str(save_dir / "train.txt"), "w") as f:
+            f.write("\n".join([f"{e[0]} {e[1]}" for e in train_items]))
+        with open(str(save_dir / "valid.txt"), "w") as f:
+            f.write("\n".join([f"{e[0]} {e[1]}" for e in valid_items]))
+        with open(str(save_dir / "test.txt"), "w") as f:
+            f.write("\n".join([f"{e[0]} {e[1]}" for e in test_items]))
+
+    plot_score_matrix(results, str(path / "classification_acc_by_year.pdf"))
+    with open(str(path / "scores.json"), "w") as f:
+        json.dump(results, f, indent=2)
 
 
 if __name__ == "__main__":
@@ -264,7 +244,17 @@ if __name__ == "__main__":
         default=0.005,
         help="learning rate (default: 0.05)",
     )
-    parser.add_argument("--seed", type=int, default=1, help="random seed (default: 1)")
+    parser.add_argument(
+        "--seed",
+        type=int,
+        nargs="+",
+        default=[0],
+        help="list of random seeds (default: 1)",
+    )
 
     args = parser.parse_args()
-    main(args)
+
+    for s in args.seed:
+        path = pathlib.Path(f"results/trial{s}")
+        path.mkdir(parents=True, exist_ok=True)
+        main(args, s, path)
