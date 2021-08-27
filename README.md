@@ -166,11 +166,11 @@ The following table is necessary for this dataset to be indexed by search engine
           </tr>
           <tr>
             <td>name</td>
-            <td><code itemprop="name">{CC BY-NC 4.0 }</code></td>
+            <td><code itemprop="name">CC BY-NC 4.0</code></td>
           </tr>
           <tr>
             <td>url</td>
-            <td><code itemprop="url">{https://github.com/st-tech/zozo-shift15m/blob/main/LICENSE.CC}</code></td>
+            <td><code itemprop="url">https://github.com/st-tech/zozo-shift15m/blob/main/LICENSE.CC</code></td>
           </tr>
         </table>
       </div>
