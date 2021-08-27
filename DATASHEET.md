@@ -168,6 +168,7 @@ https://docs.chainer.org/en/v7.8.0/reference/generated/chainer.links.VGG16Layers
 We exclude the outfits that contain less than four items. Other than that, we did not remove any instances in creating our dataset. However, we excluded some data in each independent task. In detail, please refer to each task description.
 
 ##### ```Was the “raw” data saved in addition to the preprocessed/cleaned/labeled data (e.g., to support unanticipated future uses)? If so, please provide a link or other access point to the “raw” data.```
+No.
 
 ##### ```Is the software used to preprocess/clean/label the instances available? If so, please provide a link or other access point.```
 All software are provided on the [SHIFT15M repository](https://github.com/st-tech/zozo-shift15m).
