@@ -98,7 +98,8 @@ To learn more about making a contribution to SHIFT15M, please see the following 
 - [Benchmark Proposal Guide](./BENCHMARK.md)
 
 ## LICENSE
-Please observe the {TBD} license that is listed in this repository.
+The dataset itself is provided under a [CC BY-NC 4.0 license](./LICENSE.CC).
+On the other hand, the software in this repository is provided under the [MIT license](./LICENSE.MIT).
 
 ## Dataset Metadata
 The following table is necessary for this dataset to be indexed by search engines such as [Google Dataset Search](https://datasetsearch.research.google.com/).
@@ -165,11 +166,11 @@ The following table is necessary for this dataset to be indexed by search engine
           </tr>
           <tr>
             <td>name</td>
-            <td><code itemprop="name">{TBD}</code></td>
+            <td><code itemprop="name">{CC BY-NC 4.0 }</code></td>
           </tr>
           <tr>
             <td>url</td>
-            <td><code itemprop="url">{TBD}</code></td>
+            <td><code itemprop="url">{https://github.com/st-tech/zozo-shift15m/blob/main/LICENSE.CC}</code></td>
           </tr>
         </table>
       </div>
