@@ -40,6 +40,17 @@ We collected outfits posted on a Japanese fasion website "IQON". This website ha
 An outfit is a set of multiple items, and each item has a corresponding category. In SHIFT15M, outfits that contain 4 or more items belonging to the main categories (outerwear, tops, bottoms, shoes,bags, hats, and accessories) were collected.
 
 ##### ```What data does each instance consist of? “Raw” data (e.g., unprocessed text or images)or features? In either case, please provide a description.```
+The dataset contains:
+1) 4096-dimensional features of fashion item images extracted via VGG16 model trained using ILSVRC2012 dataset
+2) Outfits composed of multiple items
+3) Information of items and outfits
+3.1) Outfit IDs and item IDs
+3.2) Posted dates
+3.3) Number of likes to each outfit
+3.4) Price of each item
+3.5) Parent and child item categories of each item
+3.6) Labels for training
+3.7) Other statistical information
 
 ##### ```Is there a label or target associated with each instance? If so, please provide a description.```
 
