@@ -66,7 +66,7 @@ The following tasks are now available:
 | [SumPricesRegression](https://github.com/st-tech/zozo-shift15m/tree/main/benchmarks#regression-for-the-sum-of-prices) | regression    | covariate shift, target shift | (N, 1) | (N, 1)|
 | ItemPriceRegression        | regression          | target shift | (N, H, W)      | (N, 1)          |
 | [ItemCategoryClassification](https://github.com/st-tech/zozo-shift15m/tree/main/benchmarks/item_category_prediction) | classification      | target shift| (N, H, W)      | (N, 7)          |
-| Set2SetMatching            | set-to-set matching | covariate shift | (N,H,W)x(N,H,W)| (N, 1)          |
+| [Set2SetMatching](https://github.com/st-tech/zozo-shift15m/tree/main/benchmarks/set_matching)      | set-to-set matching | covariate shift | (N,H,W)x(N,H,W)| (N, 1)          |
 
 ## Benchmarks
 
