@@ -22,7 +22,7 @@ jobs:
           pip install --progress-bar off .
           pip install --progress-bar off flake8 black isort mypy
       # - run: flake8 . --show-source
-      # - run: black --check --diff .
+      - run: black --check --diff .
       # - run: isort --check --diff .
       # - run: mypy .
   test:
