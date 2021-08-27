@@ -164,6 +164,10 @@ The use of the service was deemed as consent.
 
 ##### ```If consent was obtained, were the consenting individuals provided with a mechanism to revoke their consent in the future or for certain uses? If so, please provide a description, as well as a link or other access point to the mechanism (if appropriate).```
 
+It is possible to contact the company that provided the service.
+
+https://tech.zozo.com/privacy/info/
+
 ##### ```Has an analysis of the potential impact of the dataset and its use on data subjects (e.g., a data protection impact analysis)been conducted? If so, please provide a description of this analysis, including the outcomes, as well as a link or other access point to any supporting documentation.```
 No, there had been no potential impact analysis conducted.
 
