@@ -43,7 +43,7 @@ An outfit is a set of multiple items, and each item has a corresponding category
 The dataset contains:
 1) 4096-dimensional features of fashion item images extracted via VGG16 model trained using ILSVRC2012 dataset
 2) Outfits composed of multiple items
-3) Information of items and outfits
+3) Information of outfits and items
 3.1) Outfit IDs and item IDs
 3.2) Posted dates
 3.3) Number of likes to each outfit
