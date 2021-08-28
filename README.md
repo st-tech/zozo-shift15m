@@ -193,7 +193,7 @@ The following table is necessary for this dataset to be indexed by search engine
 @misc{Kimura_SHIFT15M_Multiobjective_LargeScale_2021,
 author = {Kimura, Masanari and Nakamura, Takuma and Saito, Yuki},
 month = {8},
-title = {SHIFT15M: Multiobjective Large-Scale Dataset with Distributional Shifts},
+title = {SHIFT15M: Multiobjective Large-Scale Fashion Dataset with Distributional Shifts},
 year = {2021}
 }
 ```
