@@ -203,6 +203,8 @@ This dataset is distributed in a way that excluding raw images and anonymizing t
 Yes. The dataset will be distributed to third parties based on the licence.
 
 ##### ```How will the dataset will be distributed (e.g., tarball on website, API, GitHub)? Does the dataset have a digital object identifier (DOI)?```
+The dataset will be distributed via a website or the links indicated in our Github repository provided by ZOZO Technologies, Inc.
+We will add DOI for the SHIFT15M dataset after published at the ArXiv.
 
 ##### ```When will the dataset be distributed?```
 The dataset will be first released in August 2021.
