@@ -37,13 +37,13 @@ Also, you can reduce the required memory size by setting minibatch-size -b to a 
 
 To obtain a set matching model trained with the weighted loss, you need to train a weight estimator first and then the extended set matching model.
 
+Also, setting training and testing years here are required for covariate adaptation. The following examples are adapting the data of the year 2013 to the year 2014.
+
 #### Weight estimator
 
 ```
 $ python weight_estimation/train.py -b 128 -e 16 -i ../../inputs/cnn-features -l ../../inputs/set_matching/set_matching_labels/2013-2014-label1 -o result_weight/2013-2014-label1 -gpu -1
 ```
-
-python outfits/train.py -b 128 -e 16 -i ~/SHIFT/vgg16 -l ../../inputs/set_matching/set_matching_labels/2013-2014-label1 -o result_weight/2013-2014-label1 -gpu -1
 
 #### Weighted training on set matching model
 
