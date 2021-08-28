@@ -1,6 +1,12 @@
-# SHIFT15M
+<p align="center">
+  <img src="./assets/shift15m.png" width="70%" style="display: block; margin: 0 auto" />
+</p>
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/python-3.6%20%7C%203.7%20%7C%203.8%20%7C%203.9-blue)](https://www.python.org)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/st-tech/zozo-shift15m)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/st-tech/zozo-shift15m/tests)
+![GitHub issues](https://img.shields.io/github/issues/st-tech/zozo-shift15m)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/st-tech/zozo-shift15m)
 ![GitHub last commit](https://img.shields.io/github/last-commit/st-tech/zozo-shift15m)
 
@@ -52,7 +58,7 @@ dataset = NumLikesRegression(root="./data", download=True)
 
 ### Download Directly from the Sharable URL
 
-Please access [here](https://drive.google.com/drive/folders/1BExsZkhE5N6Oj_OyFrs2O52WUc0SkZOr?usp=sharing) and download all files.
+Please access [here](s3://zr-web-static-prd/data_release/shift15m/) and download all files.
 
 ## Tasks
 
@@ -64,7 +70,7 @@ The following tasks are now available:
 | [SumPricesRegression](https://github.com/st-tech/zozo-shift15m/tree/main/benchmarks#regression-for-the-sum-of-prices) | regression    | covariate shift, target shift | (N, 1) | (N, 1)|
 | ItemPriceRegression        | regression          | target shift | (N, H, W)      | (N, 1)          |
 | [ItemCategoryClassification](https://github.com/st-tech/zozo-shift15m/tree/main/benchmarks/item_category_prediction) | classification      | target shift| (N, H, W)      | (N, 7)          |
-| Set2SetMatching            | set-to-set matching | covariate shift | (N,H,W)x(N,H,W)| (N, 1)          |
+| [Set2SetMatching](https://github.com/st-tech/zozo-shift15m/tree/main/benchmarks/set_matching)      | set-to-set matching | covariate shift | (N,H,W)x(N,H,W)| (N, 1)          |
 
 ## Benchmarks
 
@@ -96,7 +102,8 @@ To learn more about making a contribution to SHIFT15M, please see the following 
 - [Benchmark Proposal Guide](./BENCHMARK.md)
 
 ## LICENSE
-Please observe the {TBD} license that is listed in this repository.
+The dataset itself is provided under a [CC BY-NC 4.0 license](./LICENSE.CC).
+On the other hand, the software in this repository is provided under the [MIT license](./LICENSE.MIT).
 
 ## Dataset Metadata
 The following table is necessary for this dataset to be indexed by search engines such as [Google Dataset Search](https://datasetsearch.research.google.com/).
@@ -163,11 +170,11 @@ The following table is necessary for this dataset to be indexed by search engine
           </tr>
           <tr>
             <td>name</td>
-            <td><code itemprop="name">{TBD}</code></td>
+            <td><code itemprop="name">CC BY-NC 4.0</code></td>
           </tr>
           <tr>
             <td>url</td>
-            <td><code itemprop="url">{TBD}</code></td>
+            <td><code itemprop="url">https://github.com/st-tech/zozo-shift15m/blob/main/LICENSE.CC</code></td>
           </tr>
         </table>
       </div>

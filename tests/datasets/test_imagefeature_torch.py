@@ -11,7 +11,7 @@ except ImportError:
     SKIP = True
 
 
-class TestNumlikesTabular(unittest.TestCase):
+class TestImageFeatureDataset(unittest.TestCase):
     def setUp(self):
         pathlib.Path("test_features").mkdir(exist_ok=True)
         with gzip.open("test_features/xxxxx.json.gz", mode="wt") as fp:

@@ -1,17 +1,27 @@
 # Item category prediction
 
-## Install extra requires
+## Set up
+### Install extra requires
 
-```bash
-poetry install -E pytorch
 ```
+$ poetry install -E pytorch
+```
+
+### Preparing dataset
+1. Put the [item catalog](https://research.zozo.com/data_release/shift15m/item_category_prediction/item_catalog.txt) in `{repository_root}/data/` .
+
+```
+$ wget https://research.zozo.com/data_release/shift15m/item_category_prediction/item_catalog.txt -O data/item_catalog.txt
+```
+
+2. Unzip the item features and put them in `{repository_root}/data/features/` .
+
+The location of the data is defined in [shift15m.constants](./../../shift15m/constants.py).
 
 ## Run
 
-```bash
-poetry run python benchmarks/item_category_prediction/main.py 
+```
+$ poetry run python benchmarks/item_category_prediction/main.py
 ```
 
-If use `--make_dataset` option, it makes two files `train.txt` and `test.txt` and puts them in the data root. These have 3 columns.
-The first column represents the item ID, which corresponds to the file name of the feature file. The second and third are the category and subcategory of this item, respectively.
-
+![](../../assets/benchmarks/category_prediction.png)
