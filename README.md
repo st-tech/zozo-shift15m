@@ -56,9 +56,13 @@ from shift15.datasets import NumLikesRegression
 dataset = NumLikesRegression(root="./data", download=True)
 ```
 
-### Download Directly from the Sharable URL
+### Download Directly by using download scripts
 
-Please access [here](s3://zr-web-static-prd/data_release/shift15m/) and download all files.
+Please download the dataset as follows:
+
+```bash
+$ bash scripts/download_all.sh
+```
 
 ## Tasks
 
