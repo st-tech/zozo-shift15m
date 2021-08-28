@@ -20,7 +20,7 @@ For GPU, you need to install Cupy. Please refer to the [installation guide](http
 
 ## Training
 
-### Vannila set matching model
+### Vanilla set matching model
 
 You can train a set matching model indicating the label directory.
 For example, to train a model from the training data collected in the year 2013 split as 'label1', you can use the code as follows:
@@ -48,6 +48,8 @@ $ python weight_estimation/train.py -b 128 -e 16 -i ../../inputs/cnn-features -l
 #### Weighted training on set matching model
 
 You can select the weighting strategy `-m cov_max` or `-m cov_mean,` which represent max-IW or mean-IW, respectively.
+
+To compare the results, we recommend using the same number of minibatch-size and training epochs as the vanilla set matching model.
 
 ```
 $ python outfits/train.py -m cov_max -b 32 -e 32 -i ../../inputs/cnn-features -l ../../inputs/set_matching/set_matching_labels/2013-2014-label1 -o result_s2s_cov_max/2013-2014-label1 -gpu -1 -w result_weight/2013-2014-label1
