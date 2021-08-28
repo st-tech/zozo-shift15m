@@ -96,8 +96,6 @@ No.
 ##### ```Any other comments?```
 
 Table 1 summarizes some dataset statistics and Figure 1 shows examples of items.
-All images in the dataset are color.
-
 
 | Property            | Value      |
 |---------------------|------------|
