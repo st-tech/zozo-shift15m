@@ -55,6 +55,15 @@ To compare the results, we recommend using the same number of minibatch-size and
 $ python outfits/train.py -m cov_max -b 32 -e 32 -i ../../inputs/cnn-features -l ../../inputs/set_matching/set_matching_labels/2013-2014-label1 -o result_s2s_cov_max/2013-2014-label1 -gpu -1 -w result_weight/2013-2014-label1
 ```
 
+## Testing
+
+Using our test data, you can evaluate the trained model.
+For example, the command for testing the *cov-max* weighted model on the set matching task, a.k.a. Fill-in-the-N-blank with four candidates in the covariate assumption for the years from 2013 to 2014, is:
+
+```
+$ python outfits/test.py -i ../../inputs/set_matching_test_data/test_ncand4/2013-2014-label1 -d result_s2s_cov_max/2013-2014-label1 -gpu -1
+```
+
 # Remarks
 
 The set matching modules on this repository are based on the [OSS](https://github.com/soskek/attention_is_all_you_need), which is distributed under the [BSD 3-Clause License](networks/LICENSE).
