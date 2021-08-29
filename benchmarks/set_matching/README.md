@@ -66,5 +66,5 @@ $ python outfits/test.py -i ../../inputs/set_matching_test_data/test_ncand4/2013
 
 # Remarks
 
-The set matching modules on this repository are based on the [OSS](https://github.com/soskek/attention_is_all_you_need), which is distributed under the [BSD 3-Clause License](networks/LICENSE).
+The set matching modules on this repository use the [OSS](https://github.com/soskek/attention_is_all_you_need), which is distributed under the [BSD 3-Clause License](networks/LICENSE).
 
