@@ -11,7 +11,9 @@ def _extract_tarfiles(data_dir):
     if not os.path.isdir(path):
         os.mkdir(path)
 
-    image_tar_files = open(os.path.join(data_dir, "tar_files.txt")).read().strip().split("\n")
+    image_tar_files = (
+        open(os.path.join(data_dir, "tar_files.txt")).read().strip().split("\n")
+    )
     image_tar_files = [os.path.join(data_dir, s) for s in image_tar_files]
     for fpath in tqdm(image_tar_files):
         with tarfile.open(fpath, "r") as tf:
