@@ -1,10 +1,9 @@
-import json
-import numpy as np
+import argparse
 import os
 import shutil
 import tarfile
-import argparse
-import tqdm
+
+from tqdm import tqdm
 
 
 def _extract_tarfiles(data_dir):
@@ -16,7 +15,7 @@ def _extract_tarfiles(data_dir):
         open(os.path.join(data_dir, "tar_files.txt")).read().strip().split("\n")
     )
     image_tar_files = [os.path.join(data_dir, s) for s in image_tar_files]
-    for fpath in tqdm.tqdm(image_tar_files):
+    for fpath in tqdm(image_tar_files):
         with tarfile.open(fpath, "r") as tf:
             tf.extractall(data_dir)
 
@@ -25,6 +24,8 @@ def _extract_tarfiles(data_dir):
             src = os.path.join(tmp_dir, imgname)
             dst = os.path.join(data_dir, "features", imgname)
             shutil.move(src, dst)
+
+        os.rmdir(tmp_dir)
 
 
 if __name__ == "__main__":
