@@ -87,8 +87,8 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     # hyper parameter
-    parser.add_argument("--batchsize", "-b", type=int, default=256)
-    parser.add_argument("--epoch", "-e", type=int, default=32)
+    parser.add_argument("--batchsize", "-b", type=int, default=128)
+    parser.add_argument("--epoch", "-e", type=int, default=16)
     parser.add_argument(
         "--model",
         "-m",
@@ -98,11 +98,11 @@ if __name__ == "__main__":
         default="two_layered_cnn",
     )
     # channel
-    parser.add_argument("--input_dir", type=str)
-    parser.add_argument("--label_dir", type=str)
-    parser.add_argument("--out_dir", type=str)
+    parser.add_argument("--input_dir", "-i", type=str)
+    parser.add_argument("--label_dir", "-l", type=str)
+    parser.add_argument("--out_dir", "-o", type=str)
     parser.add_argument(
-        "--device", type=int, default=-1
+        "--device", "-gpu", type=int, default=-1
     )  # -1 for cpu or indicate gpu id >= 0
     args = parser.parse_args()
 

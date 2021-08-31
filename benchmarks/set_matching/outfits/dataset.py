@@ -30,6 +30,8 @@ def _extract_tarfiles(data_dir):
 
 
 def get_train_val_dataset(feature_dir, label_dir):
+    _extract_tarfiles(feature_dir)
+
     train = json.load(open(os.path.join(label_dir, "train.json")))
     valid = json.load(open(os.path.join(label_dir, "valid.json")))
 

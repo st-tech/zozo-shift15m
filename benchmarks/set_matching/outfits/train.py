@@ -104,12 +104,12 @@ if __name__ == "__main__":
         default="cov_max",
     )
     # channel
-    parser.add_argument("--input_dir", type=str)
-    parser.add_argument("--label_dir", type=str)
-    parser.add_argument("--weight", type=str)
-    parser.add_argument("--out_dir", type=str)
+    parser.add_argument("--input_dir", "-i", type=str)
+    parser.add_argument("--label_dir", "-l", type=str)
+    parser.add_argument("--weight", "-w", type=str)
+    parser.add_argument("--out_dir", "-o", type=str)
     parser.add_argument(
-        "--device", type=int, default=-1
+        "--device", "-gpu", type=int, default=-1
     )  # -1 for cpu or indicate gpu id >= 0
     args = parser.parse_args()
 
