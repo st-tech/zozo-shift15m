@@ -64,6 +64,12 @@ Please download the dataset as follows:
 $ bash scripts/download_all.sh
 ```
 
+To avoid downloading the test dataset for set matching (80GB), which is not required in training, you can use the following script.
+
+```bash
+$ bash scripts/download_all_wo_set_testdata.sh
+```
+
 ## Tasks
 
 The following tasks are now available:
@@ -82,7 +88,7 @@ As templates for numerical experiments on the SHIFT15M dataset, we have publishe
 
 ## Original Dataset Structure
 
-The original dataset is maintained in jsonl format, and a row consists of the following:
+The original dataset is maintained in json format, and a row consists of the following:
 
 ```
 {
@@ -96,8 +102,6 @@ The original dataset is maintained in jsonl format, and a row consists of the fo
   "publish_date":"yyyy-mm-dd"
 }
 ```
-
-
 
 ## Contributing
 To learn more about making a contribution to SHIFT15M, please see the following materials:
