@@ -79,7 +79,7 @@ The following tasks are now available:
 
 | Tasks                      | Task type           | Shift type   | # of input dim | # of output dim |
 |----------------------------|---------------------|--------------|----------------|-----------------|
-| [NumLikesRegression](https://github.com/st-tech/zozo-shift15m/tree/main/benchmarks#regression-for-the-number-of-likes) | regression     | target shift |     (N, 25)                       | (N,1)               |
+| [NumLikesRegression](https://github.com/st-tech/zozo-shift15m/tree/main/benchmarks#regression-for-the-number-of-likes) | regression     | target shift |     (N, 25)                       | (N, 1)               |
 | [SumPricesRegression](https://github.com/st-tech/zozo-shift15m/tree/main/benchmarks#regression-for-the-sum-of-prices) | regression    | covariate shift, target shift | (N, 1) | (N, 1)|
 | ItemPriceRegression        | regression          | target shift | (N, 4096)      | (N, 1)          |
 | [ItemCategoryClassification](https://github.com/st-tech/zozo-shift15m/tree/main/benchmarks/item_category_prediction) | classification      | target shift| (N, 4096)      | (N, 7)          |
