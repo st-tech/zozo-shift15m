@@ -9,6 +9,9 @@
 ![GitHub issues](https://img.shields.io/github/issues/st-tech/zozo-shift15m)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/st-tech/zozo-shift15m)
 ![GitHub last commit](https://img.shields.io/github/last-commit/st-tech/zozo-shift15m)
+[![arXiv](https://img.shields.io/badge/arXiv-1234.56789-b31b1b.svg)](https://arxiv.org/abs/2108.12992)
+
+[[arXiv]](https://arxiv.org/abs/2108.12992)
 
 The main motivation of the SHIFT15M project is to provide a dataset that contains natural dataset shifts collected from a web service that was actually in operation for several years.
 In addition, the SHIFT15M dataset has several types of dataset shifts, allowing us to evaluate the robustness of the model to different types of shifts (e.g., covariate shift and target shift).
