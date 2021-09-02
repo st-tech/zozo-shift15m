@@ -9,7 +9,7 @@
 ![GitHub issues](https://img.shields.io/github/issues/st-tech/zozo-shift15m)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/st-tech/zozo-shift15m)
 ![GitHub last commit](https://img.shields.io/github/last-commit/st-tech/zozo-shift15m)
-[![arXiv](https://img.shields.io/badge/arXiv-1234.56789-b31b1b.svg)](https://arxiv.org/abs/2108.12992)
+[![arXiv](https://img.shields.io/badge/arXiv-2108.12992-b31b1b.svg)](https://arxiv.org/abs/2108.12992)
 
 [[arXiv]](https://arxiv.org/abs/2108.12992)
 
