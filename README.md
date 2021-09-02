@@ -13,7 +13,7 @@
 
 [[arXiv]](https://arxiv.org/abs/2108.12992)
 
-The main motivation of the SHIFT15M project is to provide a dataset that contains natural dataset shifts collected from a web service that was actually in operation for several years.
+The main motivation of the SHIFT15M project is to provide a dataset that contains natural dataset shifts collected from a web service IQON, which was actually in operation for a decade.
 In addition, the SHIFT15M dataset has several types of dataset shifts, allowing us to evaluate the robustness of the model to different types of shifts (e.g., covariate shift and target shift).
 
 We provide the [Datasheet for SHIFT15M](./DATASHEET.md).
@@ -38,7 +38,7 @@ SHIFT15M is a large-scale dataset based on approximately 15 million items accumu
 $ pip install shift15m
 ```
 
-### From Source
+### From source
 
 ```bash
 $ git clone https://github.com/st-tech/zozo-shift15m.git
@@ -59,7 +59,7 @@ from shift15.datasets import NumLikesRegression
 dataset = NumLikesRegression(root="./data", download=True)
 ```
 
-### Download Directly by using download scripts
+### Download directly by using download scripts
 
 Please download the dataset as follows:
 
@@ -79,11 +79,11 @@ The following tasks are now available:
 
 | Tasks                      | Task type           | Shift type   | # of input dim | # of output dim |
 |----------------------------|---------------------|--------------|----------------|-----------------|
-| [NumLikesRegression](https://github.com/st-tech/zozo-shift15m/tree/main/benchmarks#regression-for-the-number-of-likes) | regression     | target shift |     (N,25)                       | (N,1)               |
+| [NumLikesRegression](https://github.com/st-tech/zozo-shift15m/tree/main/benchmarks#regression-for-the-number-of-likes) | regression     | target shift |     (N, 25)                       | (N, 1)               |
 | [SumPricesRegression](https://github.com/st-tech/zozo-shift15m/tree/main/benchmarks#regression-for-the-sum-of-prices) | regression    | covariate shift, target shift | (N, 1) | (N, 1)|
 | ItemPriceRegression        | regression          | target shift | (N, 4096)      | (N, 1)          |
 | [ItemCategoryClassification](https://github.com/st-tech/zozo-shift15m/tree/main/benchmarks/item_category_prediction) | classification      | target shift| (N, 4096)      | (N, 7)          |
-| [Set2SetMatching](https://github.com/st-tech/zozo-shift15m/tree/main/benchmarks/set_matching)      | set-to-set matching | covariate shift | (N,4096)x(M,4096)| (1)          |
+| [Set2SetMatching](https://github.com/st-tech/zozo-shift15m/tree/main/benchmarks/set_matching)      | set-to-set matching | covariate shift | (N, 4096)x(M, 4096)| (1)          |
 
 ## Benchmarks
 
@@ -95,7 +95,7 @@ The original dataset is maintained in json format, and a row consists of the fol
 
 ```
 {
-  "user":{"user_id":"xxxx"},
+  "user":{"user_id":"xxxx", "fav_brand_ids":"xxxx,xx,..."},
   "like_num":"xx",
   "set_id":"xxx",
   "items":[
@@ -112,11 +112,11 @@ To learn more about making a contribution to SHIFT15M, please see the following 
 - [Task Proposal Guide](./TASK_PROPOSAL.md)
 - [Benchmark Proposal Guide](./BENCHMARK.md)
 
-## LICENSE
+## License
 The dataset itself is provided under a [CC BY-NC 4.0 license](./LICENSE.CC).
 On the other hand, the software in this repository is provided under the [MIT license](./LICENSE.MIT).
 
-## Dataset Metadata
+## Dataset metadata
 The following table is necessary for this dataset to be indexed by search engines such as [Google Dataset Search](https://datasetsearch.research.google.com/).
 
 <div itemscope itemtype="http://schema.org/Dataset">
