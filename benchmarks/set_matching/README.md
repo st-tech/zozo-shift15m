@@ -26,7 +26,7 @@ You can train a set matching model indicating the label directory.
 For example, to train a model from the training data collected in the year 2013 split as 'label1', you can use the code as follows:
 
 ```
-$ python outfits/train.py -m set_matching_sim -b 32 -e 32 -i ../../data/cnn-features -l ../../data/set_matching/set_matching_labels/2013-2014-label1 -o result_s2s/2013-label1 -gpu -1
+$ python outfits/train.py -m set_matching_sim -b 32 -e 32 -i ../../data -l ../../data/set_matching/set_matching_labels/2013-2014-label1 -o result_s2s/2013-label1 -gpu -1
 ```
 
 Note that all the training data in the same label split are identical, so you can select any label directories regardless of the validation year.
@@ -42,7 +42,7 @@ Also, setting training and testing years here are required for covariate adaptat
 #### Weight estimator
 
 ```
-$ python weight_estimation/train.py -b 128 -e 16 -i ../../data/cnn-features -l ../../data/set_matching/set_matching_labels/2013-2014-label1 -o result_weight/2013-2014-label1 -gpu -1
+$ python weight_estimation/train.py -b 128 -e 16 -i ../../data -l ../../data/set_matching/set_matching_labels/2013-2014-label1 -o result_weight/2013-2014-label1 -gpu -1
 ```
 
 #### Weighted training on set matching model
@@ -52,7 +52,7 @@ You can select the weighting strategy `-m cov_max` or `-m cov_mean,` which repre
 To compare the results, we recommend using the same number of minibatch-size and training epochs as the vanilla set matching model.
 
 ```
-$ python outfits/train.py -m cov_max -b 32 -e 32 -i ../../data/cnn-features -l ../../data/set_matching/set_matching_labels/2013-2014-label1 -o result_s2s_cov_max/2013-2014-label1 -gpu -1 -w result_weight/2013-2014-label1
+$ python outfits/train.py -m cov_max -b 32 -e 32 -i ../../data -l ../../data/set_matching/set_matching_labels/2013-2014-label1 -o result_s2s_cov_max/2013-2014-label1 -gpu -1 -w result_weight/2013-2014-label1
 ```
 
 ## Testing
