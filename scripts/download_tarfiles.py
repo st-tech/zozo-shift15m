@@ -68,7 +68,7 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--root", type=str)
+    parser.add_argument("--root", type=str, default=C.ROOT)
     parser.add_argument("--processes", type=int, default=os.cpu_count())
     args = parser.parse_args()
     main(args.root, args.processes)
