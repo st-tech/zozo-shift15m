@@ -2,7 +2,7 @@
 
 set -e
 
-readonly ROOT=data/cnn-features
+readonly ROOT=data
 
 mkdir -p ${ROOT}
 python scripts/download_tarfiles.py --root ${ROOT}
