@@ -1,9 +1,10 @@
 import os
-import sys
-
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+try:
+    import shift15m.constants as C
+except ModuleNotFoundError as e:
+    import sys
+    sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 import requests
-import shift15m.constants as C
 
 FLIST_URL = (
     "https://research.zozo.com/data_release/shift15m/vgg16-features/filelist.txt"
@@ -64,7 +65,7 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--root", type=str, default=C.ROOT)
+    parser.add_argument("--root", type=str)
     parser.add_argument("--processes", type=int, default=os.cpu_count())
     args = parser.parse_args()
     main(args.root, args.processes)
