@@ -6,7 +6,6 @@ except ModuleNotFoundError as e:
     import sys
 
     sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-    import shift15m.constants as C
 import requests
 
 FLIST_URL = (
