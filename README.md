@@ -32,7 +32,7 @@ SHIFT15M is a large-scale dataset based on approximately 15 million items accumu
 
 ## Installation
 
-### (WIP) From PyPi
+### From PyPi
 
 ```bash
 $ pip install shift15m
