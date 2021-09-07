@@ -13,7 +13,9 @@ from shift15m.datasets import df_manipulations
 
 
 class NumLikesRegression(BaseDataset):
-    def __init__(self, root: str = C.ROOT, load_jsonl: bool = False, download: bool = False):
+    def __init__(
+        self, root: str = C.ROOT, load_jsonl: bool = False, download: bool = False
+    ):
         self.download = download
 
         if load_jsonl:
@@ -64,7 +66,9 @@ class NumLikesRegression(BaseDataset):
                     save_path = os.path.join(root, f)
                     print("{}: {}".format(C.DOWNLOAD, url))
                     urllib.request.urlretrieve(url, save_path)
-                self.pickles: list = sorted(glob.glob(os.path.join(root, f"*.{C.PICKLE}")))
+                self.pickles: list = sorted(
+                    glob.glob(os.path.join(root, f"*.{C.PICKLE}"))
+                )
             else:
                 raise RuntimeError(M.DATASET_NOT_FOUND)
 
