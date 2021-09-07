@@ -50,7 +50,7 @@ $ pip install dist/shift15m-xxxx-py3-none-any.whl
 
 ## Download SHIFT15M dataset
 
-### (WIP) Use Dataset class
+### Use Dataset class
 
 You can download SHIFT15M dataset as follows:
 
