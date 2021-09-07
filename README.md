@@ -5,6 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/python-3.6%20%7C%203.7%20%7C%203.8%20%7C%203.9-blue)](https://www.python.org)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/st-tech/zozo-shift15m)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/shift15m?color=blue)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/st-tech/zozo-shift15m/tests)
 [![PyPI version](https://badge.fury.io/py/shift15m.svg)](https://badge.fury.io/py/shift15m)
 ![GitHub issues](https://img.shields.io/github/issues/st-tech/zozo-shift15m)
