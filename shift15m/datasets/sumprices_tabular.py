@@ -4,6 +4,7 @@ import pickle
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
+import urllib.request
 
 from shift15m import constants as C
 from shift15m import msgs as M
@@ -12,7 +13,11 @@ from shift15m.datasets.base_dataset import BaseDataset
 
 
 class SumPricesRegression(BaseDataset):
-    def __init__(self, root: str = C.ROOT, load_jsonl: bool = False):
+    def __init__(
+        self, root: str = C.ROOT, load_jsonl: bool = False, download: bool = False
+    ):
+        self.download = download
+
         if load_jsonl:
             # load *.jsonl files in the root directory
             self.__load_jsonl(root=root)
@@ -48,7 +53,18 @@ class SumPricesRegression(BaseDataset):
     def __load_pickle(self, root: str):
         self.pickles: list = sorted(glob.glob(os.path.join(root, f"*.{C.PICKLE}")))
         if len(self.pickles) == 0:
-            raise RuntimeError(M.DATASET_NOT_FOUND)
+            if self.download:
+                os.makedirs(root, exist_ok=True)
+                for f in C.FILES_SUM_PRICES_REGRESSION:
+                    url = os.path.join(*[C.BASE_URL, C.Tasks.SUM_PRICES_REGRESSION, f])
+                    save_path = os.path.join(root, f)
+                    print("{}: {}".format(C.DOWNLOAD, url))
+                    urllib.request.urlretrieve(url, save_path)
+                self.pickles: list = sorted(
+                    glob.glob(os.path.join(root, f"*.{C.PICKLE}"))
+                )
+            else:
+                raise RuntimeError(M.DATASET_NOT_FOUND)
 
         with open(self.pickles[0], "rb") as f:
             (self.x, self.y) = pickle.load(f)
