@@ -33,6 +33,10 @@ FILES_NUM_LIKES_REGRESSION = [
     "xy_09.pickle",
 ]
 
+FILES_SUM_PRICES_REGRESSION = [
+    "sumprices.pickle",
+]
+
 
 class Keys:
     USER = "user"
