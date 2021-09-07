@@ -1,6 +1,8 @@
+BASE_URL = "https://research.zozo.com/data_release/shift15m"
 JSONL = "jsonl"
 PICKLE = "pickle"
 ROOT = "data"
+DOWNLOAD = "download"
 FEATURE_ROOT = "data/features"
 RECORDS = "records"
 CATEGORY_ID_MAX = 20
@@ -17,6 +19,19 @@ SUB_CATEGORIES = [
     "16001", "16002", "16003", "16004",
 ]
 # fmt: on
+
+FILES_NUM_LIKES_REGRESSION = [
+    "xy_00.pickle",
+    "xy_01.pickle",
+    "xy_02.pickle",
+    "xy_03.pickle",
+    "xy_04.pickle",
+    "xy_05.pickle",
+    "xy_06.pickle",
+    "xy_07.pickle",
+    "xy_08.pickle",
+    "xy_09.pickle",
+]
 
 
 class Keys:
