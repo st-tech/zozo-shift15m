@@ -49,6 +49,11 @@ class Keys:
     SUBCATEGORY_ID = "category_id2"
 
 
+class ItemCatalog:
+    DEFAULT_FILE = "item_catalog.txt"
+    YEAR = "year"
+
+
 class Tasks:
     NUM_LIKES_REGRESSION = "num_likes_regression"
     SUM_PRICES_REGRESSION = "sum_prices_regression"

@@ -15,20 +15,22 @@ def make_item_catalog(inp: str, output_dir: str = C.ROOT):
         for item in _set[K.ITEMS]:
             item_id = item[K.ITEM_ID]
             if item_id in items_mst:
-                items_mst[item_id]["year"] = min(items_mst[item_id]["year"], year)
+                items_mst[item_id][C.ItemCatalog.YEAR] = min(
+                    items_mst[item_id][C.ItemCatalog.YEAR], year
+                )
             else:
                 items_mst[item_id] = {
                     K.CATEGORY_ID: item[K.CATEGORY_ID],
                     K.SUBCATEGORY_ID: item[K.SUBCATEGORY_ID],
-                    "year": year,
+                    C.ItemCatalog.YEAR: year,
                 }
 
     items = [
-        f"{k} {v[K.CATEGORY_ID]} {v[K.SUBCATEGORY_ID]} {v['year']}"
+        f"{k} {v[K.CATEGORY_ID]} {v[K.SUBCATEGORY_ID]} {v[C.ItemCatalog.YEAR]}"
         for k, v in items_mst.items()
     ]
 
-    with open(pathlib.Path(output_dir) / "item_catalog.txt", "w") as f:
+    with open(pathlib.Path(output_dir) / C.ItemCatalog.DEFAULT_FILE, "w") as f:
         f.write("\n".join(items))
 
 

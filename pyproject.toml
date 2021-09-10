@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "shift15m"
-version = "0.1.1"
+version = "0.1.2"
 description = "Large-scale multiobective dataset with dataset shift."
 authors = ["ZOZO Research SHIFT15M Team"]
 readme = "README.md"
