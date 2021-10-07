@@ -98,7 +98,7 @@ class ItemCatalog:
         dltars(str(root), os.cpu_count())
         ext(str(root))
         for fname in open(root / "tar_files.txt"):
-            os.remove(root / fname)
+            os.remove(root / fname.strip())
 
     def _validate(self, items: List[Tuple], year: str):
         if len(items) == 0:
