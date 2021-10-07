@@ -7,6 +7,15 @@ from shift15m.constants import Keys as K
 
 
 def make_item_catalog(inp: str, output_dir: str = C.ROOT):
+    if not pathlib.Path(inp).exists():
+        import requests
+
+        url = "https://research.zozo.com/data_release/shift15m/label/iqon_outfits.json"
+        print(f"download {url} to {inp}.")
+        r = requests.get(url)
+        with open(inp, "w") as f:
+            json.dump(r.json(), f, indent=2)
+
     data = json.load(open(inp))
     items_mst = {}
     for _set in data:

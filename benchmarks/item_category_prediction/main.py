@@ -27,12 +27,10 @@ from figure import plot_score_matrix
 
 def load_item_catalog(args: Any) -> ItemCatalog:
     if args.make_dataset:
-        inp = next(
-            pathlib.Path(C.ROOT).glob("*.json")
-        )  # Assume that the source json file is located in `C.ROOT`
+        inp = pathlib.Path(C.ROOT) / "iqon_outfits.json"
         make_item_catalog(inp)
     catalog_path = pathlib.Path(C.ROOT) / "item_catalog.txt"
-    return ItemCatalog(catalog_path)
+    return ItemCatalog(catalog_path, download_features=True)
 
 
 def get_model(n_outputs: int) -> nn.Module:
