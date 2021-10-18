@@ -41,6 +41,15 @@ class ImageFeatureDataset(torch.utils.data.Dataset):
         for item, label in items:
             if (root / f"{item}.json.gz").exists():
                 self.items.append((item, label))
+        if len(self.items) == 0:
+            msg = (
+                "Feature files not found.\n"
+                "Please download feature files as follows:\n"
+                "  ./scripts/download_cnn_features.sh\n"
+                "or construct ItemCatalog class with the download option:\n"
+                "  catalog = ItemCatalog(path, download_features=True)"
+            )
+            raise ValueError(msg)
         self.root = root
 
     @property
@@ -68,10 +77,28 @@ class ImageFeatureDataset(torch.utils.data.Dataset):
 
 
 class ItemCatalog:
-    def __init__(self, catalog_path: str) -> None:
+    def __init__(self, catalog_path: str, download_features: bool = False) -> None:
         self.items = [
             s.split(" ") for s in open(catalog_path).read().strip().split("\n")
         ]
+        if download_features and not pathlib.Path(C.FEATURE_ROOT).exists():
+            self._download()
+
+    def _download(self):
+        msg = "It requires about 100GB storage to store 2.3M feature files. Do you continue to download? (y/[n]):"
+        res = input(msg)
+        if res.lower() not in ("y", "yes"):
+            print("Skip download.")
+            return
+
+        from shift15m.datasets.download_tarfiles import main as dltars
+        from shift15m.datasets.feature_tar_extractor import _extract_tarfiles as ext
+
+        root = pathlib.Path(C.ROOT)
+        dltars(str(root), os.cpu_count())
+        ext(str(root))
+        for fname in open(root / "tar_files.txt"):
+            os.remove(root / fname.strip())
 
     def _validate(self, items: List[Tuple], year: str):
         if len(items) == 0:
