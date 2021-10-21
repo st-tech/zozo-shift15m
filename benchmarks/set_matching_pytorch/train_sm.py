@@ -10,7 +10,7 @@ from ignite.metrics import Loss, RunningAverage
 from set_matching.metrics import NPairsAccuracy
 from tensorboardX import SummaryWriter
 
-from outfits.config import get_model_conf
+from config import get_model_conf
 from outfits.dataset import get_train_val_loader
 
 
@@ -30,6 +30,7 @@ def main(args):
         model_config["pretrained_weight"] = args.weight_path
         model = SetMatchingCov(**model_config)
         loss_fn = torch.nn.CrossEntropyLoss(reduce=False).to(device)
+        loss_fn_eval = torch.nn.CrossEntropyLoss(reduce=True).to(device)
     else:
         raise ValueError("unknown model.")
     model.to(device)
@@ -67,7 +68,11 @@ def main(args):
         model.eval()
         with torch.inference_mode():
             batch = tuple(map(lambda x: x.to(device), batch))
-            score = model(*batch)
+            out = model(*batch)
+            if isinstance(out, tuple):
+                score, _ = out
+            else:
+                score, _ = out, None
             return score, torch.arange(score.size()[0]).to(device)
 
     trainer = Engine(train_process)
@@ -79,9 +84,9 @@ def main(args):
     # metrics
     RunningAverage(output_transform=lambda x: x).attach(trainer, "loss")
     NPairsAccuracy().attach(train_evaluator, "acc")
-    Loss(loss_fn).attach(train_evaluator, "loss")
+    Loss(loss_fn_eval).attach(train_evaluator, "loss")
     NPairsAccuracy().attach(valid_evaluator, "acc")
-    Loss(loss_fn).attach(valid_evaluator, "loss")
+    Loss(loss_fn_eval).attach(valid_evaluator, "loss")
 
     # early stopping
     handler = EarlyStopping(

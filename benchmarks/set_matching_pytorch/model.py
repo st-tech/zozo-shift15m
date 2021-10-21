@@ -122,25 +122,3 @@ class SetMatchingCov(SetMatching):
         importance = self.importance(prob)
 
         return score, importance
-
-    def predict(self, q_imgs, q_ids, a_imgs, a_ids):
-        xp = self.xp
-        n_x_items = q_imgs.shape[1]
-        batch = a_imgs.shape[1]
-
-        x = F.broadcast_to(q_imgs, (batch,) + q_imgs.shape[1:])
-        # (1, 8, 3, 299, 299) -> (8, 8, 3, 299, 299)
-        y = a_imgs.squeeze(axis=0)
-        # (1, 8, 8, 3, 299, 299) -> (8, 8, 3, 299, 299)
-        x_seq = xp.broadcast_to(q_ids, (batch, n_x_items))
-        y_seq = a_ids[0]
-        # -> (8, 8)
-
-        with chainer.using_config("train", False):
-            score = self.predictor(x, x_seq, y, y_seq)
-
-        return F.softmax(score[0, :], axis=0)
-
-    def load_weight(self, path):
-        chainer.serializers.load_npz(path, self.weight_estimator)
-        print("use the pretrained weight_estimator model.")
