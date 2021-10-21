@@ -5,8 +5,7 @@ import set_matching.extensions as exfn
 import shift15m.constants as C
 import torch
 from ignite.engine import Engine, Events
-from ignite.handlers import (Checkpoint, DiskSaver, EarlyStopping,
-                             ModelCheckpoint)
+from ignite.handlers import Checkpoint, DiskSaver, EarlyStopping, ModelCheckpoint
 from ignite.metrics import Loss, RunningAverage
 from tensorboardX import SummaryWriter
 
@@ -151,14 +150,14 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
-    # hyper parameter
     parser.add_argument("--batchsize", "-b", type=int, default=128)
-    # trainer
-    parser.add_argument("--epochs", type=int, default=16)
-    parser.add_argument("--log_dir", type=str, default="/tmp/ml/weight_estimation")
+    parser.add_argument("--epochs", "-e", type=int, default=16)
+    parser.add_argument(
+        "--log_dir", "-o", type=str, default="/tmp/ml/weight_estimation"
+    )
     parser.add_argument("--checkpoint_interval", type=int, default=2)
     # channel
-    parser.add_argument("--input_dir", "-i", type=str, default=C.ROOT)
+    parser.add_argument("--input_dir", "-i", type=str, default=C.FEATURE_ROOT)
     parser.add_argument("--label_dir", "-l", type=str)
     args = parser.parse_args()
 

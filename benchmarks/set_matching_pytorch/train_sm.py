@@ -24,6 +24,7 @@ def main(args):
 
         model = SetMatching(**model_config)
         loss_fn = torch.nn.CrossEntropyLoss(reduce=True).to(device)
+        loss_fn_eval = torch.nn.CrossEntropyLoss(reduce=True).to(device)
     elif args.model in ["cov_mean", "cov_max"]:
         from model import SetMatchingCov
 
@@ -175,7 +176,6 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--batchsize", "-b", type=int, default=4)
     parser.add_argument(
         "--model",
         "-m",
@@ -186,12 +186,12 @@ if __name__ == "__main__":
         ],
         default="cov_max",
     )
-    # trainer
-    parser.add_argument("--epochs", type=int, default=10)
-    parser.add_argument("--log_dir", type=str, default="/tmp/ml/set_matching/")
+    parser.add_argument("--batchsize", "-b", type=int, default=4)
+    parser.add_argument("--epochs", "-e", type=int, default=10)
+    parser.add_argument("--log_dir", "-o", type=str, default="/tmp/ml/set_matching/")
     parser.add_argument("--checkpoint_interval", type=int, default=2)
     # channel
-    parser.add_argument("--input_dir", "-i", type=str, default=C.ROOT)
+    parser.add_argument("--input_dir", "-i", type=str, default=C.FEATURE_ROOT)
     parser.add_argument("--label_dir", "-l", type=str)
     parser.add_argument("--weight_path", "-w", type=str)
 

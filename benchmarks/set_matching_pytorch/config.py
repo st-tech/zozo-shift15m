@@ -6,7 +6,7 @@ model_conf = {
         "n_heads": 8,
         "n_iterative": 2,
         "enc_apply_ln": True,
-        "dec_apply_ln": True,  # only for MAB layer
+        "dec_apply_ln": True,
         "dec_component": "MHSim",
         "embedder_arch": "linear",
     },
@@ -17,7 +17,7 @@ model_conf = {
         "n_heads": 8,
         "n_iterative": 2,
         "enc_apply_ln": True,
-        "dec_apply_ln": True,  # only for MAB layer
+        "dec_apply_ln": True,
         "dec_component": "MHSim",
         "embedder_arch": "linear",
         "weight": "mean",
@@ -30,7 +30,7 @@ model_conf = {
         "n_heads": 8,
         "n_iterative": 2,
         "enc_apply_ln": True,
-        "dec_apply_ln": True,  # only for MAB layer
+        "dec_apply_ln": True,
         "dec_component": "MHSim",
         "embedder_arch": "linear",
         "weight": "max",

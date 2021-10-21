@@ -62,7 +62,7 @@ def _get_loader(data, root, batch_size, num_workers=None, is_train=False):
 class FeatureLabelDataset(torch.utils.data.Dataset):
     def __init__(self, data, root) -> None:
         self.data = data
-        self.feature_dir = os.path.join(root, "features")
+        self.feature_dir = root
 
     def __len__(self):
         return len(self.data)
