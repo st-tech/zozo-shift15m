@@ -101,7 +101,7 @@ class SetMatchingCov(SetMatching):
             ),
             w,
         )
-        w_min = w.min(dim=1)
+        w_min, _ = w.min(dim=1)
         # Note: here w is the probability of p(train|x), and thus it requires applying the min function
         # to calculate the maximum probability of p(test|x).
         return w_min
