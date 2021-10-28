@@ -1,9 +1,13 @@
+import pathlib
+
+repo_root = pathlib.Path(__file__).parent.parent
+
 BASE_URL = "https://research.zozo.com/data_release/shift15m"
 JSONL = "jsonl"
 PICKLE = "pickle"
-ROOT = "data"
+ROOT = str(repo_root / "data")
 DOWNLOAD = "download"
-FEATURE_ROOT = "data/features"
+FEATURE_ROOT = str(repo_root / "data/features")
 RECORDS = "records"
 CATEGORY_ID_MAX = 20
 YEAES = list(map(str, range(2010, 2021)))
