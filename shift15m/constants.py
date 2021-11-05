@@ -1,6 +1,6 @@
 import pathlib
 
-repo_root = pathlib.Path(__file__).parent.parent
+repo_root = pathlib.Path(".")
 
 BASE_URL = "https://research.zozo.com/data_release/shift15m"
 JSONL = "jsonl"
