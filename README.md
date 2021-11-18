@@ -56,7 +56,7 @@ $ pip install dist/shift15m-xxxx-py3-none-any.whl
 You can download SHIFT15M dataset as follows:
 
 ```python
-from shift15.datasets import NumLikesRegression
+from shift15m.datasets import NumLikesRegression
 
 dataset = NumLikesRegression(root="./data", download=True)
 ```
