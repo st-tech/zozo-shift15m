@@ -32,7 +32,11 @@ You can train a set matching model indicating the label directory.
 For example, to train a model from the training data collected in the year 2013 split as 'label1', you can use the code as follows:
 
 ```
-$ python train.py -m set_matching_sim -b 32 -e 32 -i ../../data -l ../../data/set_matching/set_matching_labels/2013-2014-label1 -o /tmp/ml/set_matching/
+$ python train_sm.py -m set_matching_sim -b 32 -e 32 -i ../../data -l ../../data/set_matching/set_matching_labels/2013-2014-label1 -o /tmp/ml/set_matching/
+```
+
+```
+$ python train_sm.py -m set_matching_sim -b 32 -e 32 --train_year 2013 --valid_year 2013
 ```
 
 Note that all the training data in the same label split are identical, so you can select any label directories regardless of the validation year.

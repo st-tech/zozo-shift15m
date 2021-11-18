@@ -2,16 +2,15 @@ import json
 import os
 
 import set_matching.extensions as exfn
-import shift15m.constants as C
 import torch
 from ignite.engine import Engine, Events
 from ignite.handlers import Checkpoint, DiskSaver, EarlyStopping, ModelCheckpoint
 from ignite.metrics import Loss, RunningAverage
 from set_matching.metrics import NPairsAccuracy
+from shift15m.datasets.outfitfeature import get_train_val_loader
 from tensorboardX import SummaryWriter
 
 from config import get_model_conf
-from outfits.dataset import get_train_val_loader
 
 
 def main(args):
@@ -43,7 +42,7 @@ def main(args):
 
     # dataset
     train_loader, valid_loader = get_train_val_loader(
-        args.input_dir, args.label_dir, args.batchsize
+        args.train_year, args.valid_year, args.batchsize
     )
 
     # logger
@@ -190,9 +189,9 @@ if __name__ == "__main__":
     parser.add_argument("--epochs", "-e", type=int, default=10)
     parser.add_argument("--log_dir", "-o", type=str, default="/tmp/ml/set_matching/")
     parser.add_argument("--checkpoint_interval", type=int, default=2)
-    # channel
-    parser.add_argument("--input_dir", "-i", type=str, default=C.FEATURE_ROOT)
-    parser.add_argument("--label_dir", "-l", type=str)
+
+    parser.add_argument("--train_year", type=int)
+    parser.add_argument("--valid_year", type=int)
     parser.add_argument("--weight_path", "-w", type=str)
 
     args = parser.parse_args()

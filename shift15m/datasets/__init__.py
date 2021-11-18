@@ -6,9 +6,11 @@ try:
     from shift15m.datasets.imagefeature_torch import (
         get_loader as get_imagefeature_dataloader,
     )
+    from shift15m.datasets.multiset import OutfitMultiset
 
     assert ImageFeatureDataset is not None
     assert get_imagefeature_dataloader is not None
+    assert OutfitMultiset is not None
 except ModuleNotFoundError:
     pass
 
