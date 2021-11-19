@@ -4,7 +4,7 @@ import json
 import os
 import pathlib
 import subprocess
-from typing import Optional, Union
+from typing import List, Optional, Tuple, Union
 
 import numpy as np
 import pandas as pd
@@ -13,11 +13,6 @@ import torch
 from set_matching.datasets.transforms import FeatureListTransform
 from shift15m.constants import Keys as K
 from sklearn.model_selection import train_test_split
-
-TEST_DATA_TARFILES = "https://research.zozo.com/data_release/shift15m/set_matching/set_matching_test_data_splits/filelist.txt"
-OUTFIT_JSON_URL = (
-    "https://research.zozo.com/data_release/shift15m/label/iqon_outfits.json"
-)
 
 
 def get_train_val_loader(
@@ -40,35 +35,17 @@ def get_train_val_loader(
     )
 
 
-def get_test_loader(
-    train_year: Union[str, int],
-    valid_year: Union[str, int],
-    batch_size: int,
-    root: str = C.ROOT,
-    num_workers: Optional[int] = None,
-):
-    label_dir_name = f"{train_year}-{valid_year}"
-
-    iqon_outfits = IQONOutfits(root=root)
-
-    test = iqon_outfits.get_test_data(label_dir_name)
-    feature_dir = iqon_outfits.feature_dir
-    return _get_loader(
-        test, feature_dir, batch_size, num_workers=num_workers, is_train=True
-    )
-
-
 def _get_loader(
-    sets,
-    feature_dir,
-    batch_size,
-    n_sets=1,
-    n_drops=None,
-    num_workers=None,
-    is_train=True,
+    sets: List,
+    feature_dir: pathlib.Path,
+    batch_size: int,
+    n_sets: int = 1,
+    n_drops: Optional[int] = None,
+    num_workers: Optional[int] = None,
+    is_train: bool = True,
 ):
     return torch.utils.data.DataLoader(
-        OutfitMultiset(sets, feature_dir, n_sets, n_drops=n_drops),
+        MultisetSplitDataset(sets, feature_dir, n_sets, n_drops=n_drops),
         shuffle=is_train,
         batch_size=batch_size,
         pin_memory=True,
@@ -77,8 +54,45 @@ def _get_loader(
     )
 
 
-class OutfitMultiset(torch.utils.data.Dataset):
-    def __init__(self, sets, root, n_sets, n_drops=None, max_elementnum_per_set=8):
+def get_test_loader(
+    train_year: Union[str, int],
+    valid_year: Union[str, int],
+    n_cand_sets: int,
+    batch_size: int,
+    root: str = C.ROOT,
+    num_workers: Optional[int] = None,
+) -> torch.utils.data.DataLoader:
+    label_dir_name = f"{train_year}-{valid_year}"
+
+    iqon_outfits = IQONOutfits(root=root)
+
+    test_examples = iqon_outfits.get_test_data(label_dir_name)
+    feature_dir = iqon_outfits.feature_dir
+    return torch.utils.data.DataLoader(
+        FINBsDataset(
+            test_examples,
+            feature_dir,
+            n_cand_sets=n_cand_sets,
+            max_set_size_query=6,
+            max_set_size_answer=6,
+        ),
+        shuffle=False,
+        batch_size=batch_size,
+        pin_memory=True,
+        num_workers=num_workers if num_workers else os.cpu_count(),
+        drop_last=False,
+    )
+
+
+class MultisetSplitDataset(torch.utils.data.Dataset):
+    def __init__(
+        self,
+        sets: List,
+        root: pathlib.Path,
+        n_sets: int,
+        n_drops: Optional[int] = None,
+        max_elementnum_per_set: Optional[int] = 8,
+    ):
         self.sets = sets
         self.feat_dir = root
         self.n_sets = n_sets
@@ -113,7 +127,7 @@ class OutfitMultiset(torch.utils.data.Dataset):
             features = []
             for item in items:
                 feat_name = str(item["item_id"]) + ".json.gz"
-                path = os.path.join(self.feat_dir, feat_name)
+                path = str(self.feat_dir / feat_name)
                 features.append(self._load_feature(path))
             features = np.array(features)
 
@@ -134,10 +148,59 @@ class OutfitMultiset(torch.utils.data.Dataset):
         setY_features, _, setY_mask = self.transform_y(setY_features, setY_ids)
         return setX_features, setX_mask, setY_features, setY_mask
 
-    def _load_feature(self, path):
+    def _load_feature(self, path: str):
         with gzip.open(path, mode="rt", encoding="utf-8") as f:
             feature = json.loads(f.read())
         return np.array(feature, dtype=np.float32)
+
+
+class FINBsDataset(torch.utils.data.Dataset):
+    def __init__(
+        self,
+        sets: List,
+        root: pathlib.Path,
+        n_cand_sets: int,
+        max_set_size_query: int,
+        max_set_size_answer: int,
+    ):
+        self.sets = sets
+        self.root = root
+        self.n_cand_sets = n_cand_sets
+        self.transform_q = FeatureListTransform(
+            max_set_size=max_set_size_query, apply_shuffle=False, apply_padding=True
+        )
+        self.transform_a = FeatureListTransform(
+            max_set_size=max_set_size_answer, apply_shuffle=False, apply_padding=True
+        )
+
+    def __len__(self):
+        return len(self.sets)
+
+    def __getitem__(self, idx):
+        _set = self.sets[idx]
+        query_features, query_categories = [], []
+        for item in _set["query"]:
+            with gzip.open(self.root / item, "r") as f:
+                feature = json.load(f)
+            query_features.append(feature)
+            query_categories.append(1)
+
+        question, _, q_mask = self.transform_q(query_features, query_categories)
+
+        n_answers = min(len(_set["answers"]), self.n_cand_sets)
+        answers, a_masks = [], []
+        for cand in _set["answers"][:n_answers]:
+            features, categories = [], []
+            for item in cand:
+                with gzip.open(self.root / item, "r") as f:
+                    feature = json.load(f)
+                features.append(feature)
+                categories.append(1)
+            ans, _, a_mask = self.transform_a(features, categories)
+            answers.append(ans)
+            a_masks.append(a_mask)
+
+        return question, q_mask, np.array(answers), np.array(a_masks)
 
 
 class IQONOutfits:
@@ -151,15 +214,19 @@ class IQONOutfits:
             # download outfit json
             self._download_outfit_label()
 
-        self.label_dir = self.root / "set_matching" / "labels"
-        if not self.label_dir.exists():
-            self.label_dir.mkdir(parents=True, exist_ok=True)
+        self._label_dir = self.root / "set_matching/labels"
+        if not self._label_dir.exists():
+            self._label_dir.mkdir(parents=True, exist_ok=True)
             self._make_trainval_dataset()
 
-        self.feature_dir = self.root / "features"
-        if not self.feature_dir.exists():
+        self._feature_dir = self.root / "features"
+        if not self._feature_dir.exists():
             # download feature jsons
             self._download_features()
+
+    @property
+    def feature_dir(self) -> pathlib.Path:
+        return self._feature_dir
 
     def _download_features(self):
         msg = "It requires about 100GB storage to store 2.3M feature files. Do you continue to download? (y/[n]):"
@@ -178,25 +245,10 @@ class IQONOutfits:
             os.remove(root / fname.strip())
 
     def _download_outfit_label(self):
-        print(f"Download {OUTFIT_JSON_URL} to {str(self.root)}")
-        cmd = f"wget {OUTFIT_JSON_URL} -P {str(self.root)}"
+        print(f"Download {C.OUTFIT_JSON_URL} to {str(self.root)}")
+        cmd = f"wget {C.OUTFIT_JSON_URL} -P {str(self.root)}"
         res = subprocess.run(cmd, shell=True, text=True)
         res.check_returncode()
-
-        # download test data
-        # tmp_dir = task_root / "set_matching_test_data_splits"
-        # tmp_dir.mkdir(parents=True, exist_ok=True)
-        # cmd = f"wget -i {TEST_DATA_TARFILES} -P {str(tmp_dir)}"
-        # res = subprocess.run(cmd, shell=True, text=True)
-        # res.check_returncode()
-        # cmd = f"cat {str(tmp_dir)}/set_matching_test_data.tar.gz-* > {str(task_root)}/set_matching_test_data.tar.gz"
-        # res = subprocess.run(cmd, shell=True, text=True)
-        # res.check_returncode()
-        # cmd = f"tar zxf {str(task_root)}/set_matching_test_data.tar.gz -C {str(task_root)}"
-        # res = subprocess.run(cmd, shell=True, text=True)
-        # res.check_returncode()
-        # (task_root / "set_matching_test_data.tar.gz").unlink()
-        # shutil.rmtree(str(tmp_dir))
 
     def _make_trainval_dataset(
         self, min_num_categories: int = 4, min_like_num: int = 50, seed: int = 0
@@ -243,13 +295,79 @@ class IQONOutfits:
             df_val.to_json(str(out_dir / "valid.json"), orient="records", indent=2)
             df_test.to_json(str(out_dir / "test.json"), orient="records", indent=2)
 
-    def get_trainval_data(self, label_dir_name):
-        path = self.label_dir / label_dir_name
+    def get_trainval_data(self, label_dir_name: str) -> Tuple[List, List]:
+        path = self._label_dir / label_dir_name
         train = json.load(open(path / "train.json"))
         valid = json.load(open(path / "valid.json"))
         return train, valid
 
-    def get_test_data(self, label_dir_name):
-        path = self.label_dir / label_dir_name
-        test = json.load(open(path / "test.json"))
-        return test
+    def get_test_data(
+        self, label_dir_name: str, n_comb: int = 1, n_cands: int = 8, seed: int = 0
+    ) -> List:
+        dir_name = self._label_dir / label_dir_name
+        path = dir_name / f"test_examples_ncomb_{n_comb}_ncands_{n_cands}.json"
+        if not path.exists():
+            self._make_test_examples(dir_name, n_comb, n_cands, seed)
+        test_examples = json.load(open(path))
+        return test_examples
+
+    def _make_test_examples(
+        self, path: pathlib.Path, n_comb: int = 1, n_cands: int = 8, seed: int = 0
+    ):
+        print("Make test dataset.")
+        np.random.seed(seed)
+
+        test_sets = json.load(open(path / "test.json"))
+
+        test_examples = []
+        for i in range(len(test_sets)):
+            example = {}
+
+            lst = np.delete(np.arange(len(test_sets)), i)
+            others = np.random.choice(lst, n_comb - 1, replace=False).tolist()
+            target = [i] + others
+
+            setX_items, setY_items = [], []
+            for j in target:
+                items = [
+                    str(item["item_id"]) + ".json.gz" for item in test_sets[j]["items"]
+                ]
+                items = np.array(items)
+
+                y_size = len(items) // 2
+
+                xy_mask = [True] * (len(items) - y_size) + [False] * y_size
+                xy_mask = np.random.permutation(xy_mask)
+                setX_items.extend(items[xy_mask].tolist())
+                setY_items.extend(items[~xy_mask].tolist())
+
+            example["query"] = setX_items
+
+            answers = [setY_items]
+            for j in range(n_cands - 1):
+                lst = np.delete(np.arange(len(test_sets)), target)
+                negatives = np.random.choice(lst, n_comb, replace=False).tolist()
+                assert len(set(target) & set(negatives)) == 0
+                target += negatives  # avoid double-selecting
+
+                setY_items = []
+                for k in negatives:
+                    items = [
+                        str(item["item_id"]) + ".json.gz"
+                        for item in test_sets[k]["items"]
+                    ]
+                    items = np.random.permutation(items)
+
+                    y_size = len(items) // 2
+                    setY_items.extend(items[:y_size].tolist())
+
+                answers.append(setY_items)
+
+            example["answers"] = answers
+
+            test_examples.append(example)
+
+        with open(
+            path / f"test_examples_ncomb_{n_comb}_ncands_{n_cands}.json", "w"
+        ) as f:
+            json.dump(test_examples, f, indent=2)

@@ -185,14 +185,14 @@ if __name__ == "__main__":
         ],
         default="cov_max",
     )
-    parser.add_argument("--batchsize", "-b", type=int, default=4)
+    parser.add_argument("--batchsize", "-b", type=int, default=32)
     parser.add_argument("--epochs", "-e", type=int, default=10)
     parser.add_argument("--log_dir", "-o", type=str, default="/tmp/ml/set_matching/")
     parser.add_argument("--checkpoint_interval", type=int, default=2)
 
     parser.add_argument("--train_year", type=int)
     parser.add_argument("--valid_year", type=int)
-    parser.add_argument("--weight_path", "-w", type=str)
+    parser.add_argument("--weight_path", "-w", type=str, default=None)
 
     args = parser.parse_args()
 
