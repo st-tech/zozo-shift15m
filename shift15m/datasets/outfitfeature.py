@@ -206,8 +206,7 @@ class IQONOutfits:
             return
 
         from shift15m.datasets.download_tarfiles import main as dltars
-        from shift15m.datasets.feature_tar_extractor import \
-            _extract_tarfiles as ext
+        from shift15m.datasets.feature_tar_extractor import _extract_tarfiles as ext
 
         root = pathlib.Path(C.ROOT)
         dltars(str(root), os.cpu_count())
@@ -260,7 +259,7 @@ class IQONOutfits:
                     df_ye, test_size=0.5, random_state=seed
                 )
 
-            out_dir = self.label_dir / str_year
+            out_dir = self._label_dir / str_year
             out_dir.mkdir(exist_ok=True)
             df_train.to_json(str(out_dir / "train.json"), orient="records", indent=2)
             df_val.to_json(str(out_dir / "valid.json"), orient="records", indent=2)
