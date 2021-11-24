@@ -69,6 +69,8 @@ class SetMatchingCov(SetMatching):
         if pretrained_weight:
             with open(pretrained_weight, "rb") as f:
                 self.weight_estimator.load_state_dict(torch.load(f))
+            for param in self.weight_estimator.parameters():
+                param.requires_grad = False
 
     def importance_logit(self, prob):
         # prob = p(train|x) = 1 - p(test|x)
