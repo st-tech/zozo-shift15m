@@ -1,17 +1,73 @@
 import json
 import os
+from typing import Any, Dict, List, Optional, Tuple, Union
 
+import numpy as np
 import set_matching.extensions as exfn
 import shift15m.constants as C
 import torch
 from ignite.engine import Engine, Events
 from ignite.handlers import Checkpoint, DiskSaver, EarlyStopping, ModelCheckpoint
 from ignite.metrics import Loss, RunningAverage
+from shift15m.datasets.outfitfeature import FeatureLabelDataset, IQONOutfits, get_loader
 from tensorboardX import SummaryWriter
 
+from metrics import BinaryAccuracy
 from model import TwoLayeredLinear
-from weight_estimation.dataset import get_train_val_loader
-from weight_estimation.metrics import BinaryAccuracy
+
+
+def _get_items(sets: List[Dict]) -> List:
+    item_ids = []
+    for set_ in sets:
+        item_ids.extend([item["item_id"] for item in set_["items"]])
+    return item_ids
+
+
+def get_train_val_loader(
+    train_year: Union[str, int],
+    valid_year: Union[str, int],
+    batch_size: int,
+    root: str = C.ROOT,
+    num_workers: Optional[int] = None,
+) -> Tuple[Any, Any]:
+    label_dir_name = f"{train_year}-{valid_year}"
+
+    iqon_outfits = IQONOutfits(root=root)
+
+    train, valid = iqon_outfits.get_trainval_data(label_dir_name)
+    feature_dir = iqon_outfits.feature_dir
+
+    train = _get_items(train)
+    valid = _get_items(valid)
+
+    common_id = set(train) & set(valid)
+    traindiff_id = list(set(train) - common_id)
+    validdiff_id = list(set(valid) - common_id)
+    sampling_num = len(traindiff_id) - len(validdiff_id)
+    duplicated_ind = np.random.choice(len(validdiff_id), sampling_num, replace=True)
+    duplicated_valid_id = [validdiff_id[i] for i in duplicated_ind]
+    validdiff_id = validdiff_id + duplicated_valid_id
+    train_data = [{"item_id": d, "label": np.int32(1)} for d in traindiff_id] + [
+        {"item_id": d, "label": np.int32(0)} for d in validdiff_id
+    ]
+    print("train data created")
+
+    test = iqon_outfits.get_test_data(label_dir_name)
+    test = _get_items(test)
+    common_id = set(train) & set(test)
+    testdiff_id = list(set(test) - common_id)
+    removed = np.random.choice(len(traindiff_id), len(testdiff_id), replace=False)
+    removed_train_id = [traindiff_id[i] for i in removed]
+    valid_data = [{"item_id": d, "label": np.int32(1)} for d in removed_train_id] + [
+        {"item_id": d, "label": np.int32(0)} for d in testdiff_id
+    ]
+    print("test data created")
+
+    train_dataset = FeatureLabelDataset(train_data, feature_dir)
+    valid_dataset = FeatureLabelDataset(valid_data, feature_dir)
+    return get_loader(
+        train_dataset, batch_size, num_workers, is_train=True
+    ), get_loader(valid_dataset, batch_size, num_workers, is_train=False)
 
 
 def main(args):
@@ -29,7 +85,7 @@ def main(args):
 
     # dataset
     train_loader, valid_loader = get_train_val_loader(
-        args.input_dir, args.label_dir, args.batchsize
+        args.train_year, args.valid_year, args.batchsize
     )
 
     # logger
@@ -157,8 +213,9 @@ if __name__ == "__main__":
     )
     parser.add_argument("--checkpoint_interval", type=int, default=2)
     # channel
-    parser.add_argument("--input_dir", "-i", type=str, default=C.FEATURE_ROOT)
-    parser.add_argument("--label_dir", "-l", type=str)
+    parser.add_argument("--train_year", type=int)
+    parser.add_argument("--valid_year", type=int)
     args = parser.parse_args()
 
+    np.random.seed(0)  # used for train/test splitting
     main(args)

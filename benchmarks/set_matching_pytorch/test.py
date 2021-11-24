@@ -1,12 +1,12 @@
 import argparse
-import gzip
 import json
 import pathlib
+from typing import Any, Optional, Union
 
-import numpy as np
+import shift15m.constants as C
 import torch
-from set_matching.datasets.transforms import FeatureListTransform
 from set_matching.models.set_matching import SetMatching
+from shift15m.datasets.outfitfeature import FINBsDataset, IQONOutfits, get_loader
 from tqdm import tqdm
 
 from model import SetMatchingCov
@@ -18,7 +18,31 @@ MODELS = {
 }
 
 
-def model_fn(model_dir, device):
+def get_test_loader(
+    train_year: Union[str, int],
+    valid_year: Union[str, int],
+    n_cand_sets: int,
+    batch_size: int,
+    root: str = C.ROOT,
+    num_workers: Optional[int] = None,
+) -> torch.utils.data.DataLoader:
+    label_dir_name = f"{train_year}-{valid_year}"
+
+    iqon_outfits = IQONOutfits(root=root)
+
+    test_examples = iqon_outfits.get_fitb_data(label_dir_name)
+    feature_dir = iqon_outfits.feature_dir
+    dataset = FINBsDataset(
+        test_examples,
+        feature_dir,
+        n_cand_sets=n_cand_sets,
+        max_set_size_query=6,
+        max_set_size_answer=6,
+    )
+    return get_loader(dataset, batch_size, num_workers=num_workers, is_train=False)
+
+
+def model_fn(model_dir: str, device: str) -> Any:
     model_name = json.load(open(pathlib.Path(model_dir) / "args.json"))["model"]
     model_config = json.load(open(pathlib.Path(model_dir) / "model_config.json"))
 
@@ -29,37 +53,10 @@ def model_fn(model_dir, device):
     model.eval()
     model.to(device)
 
-    transform = FeatureListTransform(
-        max_set_size=5,
-        apply_shuffle=False,
-        apply_padding=True,
-    )
-
-    return model, transform
+    return model
 
 
-def input_fn(request_body):
-    input_object = json.loads(request_body)
-
-    query, answers = [], []
-    for feature in input_object["query"]:
-        query.append(np.array(feature, dtype=np.float32))
-
-    for cand in input_object["answers"]:
-        c_feature = []
-        for feature in cand:
-            c_feature.append(np.array(feature, dtype=np.float32))
-        answers.append(c_feature)
-
-    return query, answers
-
-
-def _to_tensor(x):
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-    return torch.tensor(x[None, :]).to(device)
-
-
-def _predict_fn(inputs, model):
+def predict_fn(inputs: Any, model: Any) -> Any:
     query, q_mask, candidates, c_mask = inputs
     query_set_size = query.shape[1]
     (
@@ -92,45 +89,27 @@ def _predict_fn(inputs, model):
     return pred, torch.softmax(score, dim=1)
 
 
-def predict_fn(input_object, model):
-    query, target = input_object
-    model, transform = model
-
-    query, _, q_mask = transform(query, [0] * len(query))
-    answers, a_masks = [], []
-    for answer in target:
-        ans, _, a_mask = transform(answer, [0] * len(answer))
-        answers.append(ans)
-        a_masks.append(a_mask)
-    x = tuple(map(_to_tensor, [query, q_mask, np.array(answers), np.array(a_masks)]))
-
-    with torch.inference_mode():
-        _, prediction = _predict_fn(x, model)
-    return prediction.cpu().detach().numpy()[0]
-
-
 def main(args):
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
     model = model_fn(args.model_dir, device)
-    testdata_path = pathlib.Path(args.input_dir).glob("*.json.gz")
+    test_loader = get_test_loader(args.train_year, args.valid_year, 4, 32)
 
-    ans_list = []
-    for path in tqdm(testdata_path):
-        with gzip.open(path, mode="rt", encoding="utf-8") as f:
-            data = f.read()
+    correct, count = 0, 0
+    with torch.inference_mode():
+        for batch in tqdm(test_loader):
+            batch = tuple(map(lambda x: x.to(device), batch))
+            pred, _ = predict_fn(batch, model)
+            correct += pred.eq(torch.zeros_like(pred)).sum().item()
+            count += len(pred)
 
-        input_objects = input_fn(data)
-        pred = predict_fn(input_objects, model)
-        ans = np.argmax(pred) == 0
-        ans_list.append(ans)
-
-    print("\naccuracy: " + str(np.mean(ans_list) * 100) + "%")
+    print("\naccuracy: " + str(correct / count * 100) + " %")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input_dir", "-i", type=str)
+    parser.add_argument("--train_year", type=int)
+    parser.add_argument("--valid_year", type=int)
     parser.add_argument("--model_dir", "-d", type=str)
     args = parser.parse_args()
 

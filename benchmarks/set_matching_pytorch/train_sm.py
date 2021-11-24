@@ -1,5 +1,6 @@
 import json
 import os
+from typing import Any, Optional, Tuple, Union
 
 import set_matching.extensions as exfn
 import shift15m.constants as C
@@ -8,10 +9,34 @@ from ignite.engine import Engine, Events
 from ignite.handlers import Checkpoint, DiskSaver, EarlyStopping, ModelCheckpoint
 from ignite.metrics import Loss, RunningAverage
 from set_matching.metrics import NPairsAccuracy
+from shift15m.datasets.outfitfeature import (
+    IQONOutfits,
+    MultisetSplitDataset,
+    get_loader,
+)
 from tensorboardX import SummaryWriter
 
 from config import get_model_conf
-from outfits.dataset import get_train_val_loader
+
+
+def get_train_val_loader(
+    train_year: Union[str, int],
+    valid_year: Union[str, int],
+    batch_size: int,
+    root: str = C.ROOT,
+    num_workers: Optional[int] = None,
+) -> Tuple[Any, Any]:
+    label_dir_name = f"{train_year}-{valid_year}"
+
+    iqon_outfits = IQONOutfits(root=root)
+
+    train, valid = iqon_outfits.get_trainval_data(label_dir_name)
+    feature_dir = iqon_outfits.feature_dir
+    train_dataset = MultisetSplitDataset(train, feature_dir, n_sets=1, n_drops=None)
+    valid_dataset = MultisetSplitDataset(valid, feature_dir, n_sets=1, n_drops=None)
+    return get_loader(
+        train_dataset, batch_size, num_workers=num_workers, is_train=True
+    ), get_loader(valid_dataset, batch_size, num_workers=num_workers, is_train=False)
 
 
 def main(args):
@@ -43,7 +68,7 @@ def main(args):
 
     # dataset
     train_loader, valid_loader = get_train_val_loader(
-        args.input_dir, args.label_dir, args.batchsize
+        args.train_year, args.valid_year, args.batchsize
     )
 
     # logger
@@ -186,14 +211,14 @@ if __name__ == "__main__":
         ],
         default="cov_max",
     )
-    parser.add_argument("--batchsize", "-b", type=int, default=4)
+    parser.add_argument("--batchsize", "-b", type=int, default=32)
     parser.add_argument("--epochs", "-e", type=int, default=10)
     parser.add_argument("--log_dir", "-o", type=str, default="/tmp/ml/set_matching/")
     parser.add_argument("--checkpoint_interval", type=int, default=2)
-    # channel
-    parser.add_argument("--input_dir", "-i", type=str, default=C.FEATURE_ROOT)
-    parser.add_argument("--label_dir", "-l", type=str)
-    parser.add_argument("--weight_path", "-w", type=str)
+
+    parser.add_argument("--train_year", type=int)
+    parser.add_argument("--valid_year", type=int)
+    parser.add_argument("--weight_path", "-w", type=str, default=None)
 
     args = parser.parse_args()
 
