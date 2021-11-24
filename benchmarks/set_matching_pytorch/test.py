@@ -1,10 +1,12 @@
 import argparse
 import json
 import pathlib
+from typing import Any, Optional, Union
 
+import shift15m.constants as C
 import torch
 from set_matching.models.set_matching import SetMatching
-from shift15m.datasets.outfitfeature import get_test_loader
+from shift15m.datasets.outfitfeature import FINBsDataset, IQONOutfits, get_loader
 from tqdm import tqdm
 
 from model import SetMatchingCov
@@ -16,7 +18,31 @@ MODELS = {
 }
 
 
-def model_fn(model_dir, device):
+def get_test_loader(
+    train_year: Union[str, int],
+    valid_year: Union[str, int],
+    n_cand_sets: int,
+    batch_size: int,
+    root: str = C.ROOT,
+    num_workers: Optional[int] = None,
+) -> torch.utils.data.DataLoader:
+    label_dir_name = f"{train_year}-{valid_year}"
+
+    iqon_outfits = IQONOutfits(root=root)
+
+    test_examples = iqon_outfits.get_fitb_data(label_dir_name)
+    feature_dir = iqon_outfits.feature_dir
+    dataset = FINBsDataset(
+        test_examples,
+        feature_dir,
+        n_cand_sets=n_cand_sets,
+        max_set_size_query=6,
+        max_set_size_answer=6,
+    )
+    return get_loader(dataset, batch_size, num_workers=num_workers, is_train=False)
+
+
+def model_fn(model_dir: str, device: str) -> Any:
     model_name = json.load(open(pathlib.Path(model_dir) / "args.json"))["model"]
     model_config = json.load(open(pathlib.Path(model_dir) / "model_config.json"))
 
@@ -30,7 +56,7 @@ def model_fn(model_dir, device):
     return model
 
 
-def predict_fn(inputs, model):
+def predict_fn(inputs: Any, model: Any) -> Any:
     query, q_mask, candidates, c_mask = inputs
     query_set_size = query.shape[1]
     (
@@ -52,7 +78,11 @@ def predict_fn(inputs, model):
     candidates = candidates.view((-1, cand_set_size) + candidates.shape[3:])
     c_mask = c_mask.view(-1, cand_set_size)
 
-    score = model(query, q_mask, candidates, c_mask)  # (batch*n_cands, batch*n_cands)
+    out = model(query, q_mask, candidates, c_mask)  # (batch*n_cands, batch*n_cands)
+    if isinstance(out, tuple):
+        score = out[0]
+    else:
+        score = out
     score = torch.diagonal(score, 0).view(batch, n_candidates)
     pred = score.argmax(dim=1)
 

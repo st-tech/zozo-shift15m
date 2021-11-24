@@ -1,16 +1,42 @@
 import json
 import os
+from typing import Any, Optional, Tuple, Union
 
 import set_matching.extensions as exfn
+import shift15m.constants as C
 import torch
 from ignite.engine import Engine, Events
 from ignite.handlers import Checkpoint, DiskSaver, EarlyStopping, ModelCheckpoint
 from ignite.metrics import Loss, RunningAverage
 from set_matching.metrics import NPairsAccuracy
-from shift15m.datasets.outfitfeature import get_train_val_loader
+from shift15m.datasets.outfitfeature import (
+    IQONOutfits,
+    MultisetSplitDataset,
+    get_loader,
+)
 from tensorboardX import SummaryWriter
 
 from config import get_model_conf
+
+
+def get_train_val_loader(
+    train_year: Union[str, int],
+    valid_year: Union[str, int],
+    batch_size: int,
+    root: str = C.ROOT,
+    num_workers: Optional[int] = None,
+) -> Tuple[Any, Any]:
+    label_dir_name = f"{train_year}-{valid_year}"
+
+    iqon_outfits = IQONOutfits(root=root)
+
+    train, valid = iqon_outfits.get_trainval_data(label_dir_name)
+    feature_dir = iqon_outfits.feature_dir
+    train_dataset = MultisetSplitDataset(train, feature_dir, n_sets=1, n_drops=None)
+    valid_dataset = MultisetSplitDataset(valid, feature_dir, n_sets=1, n_drops=None)
+    return get_loader(
+        train_dataset, batch_size, num_workers=num_workers, is_train=True
+    ), get_loader(valid_dataset, batch_size, num_workers=num_workers, is_train=False)
 
 
 def main(args):

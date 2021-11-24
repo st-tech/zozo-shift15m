@@ -4,7 +4,7 @@ import json
 import os
 import pathlib
 import subprocess
-from typing import List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
 import pandas as pd
@@ -15,72 +15,19 @@ from shift15m.constants import Keys as K
 from sklearn.model_selection import train_test_split
 
 
-def get_train_val_loader(
-    train_year: Union[str, int],
-    valid_year: Union[str, int],
+def get_loader(
+    dataset: Any,
     batch_size: int,
-    root: str = C.ROOT,
-    num_workers: Optional[int] = None,
-):
-    label_dir_name = f"{train_year}-{valid_year}"
-
-    iqon_outfits = IQONOutfits(root=root)
-
-    train, valid = iqon_outfits.get_trainval_data(label_dir_name)
-    feature_dir = iqon_outfits.feature_dir
-    return _get_loader(
-        train, feature_dir, batch_size, num_workers=num_workers, is_train=True
-    ), _get_loader(
-        valid, feature_dir, batch_size, num_workers=num_workers, is_train=False
-    )
-
-
-def _get_loader(
-    sets: List,
-    feature_dir: pathlib.Path,
-    batch_size: int,
-    n_sets: int = 1,
-    n_drops: Optional[int] = None,
     num_workers: Optional[int] = None,
     is_train: bool = True,
 ):
     return torch.utils.data.DataLoader(
-        MultisetSplitDataset(sets, feature_dir, n_sets, n_drops=n_drops),
+        dataset,
         shuffle=is_train,
         batch_size=batch_size,
         pin_memory=True,
         num_workers=num_workers if num_workers else os.cpu_count(),
         drop_last=is_train,
-    )
-
-
-def get_test_loader(
-    train_year: Union[str, int],
-    valid_year: Union[str, int],
-    n_cand_sets: int,
-    batch_size: int,
-    root: str = C.ROOT,
-    num_workers: Optional[int] = None,
-) -> torch.utils.data.DataLoader:
-    label_dir_name = f"{train_year}-{valid_year}"
-
-    iqon_outfits = IQONOutfits(root=root)
-
-    test_examples = iqon_outfits.get_test_data(label_dir_name)
-    feature_dir = iqon_outfits.feature_dir
-    return torch.utils.data.DataLoader(
-        FINBsDataset(
-            test_examples,
-            feature_dir,
-            n_cand_sets=n_cand_sets,
-            max_set_size_query=6,
-            max_set_size_answer=6,
-        ),
-        shuffle=False,
-        batch_size=batch_size,
-        pin_memory=True,
-        num_workers=num_workers if num_workers else os.cpu_count(),
-        drop_last=False,
     )
 
 
@@ -203,6 +150,29 @@ class FINBsDataset(torch.utils.data.Dataset):
         return question, q_mask, np.array(answers), np.array(a_masks)
 
 
+class FeatureLabelDataset(torch.utils.data.Dataset):
+    def __init__(self, data, root) -> None:
+        self.data = data
+        self.feature_dir = root
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, i):
+        item = self.data[i]
+        feat_name = str(item["item_id"]) + ".json.gz"
+        path = os.path.join(self.feature_dir, feat_name)
+        feature = self._read_feature(path)
+        label = item["label"]
+
+        return feature, label
+
+    def _read_feature(self, path):
+        with gzip.open(path, mode="rt", encoding="utf-8") as f:
+            feature = json.loads(f.read())
+        return np.array(feature, dtype=np.float32)
+
+
 class IQONOutfits:
     def __init__(
         self,
@@ -236,7 +206,8 @@ class IQONOutfits:
             return
 
         from shift15m.datasets.download_tarfiles import main as dltars
-        from shift15m.datasets.feature_tar_extractor import _extract_tarfiles as ext
+        from shift15m.datasets.feature_tar_extractor import \
+            _extract_tarfiles as ext
 
         root = pathlib.Path(C.ROOT)
         dltars(str(root), os.cpu_count())
@@ -301,7 +272,12 @@ class IQONOutfits:
         valid = json.load(open(path / "valid.json"))
         return train, valid
 
-    def get_test_data(
+    def get_test_data(self, label_dir_name: str) -> List[Dict]:
+        path = self._label_dir / label_dir_name
+        test = json.load(open(path / "test.json"))
+        return test
+
+    def get_fitb_data(
         self, label_dir_name: str, n_comb: int = 1, n_cands: int = 8, seed: int = 0
     ) -> List:
         dir_name = self._label_dir / label_dir_name
