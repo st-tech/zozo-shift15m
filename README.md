@@ -196,16 +196,17 @@ The following table is necessary for this dataset to be indexed by search engine
 </table>
 </div>
 
-## Citation
+// for blind review
+// ## Citation
 
-```bibtex
-@misc{Kimura_SHIFT15M_Multiobjective_LargeScale_2021,
-author = {Kimura, Masanari and Nakamura, Takuma and Saito, Yuki},
-month = {8},
-title = {SHIFT15M: Multiobjective Large-Scale Fashion Dataset with Distributional Shifts},
-year = {2021}
-}
-```
+// ```bibtex
+// @misc{Kimura_SHIFT15M_Multiobjective_LargeScale_2021,
+// author = {Kimura, Masanari and Nakamura, Takuma and Saito, Yuki},
+// month = {8},
+// title = {SHIFT15M: Multiobjective Large-Scale Fashion Dataset with Distributional Shifts},
+// year = {2021}
+// }
+// ```
 
 ## Errata
 No errata are currently available.
