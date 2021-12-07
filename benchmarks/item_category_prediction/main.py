@@ -5,7 +5,7 @@ except ModuleNotFoundError as e:
     msg = (
         "This benchmark requires PyTorch.\n"
         "Please install extra pachages as follows:\n"
-        "  poetry install -E pytorch"
+        "  poetry run pip install torch==1.9.0"
     )
     raise ModuleNotFoundError(msg) from e
 import itertools
