@@ -6,7 +6,6 @@
 - Python 3.7.0+
 - [set-matching-pytorch](https://github.com/tn1031/set-matching-pytorch)
 - `torch==1.9.0`
-- `torchvision==0.10.0+cu111`
 - and its dependencies
 
 ### Install set-matching-pytorch
@@ -17,7 +16,7 @@ The packages required to run this benchmark are managed as extra packages.
 ```
 $ pip install shift15m
 $ pip install git+git://github.com/tn1031/set-matching-pytorch.git@v1.0.0
-$ pip install torchvision==0.10.0+cu111 -f https://download.pytorch.org/whl/cu111/torch_stable.html
+$ pip install torch==1.9.0
 ```
 
 Or, clone this repository and run poetry install with extras packages.
@@ -27,7 +26,7 @@ $ git clone https://github.com/st-tech/zozo-shift15m.git
 $ cd zozo-shift15m
 $ poetry install
 $ poetry run pip install git+git://github.com/tn1031/set-matching-pytorch.git@v1.0.0
-$ poetry run pip install torchvision==0.10.0+cu111 -f https://download.pytorch.org/whl/cu111/torch_stable.html
+$ poetry run pip install torch==1.9.0
 ```
 
 ## Training
