@@ -5,6 +5,7 @@
 ### Requirements
 - Python 3.7.0+
 - [set-matching-pytorch](https://github.com/tn1031/set-matching-pytorch)
+- `torch==1.9.0`
 - and its dependencies
 
 ### Install set-matching-pytorch
@@ -13,15 +14,19 @@ The packages required to run this benchmark are managed as extra packages.
 
 
 ```
-$ pip install shift15m[pytorch]
+$ pip install shift15m
+$ pip install git+git://github.com/tn1031/set-matching-pytorch.git@v1.0.0
+$ pip install torch==1.9.0
 ```
 
-Or, clone this repository and run poetry install with extras option.
+Or, clone this repository and run poetry install with extras packages.
 
 ```
 $ git clone https://github.com/st-tech/zozo-shift15m.git
 $ cd zozo-shift15m
-$ poetry install -E pytorch
+$ poetry install
+$ poetry run pip install git+git://github.com/tn1031/set-matching-pytorch.git@v1.0.0
+$ poetry run pip install torch==1.9.0
 ```
 
 ## Training
@@ -49,7 +54,7 @@ Also, setting training and testing years here are required for covariate adaptat
 #### Weight estimator
 
 ```
-$ python train_we.py -b 128 -e 16 --train_year 2013 --valid_year 2014 -o /tmp/ml/weight_estimation -m cov_max
+$ python train_we.py -b 128 -e 16 --train_year 2013 --valid_year 2014 -o /tmp/ml/weight_estimation
 ```
 
 #### Weighted training on set matching model

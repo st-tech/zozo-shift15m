@@ -2,9 +2,20 @@
 
 ## Set up
 ### Install extra requires
+- `torch==1.9.0`
 
 ```
-$ poetry install -E pytorch
+$ pip install shift15m
+$ pip install torch==1.9.0"
+```
+
+Or, clone this repository and run poetry install with extras packages.
+
+```
+$ git clone https://github.com/st-tech/zozo-shift15m.git
+$ cd zozo-shift15m
+$ poetry install
+$ poetry run pip install torch==1.9.0
 ```
 
 ### Preparing dataset
