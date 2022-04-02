@@ -200,5 +200,8 @@ The following table is necessary for this dataset to be indexed by search engine
 ## Errata
 No errata are currently available.
 
+## Papers using this dataset
+- Papadopoulos, Stefanos, et al. Fashion Trend Analysis and Prediction Model. 1, Zenodo, 2021, doi:10.5281/zenodo.5795089.
+
 ## References
 - [1] Gebru, Timnit, et al. "Datasheets for datasets." arXiv preprint arXiv:1803.09010 (2018).
