@@ -203,7 +203,7 @@ The following table is necessary for this dataset to be indexed by search engine
 
 ## Errata
 
-No errata are currently available.
+- 01/08/2022, added tags info (#187)
 
 ## Papers using this dataset
 
