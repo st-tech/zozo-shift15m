@@ -174,11 +174,7 @@ class FeatureLabelDataset(torch.utils.data.Dataset):
 
 
 class IQONOutfits:
-    def __init__(
-        self,
-        root: str = C.ROOT,
-        split: int = 0,
-    ) -> None:
+    def __init__(self, root: str = C.ROOT, split: int = 0,) -> None:
         self.root = pathlib.Path(root)
         self.root.mkdir(parents=True, exist_ok=True)
         if not (self.root / "iqon_outfits.json").exists():

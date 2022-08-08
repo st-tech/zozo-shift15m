@@ -35,9 +35,10 @@ def get_train_val_dataset(feature_dir, label_dir):
     train = json.load(open(os.path.join(label_dir, "train.json")))
     valid = json.load(open(os.path.join(label_dir, "valid.json")))
 
-    return _get_dataset(
-        train, feature_dir, is_train=True, is_padding=True
-    ), _get_dataset(valid, feature_dir, is_train=False, is_padding=True)
+    return (
+        _get_dataset(train, feature_dir, is_train=True, is_padding=True),
+        _get_dataset(valid, feature_dir, is_train=False, is_padding=True),
+    )
 
 
 def _get_dataset(

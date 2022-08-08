@@ -22,8 +22,7 @@ class CNN(chainer.Chain):
 
 class TwoLayeredCNN(chainer.Chain):
     def __init__(
-        self,
-        n_units,
+        self, n_units,
     ):
         super(TwoLayeredCNN, self).__init__()
         with self.init_scope():
@@ -86,11 +85,7 @@ class SetMatching(chainer.Chain):
         acc = F.accuracy(score, label)
 
         chainer.report(
-            {
-                "loss": loss,
-                "acc": acc,
-            },
-            self,
+            {"loss": loss, "acc": acc,}, self,
         )
 
         return loss
@@ -227,11 +222,7 @@ class SetMatchingCov(SetMatching):
         loss = F.mean(loss * importance)
 
         chainer.report(
-            {
-                "loss": loss,
-                "acc": acc,
-            },
-            self,
+            {"loss": loss, "acc": acc,}, self,
         )
 
         return loss
