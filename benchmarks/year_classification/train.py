@@ -90,7 +90,12 @@ if __name__ == "__main__":
     parser.add_argument("--batchsize", "-b", type=int, default=256)
     parser.add_argument("--epoch", "-e", type=int, default=32)
     parser.add_argument(
-        "--model", "-m", choices=["two_layered_cnn",], default="two_layered_cnn",
+        "--model",
+        "-m",
+        choices=[
+            "two_layered_cnn",
+        ],
+        default="two_layered_cnn",
     )
     # channel
     parser.add_argument("--input_dir", type=str)

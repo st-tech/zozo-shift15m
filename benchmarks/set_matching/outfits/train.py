@@ -96,7 +96,11 @@ if __name__ == "__main__":
     parser.add_argument(
         "--model",
         "-m",
-        choices=["set_matching_sim", "cov_mean", "cov_max",],
+        choices=[
+            "set_matching_sim",
+            "cov_mean",
+            "cov_max",
+        ],
         default="cov_max",
     )
     # channel

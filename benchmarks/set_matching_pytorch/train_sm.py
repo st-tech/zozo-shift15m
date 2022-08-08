@@ -118,14 +118,18 @@ def main(args):
 
     # early stopping
     handler = EarlyStopping(
-        patience=5, score_function=exfn.stopping_score_function, trainer=trainer,
+        patience=5,
+        score_function=exfn.stopping_score_function,
+        trainer=trainer,
     )
     valid_evaluator.add_event_handler(Events.COMPLETED, handler)
 
     # lr scheduler
     lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=4, gamma=0.7)
     trainer.add_event_handler(
-        Events.EPOCH_COMPLETED, exfn.lr_step, lr_scheduler,
+        Events.EPOCH_COMPLETED,
+        exfn.lr_step,
+        lr_scheduler,
     )
 
     # logging
@@ -166,11 +170,16 @@ def main(args):
         save_handler=DiskSaver(args.log_dir, require_empty=False),
     )
     trainer.add_event_handler(
-        Events.EPOCH_COMPLETED(every=args.checkpoint_interval), trainer_checkpointer,
+        Events.EPOCH_COMPLETED(every=args.checkpoint_interval),
+        trainer_checkpointer,
     )
 
     model_checkpointer = ModelCheckpoint(
-        args.log_dir, "modelckpt", n_saved=1, create_dir=True, require_empty=False,
+        args.log_dir,
+        "modelckpt",
+        n_saved=1,
+        create_dir=True,
+        require_empty=False,
     )
     trainer.add_event_handler(
         Events.EPOCH_COMPLETED(every=args.checkpoint_interval),
@@ -197,7 +206,11 @@ if __name__ == "__main__":
     parser.add_argument(
         "--model",
         "-m",
-        choices=["set_matching_sim", "cov_mean", "cov_max",],
+        choices=[
+            "set_matching_sim",
+            "cov_mean",
+            "cov_max",
+        ],
         default="cov_max",
     )
     parser.add_argument("--batchsize", "-b", type=int, default=32)

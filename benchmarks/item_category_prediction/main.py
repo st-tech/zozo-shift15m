@@ -35,7 +35,10 @@ def load_item_catalog(args: Any) -> ItemCatalog:
 
 def get_model(n_outputs: int) -> nn.Module:
     return nn.Sequential(
-        nn.Linear(4096, 512), nn.ReLU(), nn.Dropout(0.2), nn.Linear(512, n_outputs),
+        nn.Linear(4096, 512),
+        nn.ReLU(),
+        nn.Dropout(0.2),
+        nn.Linear(512, n_outputs),
     )
 
 
@@ -139,13 +142,25 @@ def main(args: Any, seed: int, path: pathlib.Path):
         )
 
         train_loader = get_imagefeature_dataloader(
-            train_items, args.target, args.data_dir, args.batch_size, is_train=True,
+            train_items,
+            args.target,
+            args.data_dir,
+            args.batch_size,
+            is_train=True,
         )
         valid_loader = get_imagefeature_dataloader(
-            valid_items, args.target, args.data_dir, args.batch_size, is_train=False,
+            valid_items,
+            args.target,
+            args.data_dir,
+            args.batch_size,
+            is_train=False,
         )
         test_loader = get_imagefeature_dataloader(
-            test_items, args.target, args.data_dir, args.batch_size, is_train=False,
+            test_items,
+            args.target,
+            args.data_dir,
+            args.batch_size,
+            is_train=False,
         )
         print(
             f"\nstart training: trainval year {train_val_year} / test year {test_year}\n"
@@ -198,10 +213,16 @@ if __name__ == "__main__":
         help="target label (categoy / subcategory)",
     )
     parser.add_argument(
-        "--train_size", type=int, default=3500, help="train dataset size",
+        "--train_size",
+        type=int,
+        default=3500,
+        help="train dataset size",
     )
     parser.add_argument(
-        "--val_test_size", type=int, default=500, help="valid and test dataset size",
+        "--val_test_size",
+        type=int,
+        default=500,
+        help="valid and test dataset size",
     )
     parser.add_argument(
         "--batch_size",
@@ -216,7 +237,10 @@ if __name__ == "__main__":
         help="number of epochs to train (default: 10)",
     )
     parser.add_argument(
-        "--lr", type=float, default=0.005, help="learning rate (default: 0.05)",
+        "--lr",
+        type=float,
+        default=0.005,
+        help="learning rate (default: 0.05)",
     )
     parser.add_argument(
         "--seed",

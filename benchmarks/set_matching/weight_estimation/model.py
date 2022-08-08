@@ -5,7 +5,8 @@ import chainer.links as L
 
 class TwoLayeredCNN(chainer.Chain):
     def __init__(
-        self, n_units,
+        self,
+        n_units,
     ):
         super(TwoLayeredCNN, self).__init__()
         with self.init_scope():
@@ -22,7 +23,11 @@ class TwoLayeredCNN(chainer.Chain):
         acc = F.binary_accuracy(score, label)
 
         chainer.report(
-            {"loss": loss, "acc": acc,}, self,
+            {
+                "loss": loss,
+                "acc": acc,
+            },
+            self,
         )
 
         return loss

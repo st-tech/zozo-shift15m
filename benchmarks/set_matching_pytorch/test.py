@@ -60,7 +60,11 @@ def model_fn(model_dir: str, device: str) -> Any:
 def predict_fn(inputs: Any, model: Any) -> Any:
     query, q_mask, candidates, c_mask = inputs
     query_set_size = query.shape[1]
-    (batch, n_candidates, cand_set_size,) = candidates.shape[:3]
+    (
+        batch,
+        n_candidates,
+        cand_set_size,
+    ) = candidates.shape[:3]
 
     query = (
         torch.broadcast_to(query, (n_candidates,) + query.shape)
