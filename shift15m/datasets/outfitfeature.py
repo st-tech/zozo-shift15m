@@ -177,6 +177,7 @@ class IQONOutfits:
     def __init__(
         self,
         root: str = C.ROOT,
+        split: int = 0,
     ) -> None:
         self.root = pathlib.Path(root)
         self.root.mkdir(parents=True, exist_ok=True)
@@ -187,7 +188,7 @@ class IQONOutfits:
         self._label_dir = self.root / "set_matching/labels"
         if not self._label_dir.exists():
             self._label_dir.mkdir(parents=True, exist_ok=True)
-            self._make_trainval_dataset()
+            self._make_trainval_dataset(seed=split)
 
         self._feature_dir = self.root / "features"
         if not self._feature_dir.exists():
@@ -242,7 +243,7 @@ class IQONOutfits:
 
         ys = 2013
         for ye in range(2013, 2018):
-            str_year = f"{ys}-{ye}"
+            str_year = f"{ys}-{ye}-split{seed}"
             df_ys = df[df["publish_year"] == ys]
 
             df_ys = df_ys.sample(frac=1, random_state=seed)

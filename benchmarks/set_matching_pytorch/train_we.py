@@ -26,13 +26,14 @@ def _get_items(sets: List[Dict]) -> List:
 def get_train_val_loader(
     train_year: Union[str, int],
     valid_year: Union[str, int],
+    split: int,
     batch_size: int,
     root: str = C.ROOT,
     num_workers: Optional[int] = None,
 ) -> Tuple[Any, Any]:
-    label_dir_name = f"{train_year}-{valid_year}"
+    label_dir_name = f"{train_year}-{valid_year}-split{split}"
 
-    iqon_outfits = IQONOutfits(root=root)
+    iqon_outfits = IQONOutfits(root=root, split=split)
 
     train, valid = iqon_outfits.get_trainval_data(label_dir_name)
     feature_dir = iqon_outfits.feature_dir
@@ -85,7 +86,7 @@ def main(args):
 
     # dataset
     train_loader, valid_loader = get_train_val_loader(
-        args.train_year, args.valid_year, args.batchsize
+        args.train_year, args.valid_year, args.split, args.batchsize
     )
 
     # logger
@@ -215,6 +216,7 @@ if __name__ == "__main__":
     # channel
     parser.add_argument("--train_year", type=int)
     parser.add_argument("--valid_year", type=int)
+    parser.add_argument("--split", type=int, choices=[0, 1, 2])
     args = parser.parse_args()
 
     np.random.seed(0)  # used for train/test splitting

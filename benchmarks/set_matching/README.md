@@ -1,4 +1,4 @@
-# Set-to-set matching
+# Set-to-set matching using Chainer (not maintained)
 
 ## Set up
 
