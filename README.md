@@ -69,12 +69,6 @@ Please download the dataset as follows:
 $ bash scripts/download_all.sh
 ```
 
-To avoid downloading the test dataset for set matching (80GB), which is not required in training, you can use the following script.
-
-```bash
-$ bash scripts/download_all_wo_set_testdata.sh
-```
-
 ## Tasks
 
 The following tasks are now available:

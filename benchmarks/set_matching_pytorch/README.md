@@ -38,7 +38,7 @@ For example, to train a model from the training data collected in the year 2013,
 
 
 ```
-$ python train_sm.py -m set_matching_sim -b 32 -e 32 --train_year 2013 --valid_year 2013
+$ python train_sm.py -m set_matching_sim -b 32 -e 32 --train_year 2013 --valid_year 2013 --split 0
 ```
 
 Also, you can reduce the required memory size by setting minibatch-size -b to a small number.
@@ -54,7 +54,7 @@ Also, setting training and testing years here are required for covariate adaptat
 #### Weight estimator
 
 ```
-$ python train_we.py -b 128 -e 16 --train_year 2013 --valid_year 2014 -o /tmp/ml/weight_estimation
+$ python train_we.py -b 128 -e 16 --train_year 2013 --valid_year 2014 --split 0 -o /tmp/ml/weight_estimation
 ```
 
 #### Weighted training on set matching model
@@ -64,7 +64,7 @@ You can select the weighting strategy `-m cov_max` or `-m cov_mean,` which repre
 To compare the results, we recommend using the same number of minibatch-size and training epochs as the vanilla set matching model.
 
 ```
-$ python train_sm.py -m cov_max -b 32 -e 32 --train_year 2013 --valid_year 2014 -o /tmp/ml/set_matching/ -w /tmp/ml/weight_estimation/model.pt
+$ python train_sm.py -m cov_max -b 32 -e 32 --train_year 2013 --valid_year 2014 --split 0 -o /tmp/ml/set_matching/ -w /tmp/ml/weight_estimation/model.pt
 ```
 
 ## Testing
@@ -73,7 +73,7 @@ Using our test data, you can evaluate the trained model.
 For example, the command for testing the *cov-max* weighted model on the set matching task, a.k.a. Fill-in-the-N-blank with four candidates in the covariate assumption for the years from 2013 to 2014, is:
 
 ```
-$ python test.py --train_year 2013 --valid_year 2014 --model_dir /tmp/ml/set_matching/
+$ python test.py --train_year 2013 --valid_year 2014 --split 0 --model_dir /tmp/ml/set_matching/
 ```
 
 # Remarks

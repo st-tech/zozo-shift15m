@@ -22,21 +22,23 @@ from config import get_model_conf
 def get_train_val_loader(
     train_year: Union[str, int],
     valid_year: Union[str, int],
+    split: int,
     batch_size: int,
     root: str = C.ROOT,
     num_workers: Optional[int] = None,
 ) -> Tuple[Any, Any]:
-    label_dir_name = f"{train_year}-{valid_year}"
+    label_dir_name = f"{train_year}-{valid_year}-split{split}"
 
-    iqon_outfits = IQONOutfits(root=root)
+    iqon_outfits = IQONOutfits(root=root, split=split)
 
     train, valid = iqon_outfits.get_trainval_data(label_dir_name)
     feature_dir = iqon_outfits.feature_dir
     train_dataset = MultisetSplitDataset(train, feature_dir, n_sets=1, n_drops=None)
     valid_dataset = MultisetSplitDataset(valid, feature_dir, n_sets=1, n_drops=None)
-    return get_loader(
-        train_dataset, batch_size, num_workers=num_workers, is_train=True
-    ), get_loader(valid_dataset, batch_size, num_workers=num_workers, is_train=False)
+    return (
+        get_loader(train_dataset, batch_size, num_workers=num_workers, is_train=True),
+        get_loader(valid_dataset, batch_size, num_workers=num_workers, is_train=False),
+    )
 
 
 def main(args):
@@ -68,7 +70,7 @@ def main(args):
 
     # dataset
     train_loader, valid_loader = get_train_val_loader(
-        args.train_year, args.valid_year, args.batchsize
+        args.train_year, args.valid_year, args.split, args.batchsize
     )
 
     # logger
@@ -218,6 +220,7 @@ if __name__ == "__main__":
 
     parser.add_argument("--train_year", type=int)
     parser.add_argument("--valid_year", type=int)
+    parser.add_argument("--split", type=int, choices=[0, 1, 2])
     parser.add_argument("--weight_path", "-w", type=str, default=None)
 
     args = parser.parse_args()

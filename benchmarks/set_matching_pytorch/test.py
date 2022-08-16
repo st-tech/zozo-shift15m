@@ -21,14 +21,15 @@ MODELS = {
 def get_test_loader(
     train_year: Union[str, int],
     valid_year: Union[str, int],
+    split: int,
     n_cand_sets: int,
     batch_size: int,
     root: str = C.ROOT,
     num_workers: Optional[int] = None,
 ) -> torch.utils.data.DataLoader:
-    label_dir_name = f"{train_year}-{valid_year}"
+    label_dir_name = f"{train_year}-{valid_year}-split{split}"
 
-    iqon_outfits = IQONOutfits(root=root)
+    iqon_outfits = IQONOutfits(root=root, split=split)
 
     test_examples = iqon_outfits.get_fitb_data(label_dir_name)
     feature_dir = iqon_outfits.feature_dir
@@ -93,7 +94,7 @@ def main(args):
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
     model = model_fn(args.model_dir, device)
-    test_loader = get_test_loader(args.train_year, args.valid_year, 4, 32)
+    test_loader = get_test_loader(args.train_year, args.valid_year, args.split, 4, 32)
 
     correct, count = 0, 0
     with torch.inference_mode():
@@ -110,6 +111,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--train_year", type=int)
     parser.add_argument("--valid_year", type=int)
+    parser.add_argument("--split", type=int, choices=[0, 1, 2])
     parser.add_argument("--model_dir", "-d", type=str)
     args = parser.parse_args()
 

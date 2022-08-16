@@ -65,8 +65,9 @@ def get_train_val_dataset(feature_dir, label_dir):
     ]
     print("test data created")
 
-    return _get_dataset(train_dataset, feature_dir, is_train=True), _get_dataset(
-        test_dataset, feature_dir, is_train=False
+    return (
+        _get_dataset(train_dataset, feature_dir, is_train=True),
+        _get_dataset(test_dataset, feature_dir, is_train=False),
     )
 
 

@@ -70,8 +70,9 @@ def get_train_val_dataset(feature_dir, label_dir, year_pos, year_neg, split):
         + split
     )
 
-    return _get_dataset(train_dataset, feature_dir, is_train=True), _get_dataset(
-        valid_dataset, feature_dir, is_train=False
+    return (
+        _get_dataset(train_dataset, feature_dir, is_train=True),
+        _get_dataset(valid_dataset, feature_dir, is_train=False),
     )
 
 
