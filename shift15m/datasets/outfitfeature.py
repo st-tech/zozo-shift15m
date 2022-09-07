@@ -114,14 +114,10 @@ class FINBsDataset(torch.utils.data.Dataset):
         self.root = root
         self.n_cand_sets = n_cand_sets
         self.transform_q = FeatureListTransform(
-            max_set_size=max_set_size_query,
-            apply_shuffle=False,
-            apply_padding=True,
+            max_set_size=max_set_size_query, apply_shuffle=False, apply_padding=True,
         )
         self.transform_a = FeatureListTransform(
-            max_set_size=max_set_size_answer,
-            apply_shuffle=False,
-            apply_padding=True,
+            max_set_size=max_set_size_answer, apply_shuffle=False, apply_padding=True,
         )
 
     def __len__(self):
@@ -178,11 +174,7 @@ class FeatureLabelDataset(torch.utils.data.Dataset):
 
 
 class IQONOutfits:
-    def __init__(
-        self,
-        root: str = C.ROOT,
-        split: int = 0,
-    ) -> None:
+    def __init__(self, root: str = C.ROOT, split: int = 0,) -> None:  # not used
         self.root = pathlib.Path(root)
         self.root.mkdir(parents=True, exist_ok=True)
         if not (self.root / "iqon_outfits.json").exists():
@@ -191,8 +183,11 @@ class IQONOutfits:
 
         self._label_dir = self.root / "set_matching/labels"
         if not self._label_dir.exists():
+            print("Making train/val dataset.")
             self._label_dir.mkdir(parents=True, exist_ok=True)
-            self._make_trainval_dataset(seed=split)
+            splits = [0, 1, 2]
+            for _s in splits:
+                self._make_trainval_dataset(seed=_s)
 
         self._feature_dir = self.root / "features"
         if not self._feature_dir.exists():
@@ -226,13 +221,8 @@ class IQONOutfits:
         res.check_returncode()
 
     def _make_trainval_dataset(
-        self,
-        min_num_categories: int = 4,
-        min_like_num: int = 50,
-        seed: int = 0,
+        self, min_num_categories: int = 4, min_like_num: int = 50, seed: int = 0,
     ):
-        print("Make train/val dataset.")
-
         np.random.seed(seed)
         num_train, num_val, num_test = 30816, 3851, 3851  # max size
 
@@ -285,11 +275,7 @@ class IQONOutfits:
         return test
 
     def get_fitb_data(
-        self,
-        label_dir_name: str,
-        n_comb: int = 1,
-        n_cands: int = 8,
-        seed: int = 0,
+        self, label_dir_name: str, n_comb: int = 1, n_cands: int = 8, seed: int = 0,
     ) -> List:
         dir_name = self._label_dir / label_dir_name
         path = dir_name / f"test_examples_ncomb_{n_comb}_ncands_{n_cands}.json"
@@ -299,11 +285,7 @@ class IQONOutfits:
         return test_examples
 
     def _make_test_examples(
-        self,
-        path: pathlib.Path,
-        n_comb: int = 1,
-        n_cands: int = 8,
-        seed: int = 0,
+        self, path: pathlib.Path, n_comb: int = 1, n_cands: int = 8, seed: int = 0,
     ):
         print("Make test dataset.")
         np.random.seed(seed)
