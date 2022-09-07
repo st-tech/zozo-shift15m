@@ -182,7 +182,7 @@ class IQONOutfits:
         self,
         root: str = C.ROOT,
         split: int = 0,
-    ) -> None:
+    ) -> None:  # not used
         self.root = pathlib.Path(root)
         self.root.mkdir(parents=True, exist_ok=True)
         if not (self.root / "iqon_outfits.json").exists():
@@ -191,8 +191,11 @@ class IQONOutfits:
 
         self._label_dir = self.root / "set_matching/labels"
         if not self._label_dir.exists():
+            print("Making train/val dataset.")
             self._label_dir.mkdir(parents=True, exist_ok=True)
-            self._make_trainval_dataset(seed=split)
+            splits = [0, 1, 2]
+            for _s in splits:
+                self._make_trainval_dataset(seed=_s)
 
         self._feature_dir = self.root / "features"
         if not self._feature_dir.exists():
@@ -231,8 +234,6 @@ class IQONOutfits:
         min_like_num: int = 50,
         seed: int = 0,
     ):
-        print("Make train/val dataset.")
-
         np.random.seed(seed)
         num_train, num_val, num_test = 30816, 3851, 3851  # max size
 

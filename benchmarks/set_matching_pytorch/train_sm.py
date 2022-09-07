@@ -29,7 +29,7 @@ def get_train_val_loader(
 ) -> Tuple[Any, Any]:
     label_dir_name = f"{train_year}-{valid_year}-split{split}"
 
-    iqon_outfits = IQONOutfits(root=root, split=split)
+    iqon_outfits = IQONOutfits(root=root)
 
     train, valid = iqon_outfits.get_trainval_data(label_dir_name)
     feature_dir = iqon_outfits.feature_dir
