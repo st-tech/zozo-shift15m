@@ -34,8 +34,12 @@ def get_train_val_loader(
 
     train, valid = iqon_outfits.get_trainval_data(label_dir_name)
     feature_dir = iqon_outfits.feature_dir
-    train_dataset = MultisetSplitDataset(train, feature_dir, n_comb=n_comb, n_drops=None)
-    valid_dataset = MultisetSplitDataset(valid, feature_dir, n_comb=n_comb, n_drops=None)
+    train_dataset = MultisetSplitDataset(
+        train, feature_dir, n_comb=n_comb, n_drops=None
+    )
+    valid_dataset = MultisetSplitDataset(
+        valid, feature_dir, n_comb=n_comb, n_drops=None
+    )
     return (
         get_loader(train_dataset, batch_size, num_workers=num_workers, is_train=True),
         get_loader(valid_dataset, batch_size, num_workers=num_workers, is_train=False),
@@ -71,10 +75,10 @@ def main(args):
 
     # dataset
     train_loader, valid_loader = get_train_val_loader(
-        train_year=args.train_year, 
-        valid_year=args.valid_year, 
-        split=args.split, 
-        batch_size=args.batchsize, 
+        train_year=args.train_year,
+        valid_year=args.valid_year,
+        split=args.split,
+        batch_size=args.batchsize,
         n_comb=args.n_comb,
     )
 
