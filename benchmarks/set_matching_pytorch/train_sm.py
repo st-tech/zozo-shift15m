@@ -24,6 +24,7 @@ def get_train_val_loader(
     valid_year: Union[str, int],
     split: int,
     batch_size: int,
+    n_comb: int,
     root: str = C.ROOT,
     num_workers: Optional[int] = None,
 ) -> Tuple[Any, Any]:
@@ -33,8 +34,8 @@ def get_train_val_loader(
 
     train, valid = iqon_outfits.get_trainval_data(label_dir_name)
     feature_dir = iqon_outfits.feature_dir
-    train_dataset = MultisetSplitDataset(train, feature_dir, n_sets=1, n_drops=None)
-    valid_dataset = MultisetSplitDataset(valid, feature_dir, n_sets=1, n_drops=None)
+    train_dataset = MultisetSplitDataset(train, feature_dir, n_comb=n_comb, n_drops=None)
+    valid_dataset = MultisetSplitDataset(valid, feature_dir, n_comb=n_comb, n_drops=None)
     return (
         get_loader(train_dataset, batch_size, num_workers=num_workers, is_train=True),
         get_loader(valid_dataset, batch_size, num_workers=num_workers, is_train=False),
@@ -70,7 +71,11 @@ def main(args):
 
     # dataset
     train_loader, valid_loader = get_train_val_loader(
-        args.train_year, args.valid_year, args.split, args.batchsize
+        train_year=args.train_year, 
+        valid_year=args.valid_year, 
+        split=args.split, 
+        batch_size=args.batchsize, 
+        n_comb=args.n_comb,
     )
 
     # logger
@@ -222,6 +227,7 @@ if __name__ == "__main__":
     parser.add_argument("--valid_year", type=int)
     parser.add_argument("--split", type=int, choices=[0, 1, 2])
     parser.add_argument("--weight_path", "-w", type=str, default=None)
+    parser.add_argument("--n_comb", type=int, default=1)
 
     args = parser.parse_args()
 

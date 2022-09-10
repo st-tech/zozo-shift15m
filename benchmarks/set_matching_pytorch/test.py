@@ -31,7 +31,7 @@ def get_test_loader(
 
     iqon_outfits = IQONOutfits(root=root, split=split)
 
-    test_examples = iqon_outfits.get_fitb_data(label_dir_name)
+    test_examples = iqon_outfits.get_fitb_data(label_dir_name, n_comb=args.n_comb)
     feature_dir = iqon_outfits.feature_dir
     dataset = FINBsDataset(
         test_examples,
@@ -113,6 +113,7 @@ if __name__ == "__main__":
     parser.add_argument("--valid_year", type=int)
     parser.add_argument("--split", type=int, choices=[0, 1, 2])
     parser.add_argument("--model_dir", "-d", type=str)
+    parser.add_argument("--n_comb", type=int, default=1)
     args = parser.parse_args()
 
     main(args)

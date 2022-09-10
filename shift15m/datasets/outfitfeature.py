@@ -36,18 +36,18 @@ class MultisetSplitDataset(torch.utils.data.Dataset):
         self,
         sets: List,
         root: pathlib.Path,
-        n_sets: int,
+        n_comb: int,
         n_drops: Optional[int] = None,
         max_elementnum_per_set: Optional[int] = 8,
     ):
         self.sets = sets
         self.feat_dir = root
-        self.n_sets = n_sets
+        self.n_comb = n_comb
         self.n_drops = n_drops
         if n_drops is None:
             n_drops = max_elementnum_per_set // 2
-        setX_size = (max_elementnum_per_set - n_drops) * n_sets
-        setY_size = n_drops * n_sets
+        setX_size = (max_elementnum_per_set - n_drops) * n_comb
+        setY_size = n_drops * n_comb
         self.transform_x = FeatureListTransform(
             max_set_size=setX_size, apply_shuffle=True, apply_padding=True
         )
@@ -59,9 +59,9 @@ class MultisetSplitDataset(torch.utils.data.Dataset):
         return len(self.sets)
 
     def __getitem__(self, i):
-        if self.n_sets > 1:  # you can conduct "superset matching" by using n_sets > 1
+        if self.n_comb > 1:  # you can conduct "superset matching" by using n_comb > 1
             indices = np.delete(np.arange(len(self.sets)), i)
-            indices = np.random.choice(indices, self.n_sets - 1, replace=False)
+            indices = np.random.choice(indices, self.n_comb - 1, replace=False)
             indices = [i] + list(indices)
         else:
             indices = [i]
@@ -306,7 +306,7 @@ class IQONOutfits:
         n_cands: int = 8,
         seed: int = 0,
     ):
-        print("Make test dataset.")
+        print("Making test dataset.")
         np.random.seed(seed)
 
         test_sets = json.load(open(path / "test.json"))
