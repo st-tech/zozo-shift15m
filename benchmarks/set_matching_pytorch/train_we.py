@@ -31,11 +31,11 @@ def get_train_val_loader(
     root: str = C.ROOT,
     num_workers: Optional[int] = None,
 ) -> Tuple[Any, Any]:
-    label_dir_name = f"{train_year}-{valid_year}-split{split}"
+    iqon_outfits = IQONOutfits(
+        train_year=train_year, valid_year=valid_year, split=split, root=root
+    )
 
-    iqon_outfits = IQONOutfits(root=root)
-
-    train, valid = iqon_outfits.get_trainval_data(label_dir_name)
+    train, valid = iqon_outfits.get_trainval_data()
     feature_dir = iqon_outfits.feature_dir
 
     train = _get_items(train)
@@ -53,7 +53,7 @@ def get_train_val_loader(
     ]
     print("train data created")
 
-    test = iqon_outfits.get_test_data(label_dir_name)
+    test = iqon_outfits.get_test_data()
     test = _get_items(test)
     common_id = set(train) & set(test)
     testdiff_id = list(set(test) - common_id)
