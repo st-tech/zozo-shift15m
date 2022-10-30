@@ -196,10 +196,10 @@ class IQONOutfits:
         if not (self._label_dir / _label_dir_name).exists():
             print("Making train/val dataset.")
             self._make_trainval_dataset(
-                train_year=train_year, 
+                train_year=train_year,
                 valid_year=valid_year,
                 seed=split,
-                label_dir_name=_label_dir_name
+                label_dir_name=_label_dir_name,
             )
 
         self._feature_dir = self.root / "features"

@@ -31,7 +31,7 @@ def get_test_loader(
     iqon_outfits = IQONOutfits(
         train_year=train_year, valid_year=valid_year, split=split, root=root
     )
-    
+
     test_examples = iqon_outfits.get_fitb_data(label_dir_name, n_comb=args.n_comb)
     feature_dir = iqon_outfits.feature_dir
     dataset = FINBsDataset(
