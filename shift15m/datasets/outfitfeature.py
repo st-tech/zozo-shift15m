@@ -192,11 +192,14 @@ class IQONOutfits:
             self._download_outfit_label()
 
         self._label_dir = self.root / "set_matching/labels"
-        self._label_dir_name = f"{train_year}-{valid_year}-split{split}"
-        if not (self._label_dir / self._label_dir_name).exists():
+        _label_dir_name = f"{train_year}-{valid_year}-split{split}"
+        if not (self._label_dir / _label_dir_name).exists():
             print("Making train/val dataset.")
             self._make_trainval_dataset(
-                train_year=train_year, valid_year=valid_year, seed=split
+                train_year=train_year, 
+                valid_year=valid_year,
+                seed=split,
+                label_dir_name=_label_dir_name
             )
 
         self._feature_dir = self.root / "features"
@@ -232,6 +235,7 @@ class IQONOutfits:
 
     def _make_trainval_dataset(
         self,
+        label_dir_name: str,
         train_year: Union[str, int],
         valid_year: Union[str, int],
         min_num_categories: int = 4,
@@ -267,30 +271,31 @@ class IQONOutfits:
             df_ye = df_ys.tail(-num_train)
             df_val, df_test = train_test_split(df_ye, test_size=0.5, random_state=seed)
 
-        out_dir = self._label_dir / self._label_dir_name
+        out_dir = self._label_dir / label_dir_name
         out_dir.mkdir(parents=True, exist_ok=True)
         df_train.to_json(str(out_dir / "train.json"), orient="records", indent=2)
         df_val.to_json(str(out_dir / "valid.json"), orient="records", indent=2)
         df_test.to_json(str(out_dir / "test.json"), orient="records", indent=2)
 
-    def get_trainval_data(self) -> Tuple[List, List]:
-        path = self._label_dir / self._label_dir_name
+    def get_trainval_data(self, label_dir_name: str) -> Tuple[List, List]:
+        path = self._label_dir / label_dir_name
         train = json.load(open(path / "train.json"))
         valid = json.load(open(path / "valid.json"))
         return train, valid
 
-    def get_test_data(self) -> List[Dict]:
-        path = self._label_dir / self._label_dir_name
+    def get_test_data(self, label_dir_name: str) -> List[Dict]:
+        path = self._label_dir / label_dir_name
         test = json.load(open(path / "test.json"))
         return test
 
     def get_fitb_data(
         self,
+        label_dir_name: str,
         n_comb: int = 1,
         n_cands: int = 8,
         seed: int = 0,  # 0 is used for any train/val splits
     ) -> List:
-        dir_name = self._label_dir / self._label_dir_name
+        dir_name = self._label_dir / label_dir_name
         path = dir_name / f"test_examples_ncomb_{n_comb}_ncands_{n_cands}.json"
         if not path.exists():
             self._make_test_examples(dir_name, n_comb, n_cands, seed)

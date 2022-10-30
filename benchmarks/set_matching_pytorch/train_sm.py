@@ -28,11 +28,12 @@ def get_train_val_loader(
     root: str = C.ROOT,
     num_workers: Optional[int] = None,
 ) -> Tuple[Any, Any]:
+    label_dir_name = f"{train_year}-{valid_year}-split{split}"
     iqon_outfits = IQONOutfits(
         train_year=train_year, valid_year=valid_year, split=split, root=root
     )
 
-    train, valid = iqon_outfits.get_trainval_data()
+    train, valid = iqon_outfits.get_trainval_data(label_dir_name)
     feature_dir = iqon_outfits.feature_dir
     train_dataset = MultisetSplitDataset(
         train, feature_dir, n_comb=n_comb, n_drops=None
