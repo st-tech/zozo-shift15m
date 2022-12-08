@@ -21,7 +21,26 @@ def _extract_tarfiles(data_dir):
         feature_tar_files = [os.path.join(data_dir, s) for s in feature_tar_files]
         for fpath in feature_tar_files:
             with tarfile.open(fpath, "r") as tf:
-                tf.extractall(data_dir)
+                def is_within_directory(directory, target):
+                    
+                    abs_directory = os.path.abspath(directory)
+                    abs_target = os.path.abspath(target)
+                
+                    prefix = os.path.commonprefix([abs_directory, abs_target])
+                    
+                    return prefix == abs_directory
+                
+                def safe_extract(tar, path=".", members=None, *, numeric_owner=False):
+                
+                    for member in tar.getmembers():
+                        member_path = os.path.join(path, member.name)
+                        if not is_within_directory(path, member_path):
+                            raise Exception("Attempted Path Traversal in Tar File")
+                
+                    tar.extractall(path, members, numeric_owner=numeric_owner) 
+                    
+                
+                safe_extract(tf, data_dir)
 
             tmp_dir = fpath[:-7]
             for featname in os.listdir(tmp_dir):
