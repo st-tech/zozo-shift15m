@@ -4,7 +4,7 @@ import json
 import os
 import pathlib
 import subprocess
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import numpy as np
 import pandas as pd
@@ -180,8 +180,10 @@ class FeatureLabelDataset(torch.utils.data.Dataset):
 class IQONOutfits:
     def __init__(
         self,
+        train_year: Union[str, int],
+        valid_year: Union[str, int],
+        split: int,
         root: str = C.ROOT,
-        split: int = 0,
     ) -> None:  # not used
         self.root = pathlib.Path(root)
         self.root.mkdir(parents=True, exist_ok=True)
@@ -190,12 +192,15 @@ class IQONOutfits:
             self._download_outfit_label()
 
         self._label_dir = self.root / "set_matching/labels"
-        if not self._label_dir.exists():
+        _label_dir_name = f"{train_year}-{valid_year}-split{split}"
+        if not (self._label_dir / _label_dir_name).exists():
             print("Making train/val dataset.")
-            self._label_dir.mkdir(parents=True, exist_ok=True)
-            splits = [0, 1, 2]
-            for _s in splits:
-                self._make_trainval_dataset(seed=_s)
+            self._make_trainval_dataset(
+                train_year=train_year,
+                valid_year=valid_year,
+                seed=split,
+                label_dir_name=_label_dir_name,
+            )
 
         self._feature_dir = self.root / "features"
         if not self._feature_dir.exists():
@@ -230,6 +235,9 @@ class IQONOutfits:
 
     def _make_trainval_dataset(
         self,
+        label_dir_name: str,
+        train_year: Union[str, int],
+        valid_year: Union[str, int],
         min_num_categories: int = 4,
         min_like_num: int = 50,
         seed: int = 0,
@@ -249,25 +257,24 @@ class IQONOutfits:
             lambda x: datetime.datetime.strptime(x, "%Y-%m-%d").year
         )
 
-        ys = 2013
-        for ye in range(2013, 2018):
-            str_year = f"{ys}-{ye}-split{seed}"
-            df_ys = df[df["publish_year"] == ys]
+        ys = int(train_year)
+        ye = int(valid_year)
+        df_ys = df[df["publish_year"] == ys]
 
-            df_ys = df_ys.sample(frac=1, random_state=seed)
-            df_train = df_ys.head(num_train)
-            if ys != ye:
-                df_ye = df[df["publish_year"] == ye]
-            else:
-                df_ye = df_ys.tail(-num_train)
-            df_ye = df_ye.sample(frac=1, random_state=seed).head(num_val + num_test)
-            df_val, df_test = train_test_split(df_ye, test_size=0.5, random_state=seed)
+        df_ys = df_ys.sample(frac=1, random_state=seed)
+        df_train = df_ys.head(num_train)
+        if ys != ye:
+            df_ye = df[df["publish_year"] == ye]
+        else:
+            df_ye = df_ys.tail(-num_train)
+        df_ye = df_ye.sample(frac=1, random_state=seed).head(num_val + num_test)
+        df_val, df_test = train_test_split(df_ye, test_size=0.5, random_state=seed)
 
-            out_dir = self._label_dir / str_year
-            out_dir.mkdir(exist_ok=True)
-            df_train.to_json(str(out_dir / "train.json"), orient="records", indent=2)
-            df_val.to_json(str(out_dir / "valid.json"), orient="records", indent=2)
-            df_test.to_json(str(out_dir / "test.json"), orient="records", indent=2)
+        out_dir = self._label_dir / label_dir_name
+        out_dir.mkdir(parents=True, exist_ok=True)
+        df_train.to_json(str(out_dir / "train.json"), orient="records", indent=2)
+        df_val.to_json(str(out_dir / "valid.json"), orient="records", indent=2)
+        df_test.to_json(str(out_dir / "test.json"), orient="records", indent=2)
 
     def get_trainval_data(self, label_dir_name: str) -> Tuple[List, List]:
         path = self._label_dir / label_dir_name
@@ -285,7 +292,7 @@ class IQONOutfits:
         label_dir_name: str,
         n_comb: int = 1,
         n_cands: int = 8,
-        seed: int = 0,
+        seed: int = 0,  # 0 is used for any train/val splits
     ) -> List:
         dir_name = self._label_dir / label_dir_name
         path = dir_name / f"test_examples_ncomb_{n_comb}_ncands_{n_cands}.json"
@@ -299,7 +306,7 @@ class IQONOutfits:
         path: pathlib.Path,
         n_comb: int = 1,
         n_cands: int = 8,
-        seed: int = 0,
+        seed: int = 0,  # 0 is used for any train/val splits
     ):
         print("Making test dataset.")
         np.random.seed(seed)
