@@ -265,11 +265,10 @@ class IQONOutfits:
         df_train = df_ys.head(num_train)
         if ys != ye:
             df_ye = df[df["publish_year"] == ye]
-            df_ye = df_ye.sample(frac=1, random_state=seed).head(num_val + num_test)
-            df_val, df_test = train_test_split(df_ye, test_size=0.5, random_state=seed)
         else:
             df_ye = df_ys.tail(-num_train)
-            df_val, df_test = train_test_split(df_ye, test_size=0.5, random_state=seed)
+        df_ye = df_ye.sample(frac=1, random_state=seed).head(num_val + num_test)
+        df_val, df_test = train_test_split(df_ye, test_size=0.5, random_state=seed)
 
         out_dir = self._label_dir / label_dir_name
         out_dir.mkdir(parents=True, exist_ok=True)
