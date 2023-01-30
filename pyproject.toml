@@ -9,6 +9,7 @@ readme = "README.md"
 python = ">=3.7.1,<4.0"
 pandas = "^1.2.4"
 sklearn = "^0.0"
+scikit-learn = "^1.2.1"
 matplotlib = "^3.4.2"
 seaborn = "^0.11.1"
 Sphinx = "^4.0.2"
@@ -23,5 +24,5 @@ flake8 = "^3.9.2"
 autoflake = "^1.4"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=1.0.0", "setuptools>=42"]
 build-backend = "poetry.core.masonry.api"
