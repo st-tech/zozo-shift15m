@@ -59,6 +59,7 @@ You can download SHIFT15M dataset as follows:
 from shift15m.datasets import NumLikesRegression
 
 dataset = NumLikesRegression(root="./data", download=True)
+(x_train, y_train), (x_test, y_test) = dataset.load_dataset(target_shift=True)
 ```
 
 ### Download directly by using download scripts
