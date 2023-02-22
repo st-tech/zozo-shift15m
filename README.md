@@ -25,7 +25,7 @@ This datasheet is based on the [Datasheets for Datasets](https://arxiv.org/abs/1
 | :---------------: | :------------------------------------------------------------------: | :------------------------------------------------------------------: | :------------------------------------------------------------------: |
 |     Linux CPU     | <img src="https://img.shields.io/badge/build-success-brightgreen" /> | <img src="https://img.shields.io/badge/build-success-brightgreen" /> | <img src="https://img.shields.io/badge/build-success-brightgreen" /> |
 |     Linux GPU     | <img src="https://img.shields.io/badge/build-success-brightgreen" /> | <img src="https://img.shields.io/badge/build-success-brightgreen" /> | <img src="https://img.shields.io/badge/build-success-brightgreen" /> |
-| Windows CPU / GPU |            <center>Status Currently Unavailable</center>             |            <center>Status Currently Unavailable</center>             |            <center>Status Currently Unavailable</center>             |
+| Windows CPU / GPU |  <img src="https://img.shields.io/badge/build-success-brightgreen" />   |  <img src="https://img.shields.io/badge/build-success-brightgreen" />    | <img src="https://img.shields.io/badge/build-success-brightgreen" />  |
 |    Mac OS CPU     | <img src="https://img.shields.io/badge/build-success-brightgreen" /> | <img src="https://img.shields.io/badge/build-success-brightgreen" /> | <img src="https://img.shields.io/badge/build-success-brightgreen" /> |
 
 SHIFT15M is a large-scale dataset based on approximately 15 million items accumulated by the fashion search service IQON.
