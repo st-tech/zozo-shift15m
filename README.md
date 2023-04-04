@@ -6,7 +6,6 @@
 [![Python](https://img.shields.io/badge/python-3.6%20%7C%203.7%20%7C%203.8%20%7C%203.9-blue)](https://www.python.org)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/st-tech/zozo-shift15m)
 [![Downloads](https://static.pepy.tech/personalized-badge/shift15m?period=month&units=international_system&left_color=grey&right_color=blue&left_text=Downloads)](https://pepy.tech/project/shift15m)
-![GitHub Workflow Status](https://github.com/st-tech/zozo-shift15m/actions/workflows/python-tests.yml/badge.svg)
 [![PyPI version](https://badge.fury.io/py/shift15m.svg)](https://badge.fury.io/py/shift15m)
 ![GitHub issues](https://img.shields.io/github/issues/st-tech/zozo-shift15m)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/st-tech/zozo-shift15m)
