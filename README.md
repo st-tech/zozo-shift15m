@@ -31,8 +31,6 @@ This datasheet is based on the [Datasheets for Datasets](https://arxiv.org/abs/1
 
 SHIFT15M is a large-scale dataset based on approximately 15 million items accumulated by the fashion search service IQON.
 
-![](./assets/iqon.png)
-
 ## Installation
 
 ### From PyPi
