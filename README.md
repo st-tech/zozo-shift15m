@@ -15,6 +15,7 @@
 
 # SHIFT15M: Fashion-specific dataset for set-to-set matching with several distribution shifts
 - [[arXiv]](https://arxiv.org/abs/2108.12992)
+- [[CVPRW2023]](https://openaccess.thecvf.com/content/CVPR2023W/CVFAD/papers/Kimura_SHIFT15M_Fashion-Specific_Dataset_for_Set-to-Set_Matching_With_Several_Distribution_Shifts_CVPRW_2023_paper.pdf)
 - accepted at CVPR2023 workshop on [CVFAD](https://sites.google.com/view/cvfad2023/home?authuser=0)
 
 Set-to-set matching is the problem of matching two different sets of items based on some criteria. Especially when each item in the set is high-dimensional, such as an image, set-to-set matching is treated as one of the applied problems to be solved by utilizing neural networks. Most machine learning-based set-to-set matching generally assumes that the training and test data follow the same distribution. However, such assumptions are often violated in real-world machine learning problems. In this paper, we propose SHIFT15M, a dataset that can be used to properly evaluate set-to-set matching models in situations where the distribution of data changes between training and testing. Some benchmark experiments show that the performance of naive methods drops due to the effects of the distribution shift. In addition, we provide software to handle the SHIFT15M dataset in a very simple way. The URL for the software will appear after this manuscript is published.
