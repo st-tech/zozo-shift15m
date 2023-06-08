@@ -20,6 +20,10 @@
 
 Set-to-set matching is the problem of matching two different sets of items based on some criteria. Especially when each item in the set is high-dimensional, such as an image, set-to-set matching is treated as one of the applied problems to be solved by utilizing neural networks. Most machine learning-based set-to-set matching generally assumes that the training and test data follow the same distribution. However, such assumptions are often violated in real-world machine learning problems. In this paper, we propose SHIFT15M, a dataset that can be used to properly evaluate set-to-set matching models in situations where the distribution of data changes between training and testing. Some benchmark experiments show that the performance of naive methods drops due to the effects of the distribution shift. In addition, we provide software to handle the SHIFT15M dataset in a very simple way. The URL for the software will appear after this manuscript is published.
 
+<p align="center">
+  <img src="./assets/CVPRW2023_SHIFT15M_poster.png" width="100%" style="display: block; margin: 0 auto" />
+</p>
+
 We provide the [Datasheet for SHIFT15M](./DATASHEET.md).
 This datasheet is based on the [Datasheets for Datasets](https://arxiv.org/abs/1803.09010) [1] template.
 
