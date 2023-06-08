@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/shift15m.png" width="70%" style="display: block; margin: 0 auto" />
+  <img src="./assets/shift15m.png" width="50%" style="display: block; margin: 0 auto" />
 </p>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
