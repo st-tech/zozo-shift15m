@@ -6,17 +6,19 @@
 [![Python](https://img.shields.io/badge/python-3.6%20%7C%203.7%20%7C%203.8%20%7C%203.9-blue)](https://www.python.org)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/st-tech/zozo-shift15m)
 [![Downloads](https://static.pepy.tech/personalized-badge/shift15m?period=month&units=international_system&left_color=grey&right_color=blue&left_text=Downloads)](https://pepy.tech/project/shift15m)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/st-tech/zozo-shift15m/tests)
 [![PyPI version](https://badge.fury.io/py/shift15m.svg)](https://badge.fury.io/py/shift15m)
 ![GitHub issues](https://img.shields.io/github/issues/st-tech/zozo-shift15m)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/st-tech/zozo-shift15m)
 ![GitHub last commit](https://img.shields.io/github/last-commit/st-tech/zozo-shift15m)
 [![arXiv](https://img.shields.io/badge/arXiv-2108.12992-b31b1b.svg)](https://arxiv.org/abs/2108.12992)
 
-[[arXiv]](https://arxiv.org/abs/2108.12992)
 
-The main motivation of the SHIFT15M project is to provide a dataset that contains natural dataset shifts collected from a web service IQON, which was actually in operation for a decade.
-In addition, the SHIFT15M dataset has several types of dataset shifts, allowing us to evaluate the robustness of the model to different types of shifts (e.g., covariate shift and target shift).
+# SHIFT15M: Fashion-specific dataset for set-to-set matching with several distribution shifts
+- [[arXiv]](https://arxiv.org/abs/2108.12992)
+- [[CVPRW2023]](https://openaccess.thecvf.com/content/CVPR2023W/CVFAD/papers/Kimura_SHIFT15M_Fashion-Specific_Dataset_for_Set-to-Set_Matching_With_Several_Distribution_Shifts_CVPRW_2023_paper.pdf)
+- accepted at CVPR2023 workshop on [CVFAD](https://sites.google.com/view/cvfad2023/home?authuser=0)
+
+Set-to-set matching is the problem of matching two different sets of items based on some criteria. Especially when each item in the set is high-dimensional, such as an image, set-to-set matching is treated as one of the applied problems to be solved by utilizing neural networks. Most machine learning-based set-to-set matching generally assumes that the training and test data follow the same distribution. However, such assumptions are often violated in real-world machine learning problems. In this paper, we propose SHIFT15M, a dataset that can be used to properly evaluate set-to-set matching models in situations where the distribution of data changes between training and testing. Some benchmark experiments show that the performance of naive methods drops due to the effects of the distribution shift. In addition, we provide software to handle the SHIFT15M dataset in a very simple way. The URL for the software will appear after this manuscript is published.
 
 We provide the [Datasheet for SHIFT15M](./DATASHEET.md).
 This datasheet is based on the [Datasheets for Datasets](https://arxiv.org/abs/1803.09010) [1] template.
@@ -29,8 +31,6 @@ This datasheet is based on the [Datasheets for Datasets](https://arxiv.org/abs/1
 |    Mac OS CPU     | <img src="https://img.shields.io/badge/build-success-brightgreen" /> | <img src="https://img.shields.io/badge/build-success-brightgreen" /> | <img src="https://img.shields.io/badge/build-success-brightgreen" /> |
 
 SHIFT15M is a large-scale dataset based on approximately 15 million items accumulated by the fashion search service IQON.
-
-![](./assets/iqon.png)
 
 ## Installation
 
